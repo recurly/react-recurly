@@ -1,0 +1,36 @@
+{
+  "name": "react-recurly",
+  "version": "1.0.0",
+  "description": "React component for Recurly.js",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrissrogers/react-recurly.git"
+  },
+  "author": "Recurly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrissrogers/react-recurly/issues"
+  },
+  "homepage": "https://github.com/chrissrogers/react-recurly#readme",
+  "peerDependencies": {
+    "react": "^15.5.4 || ^16.0.0-0",
+    "react-dom": "^15.5.4 || ^16.0.0-0"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
