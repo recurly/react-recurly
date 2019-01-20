@@ -50,9 +50,6 @@ const createOptions = (fontSize, padding) => {
 class _CardForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
-    if (!this.props.recurly) {
-      return console.log("Recurly.js hasn't loaded yet.");
-    }
     this.props.recurly
       .token()
       .then(payload => console.log('[token]', payload));
@@ -62,13 +59,13 @@ class _CardForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Card Field
-          <CardField
+          {/*<CardField
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
             onReady={handleReady}
             {...createOptions(this.props.fontSize)}
-          />
+          />*/}
         </label>
         <button>Pay</button>
       </form>
