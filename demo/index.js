@@ -59,13 +59,13 @@ class _CardForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Card Field
-          {/*<CardField
+          <CardField
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
             onReady={handleReady}
             {...createOptions(this.props.fontSize)}
-          />*/}
+          />
         </label>
         <button>Pay</button>
       </form>
