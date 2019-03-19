@@ -8,7 +8,7 @@ import {
   // CardCVCField,
   RecurlyProvider,
   Fields,
-  injectRecurly
+  useRecurly
 } from '../lib/index';
 
 const handleBlur = () => {
@@ -47,32 +47,59 @@ const createOptions = (fontSize, padding) => {
   };
 };
 
-class _CardForm extends React.Component {
-  handleSubmit = event => {
+// class _CardForm extends React.Component {
+//   handleSubmit = event => {
+//     event.preventDefault();
+//     this.props.recurly
+//       .token()
+//       .then(payload => console.log('[token]', payload));
+//   };
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Card Field
+//           <CardField
+//             onBlur={handleBlur}
+//             onChange={handleChange}
+//             onFocus={handleFocus}
+//             onReady={handleReady}
+//             {...createOptions(this.props.fontSize)}
+//           />
+//         </label>
+//         <button>Pay</button>
+//       </form>
+//     );
+//   }
+// }
+
+function CardForm () {
+  const recurly = useRecurly();
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.recurly
-      .token()
-      .then(payload => console.log('[token]', payload));
+    recurly.token(this, (err, token) => {
+      if (err) console.log('[error]', err);
+      else console.log('[token]', token);
+    });
   };
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Card Field
-          <CardField
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label>
-        <button>Pay</button>
-      </form>
-    );
-  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Card Field
+        <CardField
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          {...createOptions(this.props.fontSize)}
+        />
+      </label>
+      <button>Pay</button>
+    </form>
+  );
 }
-const CardForm = injectRecurly(_CardForm);
 
 class Checkout extends React.Component {
   constructor() {
