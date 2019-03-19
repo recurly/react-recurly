@@ -33,5 +33,8 @@ module.exports = {
       filename: 'index.html',
       template: './demo/index.html',
     })
-  ]
+  ],
+  devServer: {
+    host: 'react-recurly-rig.lvh.me'
+  }
 };
