@@ -2,12 +2,12 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import {
-  CardField,
-  // CardNumberField,
-  // CardExpiryField,
-  // CardCVCField,
+  CardElement,
+  // CardNumberElement,
+  // CardExpiryElement,
+  // CardCVCElement,
   RecurlyProvider,
-  Fields,
+  Elements,
   useRecurly
 } from '../lib/index';
 
@@ -73,12 +73,12 @@ const createOptions = (fontSize, padding) => {
 //   }
 // }
 
-function CardForm () {
+function CardForm (props) {
   const recurly = useRecurly();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-    recurly.token(this, (err, token) => {
+    recurly.token(event.target, (err, token) => {
       if (err) console.log('[error]', err);
       else console.log('[token]', token);
     });
@@ -86,14 +86,25 @@ function CardForm () {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        First & Last Name
+        <br />
+        <input data-recurly="first_name" placeholder="First Name" value="John"></input>
+        <input data-recurly="last_name" placeholder="Last Name" value="Rambo"></input>
+        <br />
+        Postal Code
+        <br />
+        <input data-recurly="postal_code" placeholder="Postal Code" value="94117"></input>
+      </div>
       <label>
-        Card Field
-        <CardField
+        Card Element
+        <br />
+        <CardElement
           onBlur={handleBlur}
           onChange={handleChange}
           onFocus={handleFocus}
           onReady={handleReady}
-          {...createOptions(this.props.fontSize)}
+          {...createOptions(props.fontSize)}
         />
       </label>
       <button>Pay</button>
@@ -106,29 +117,29 @@ class Checkout extends React.Component {
     super();
 
     this.state = {
-      fieldFontSize: window.innerWidth < 450 ? '14px' : '18px',
+      elementFontSize: window.innerWidth < 450 ? '14px' : '18px',
     };
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 450 && this.state.fieldFontSize !== '14px') {
-        this.setState({ fieldFontSize: '14px' });
+      if (window.innerWidth < 450 && this.state.elementFontSize !== '14px') {
+        this.setState({ elementFontSize: '14px' });
       } else if (
         window.innerWidth >= 450 &&
-        this.state.fieldFontSize !== '18px'
+        this.state.elementFontSize !== '18px'
       ) {
-        this.setState({ fieldFontSize: '18px' });
+        this.setState({ elementFontSize: '18px' });
       }
     });
   }
 
   render() {
-    const {fieldFontSize} = this.state;
+    const {elementFontSize} = this.state;
     return (
       <div className="Checkout">
-        <h1>Fields</h1>
-        <Fields>
-          <CardForm fontSize={fieldFontSize} />
-        </Fields>
+        <h1>Elements</h1>
+        <Elements>
+          <CardForm fontSize={elementFontSize} />
+        </Elements>
       </div>
     );
   }
@@ -136,7 +147,7 @@ class Checkout extends React.Component {
 
 const App = () => {
   return (
-    <RecurlyProvider publicKey="ewr1-zfJT5nPe1qW7jihI32LIRH">
+    <RecurlyProvider publicKey="dev-AUlPEVJpUXOM7bO3rf5VzS" api="https://api.lvh.me:3000/js/v1">
       <Checkout />
     </RecurlyProvider>
   );
