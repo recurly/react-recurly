@@ -35,6 +35,7 @@ module.exports = {
     })
   ],
   devServer: {
+    disableHostCheck: true,
     host: 'react-recurly-rig.lvh.me'
   }
 };

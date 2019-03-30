@@ -3,9 +3,10 @@ import {render} from 'react-dom';
 
 import {
   CardElement,
-  // CardNumberElement,
-  // CardExpiryElement,
-  // CardCVCElement,
+  CardNumberElement,
+  CardMonthElement,
+  CardYearElement,
+  CardCVVElement,
   RecurlyProvider,
   Elements,
   useRecurly
@@ -89,12 +90,12 @@ function CardForm (props) {
       <div>
         First & Last Name
         <br />
-        <input data-recurly="first_name" placeholder="First Name" value="John"></input>
-        <input data-recurly="last_name" placeholder="Last Name" value="Rambo"></input>
+        <input data-recurly="first_name" placeholder="First Name" defaultValue="John"></input>
+        <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo"></input>
         <br />
         Postal Code
         <br />
-        <input data-recurly="postal_code" placeholder="Postal Code" value="94117"></input>
+        <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117"></input>
       </div>
       <label>
         Card Element
