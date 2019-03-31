@@ -48,68 +48,46 @@ const createOptions = (fontSize, padding) => {
   };
 };
 
-// class _CardForm extends React.Component {
-//   handleSubmit = event => {
-//     event.preventDefault();
-//     this.props.recurly
-//       .token()
-//       .then(payload => console.log('[token]', payload));
-//   };
-//   render() {
-//     return (
-//       <form onSubmit={this.handleSubmit}>
-//         <label>
-//           Card Field
-//           <CardField
-//             onBlur={handleBlur}
-//             onChange={handleChange}
-//             onFocus={handleFocus}
-//             onReady={handleReady}
-//             {...createOptions(this.props.fontSize)}
-//           />
-//         </label>
-//         <button>Pay</button>
-//       </form>
-//     );
-//   }
-// }
-
 function CardForm (props) {
   const recurly = useRecurly();
+  let form = React.createRef();
 
   const handleSubmit = event => {
-    event.preventDefault();
-    recurly.token(event.target, (err, token) => {
+    if (event.preventDefault) event.preventDefault();
+    recurly.token(form.current, (err, token) => {
       if (err) console.log('[error]', err);
       else console.log('[token]', token);
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        First & Last Name
-        <br />
-        <input data-recurly="first_name" placeholder="First Name" defaultValue="John"></input>
-        <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo"></input>
-        <br />
-        Postal Code
-        <br />
-        <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117"></input>
-      </div>
-      <label>
-        Card Element
-        <br />
-        <CardElement
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onReady={handleReady}
-          {...createOptions(props.fontSize)}
-        />
-      </label>
-      <button>Pay</button>
-    </form>
+    <div className="Checkout">
+      <form onSubmit={handleSubmit} ref={form}>
+        <div>
+          First & Last Name
+          <br />
+          <input data-recurly="first_name" placeholder="First Name" defaultValue="John"></input>
+          <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo"></input>
+          <br />
+          Postal Code
+          <br />
+          <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117"></input>
+        </div>
+        <label>
+          Card Element
+          <br />
+          <CardElement
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onReady={handleReady}
+            onSubmit={handleSubmit}
+            {...createOptions(props.fontSize)}
+          />
+        </label>
+        <button>Pay</button>
+      </form>
+    </div>
   );
 }
 
@@ -133,15 +111,12 @@ class Checkout extends React.Component {
     });
   }
 
-  render() {
-    const {elementFontSize} = this.state;
+  render () {
+    const { elementFontSize } = this.state;
     return (
-      <div className="Checkout">
-        <h1>Elements</h1>
-        <Elements>
-          <CardForm fontSize={elementFontSize} />
-        </Elements>
-      </div>
+      <Elements>
+        <CardForm fontSize={elementFontSize} />
+      </Elements>
     );
   }
 }
