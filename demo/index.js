@@ -6,7 +6,7 @@ import {
   CardNumberElement,
   CardMonthElement,
   CardYearElement,
-  CardCVVElement,
+  CardCvvElement,
   RecurlyProvider,
   Elements,
   useRecurly
@@ -28,23 +28,15 @@ const handleReady = () => {
   console.log('[ready]');
 };
 
-const createOptions = (fontSize, padding) => {
+const createOptions = (fontSize, placeholder) => {
   return {
     style: {
-      base: {
-        fontSize,
-        color: '#424770',
-        letterSpacing: '0.025em',
-        fontFamily: 'Source Code Pro, monospace',
-        placeholder: {
-          color: '#aab7c4'
-        },
-        ...(padding ? { padding } : {})
-      },
-      invalid: {
-        color: '#9e2146'
-      },
-    },
+      fontSize,
+      placeholder: {
+        content: placeholder,
+        color: '#a3a3a7'
+      }
+    }
   };
 };
 
@@ -62,30 +54,89 @@ function CardForm (props) {
 
   return (
     <div className="Checkout">
+      <h2>Card Element</h2>
       <form onSubmit={handleSubmit} ref={form}>
         <div>
-          First & Last Name
-          <br />
           <input data-recurly="first_name" placeholder="First Name" defaultValue="John"></input>
           <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo"></input>
-          <br />
-          Postal Code
-          <br />
           <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117"></input>
         </div>
-        <label>
-          Card Element
-          <br />
-          <CardElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            onSubmit={handleSubmit}
-            {...createOptions(props.fontSize)}
-          />
-        </label>
-        <button>Pay</button>
+        <CardElement
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          onSubmit={handleSubmit}
+          {...createOptions(props.fontSize)}
+        />
+        <div>
+          <button>Pay</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function CardMultiForm (props) {
+  const recurly = useRecurly();
+  let form = React.createRef();
+
+  const handleSubmit = event => {
+    if (event.preventDefault) event.preventDefault();
+    recurly.token(form.current, (err, token) => {
+      if (err) console.log('[error]', err);
+      else console.log('[token]', token);
+    });
+  };
+
+  return (
+    <div className="Checkout">
+      <h2>Card Element with separate fields</h2>
+      <form onSubmit={handleSubmit} ref={form}>
+        <div>
+          <input data-recurly="first_name" placeholder="First Name" defaultValue="John"></input>
+          <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo"></input>
+          <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117"></input>
+        </div>
+        <CardNumberElement
+          className="recurly-element-inline"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          onSubmit={handleSubmit}
+          {...createOptions(props.fontSize, 'Card number')}
+        />
+        <CardMonthElement
+          className="recurly-element-inline"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          onSubmit={handleSubmit}
+          {...createOptions(props.fontSize, 'MM')}
+        />
+        <CardYearElement
+          className="recurly-element-inline"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          onSubmit={handleSubmit}
+          {...createOptions(props.fontSize, 'YY')}
+        />
+        <CardCvvElement
+          className="recurly-element-inline"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onReady={handleReady}
+          onSubmit={handleSubmit}
+          {...createOptions(props.fontSize, 'CVV')}
+        />
+        <div>
+          <button>Pay</button>
+        </div>
       </form>
     </div>
   );
@@ -114,18 +165,26 @@ class Checkout extends React.Component {
   render () {
     const { elementFontSize } = this.state;
     return (
-      <Elements>
-        <CardForm fontSize={elementFontSize} />
-      </Elements>
+      <div>
+        <Elements>
+          <CardForm fontSize={elementFontSize} />
+        </Elements>
+        <Elements>
+          <CardMultiForm fontSize={elementFontSize} />
+        </Elements>
+      </div>
     );
   }
 }
 
 const App = () => {
   return (
-    <RecurlyProvider publicKey="dev-AUlPEVJpUXOM7bO3rf5VzS" api="https://api.lvh.me:3000/js/v1">
-      <Checkout />
-    </RecurlyProvider>
+    <div>
+      <h1>react-recurly demo</h1>
+      <RecurlyProvider publicKey="dev-AUlPEVJpUXOM7bO3rf5VzS" api="https://api.lvh.me:3000/js/v1">
+        <Checkout />
+      </RecurlyProvider>
+    </div>
   );
 };
 

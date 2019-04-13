@@ -11,9 +11,9 @@
       }
       body,
       html {
-        background-color: #f4f4f4;
-        font-size: 18px;
+        background-color: #f3f3f4;
         font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        color: #38383a;
       }
       h1 {
         font-weight: 400;
@@ -22,12 +22,67 @@
         margin: 20px 0;
         padding: 0;
       }
+      h2 {
+        color: #555;
+        padding: 0;
+        margin: 0;
+        font-size: 1.1em;
+        font-weight: 400;
+        margin-bottom: 0.5em;
+      }
+      form {
+        background: white;
+        border: 0;
+        box-shadow: 5px 5px #a3a3a7;
+        padding: 0.75em;
+      }
+      input {
+        border: 1px solid #d7d7d9;
+        color: rgb(84, 84, 87);
+        margin: 0 1em 0 0;
+        height: 2em;
+        box-sizing: border-box;
+        outline: 0;
+        padding: 0 8px 0 8px;
+      }
+      button {
+        background: #99c4c7;
+        border: 0;
+        border-radius: 0;
+        box-shadow: 3px 3px #2a6f73;
+        color: #eaf4f3;
+        font-size: 0.75em;
+        font-weight: 600;
+        margin: 1em 1em 0 0;
+        outline: 0;
+        padding: 0.5em 1em;
+        text-transform: uppercase;
+      }
+      button:active {
+        position: relative;
+        left: 2px;
+        top: 2px;
+        box-shadow: 1px 1px #2a6f73;
+      }
+      .Checkout {
+        margin: 0 0.5em 2em;
+      }
+      .recurly-element {
+        height: 2.5em;
+        border-radius: 0;
+      }
+      .recurly-element-card {
+        padding: 0;
+      }
+      .recurly-element-inline {
+        display: inline-block;
+        margin-right: 1em;
+      }
     </style>
   </head>
 
   <body>
-    <div class="App">
-    </div>
+    <div class="App"></div>
     <script src="/demo.js"></script>
   </body>
 </html>
