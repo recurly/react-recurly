@@ -11,30 +11,34 @@
 
 ```jsx
 import React from 'react';
-import {render} from 'react-dom';
-import {RecurlyProvider, Fields, CardField, injectRecurly} from 'react-recurly';
+import { CardElement, Elements, RecurlyProvider, useRecurly } from 'react-recurly';
+import { render } from 'react-dom';
 
-class Checkout extends React.component {
-  handleSubmit (event) {
-    event.preventDefault();
-    this.props.recurly
-      .token()
-      .then(token => console.log('token:', token.id));
-  }
+const App = () => {
+  const recurly = useRecurly();
+  let form = React.createRef();
 
-  render () {
-    <RecurlyProvider publicKey="ewr1-zfJT5nPe1qW7jihI32LIRH">
-      <Fields>
-        <form onSubmit={this.handleSubmit}>
-          <CardField />
-          <button>Submit</button>
-        </form>
-      </Fields>
-    </RecurlyProvider>
-  }
-}
+  const handleSubmit = event => {
+    if (event.preventDefault) event.preventDefault();
+    recurly.token(form.current, (err, token) => {
+      if (err) console.log('[error]', err);
+      else console.log('[token]', token);
+    });
+  };
 
-const App = injectRecurly(Checkout);
+  return (
+    <div>
+      <RecurlyProvider publicKey="ewr1-abcdefghijklmno">
+        <Elements>
+          <form onSubmit={handleSubmit} ref={form}>
+            <CardElement onSubmit={handleSubmit} />
+            <button>Submit</button>
+          </form>
+        </Elements>
+      </RecurlyProvider>
+    </div>
+  );
+};
 
 render(<App />, document.querySelector('.App'));
 ```
