@@ -2,31 +2,22 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import {
+  RecurlyProvider,
+  useRecurly,
+  Elements,
   CardElement,
   CardNumberElement,
   CardMonthElement,
   CardYearElement,
   CardCvvElement,
-  RecurlyProvider,
-  Elements,
-  useRecurly
+  ThreeDSecureAction
 } from '../lib/index';
 
-const handleBlur = () => {
-  console.log('[blur]');
-};
-const handleChange = (change) => {
-  console.log('[change]', change);
-};
-const handleClick = () => {
-  console.log('[click]');
-};
-const handleFocus = () => {
-  console.log('[focus]');
-};
-const handleReady = () => {
-  console.log('[ready]');
-};
+const handleBlur = () => console.log('[blur]');
+const handleChange = (change) => console.log('[change]', change);
+const handleClick = () => console.log('[click]');
+const handleFocus = () => console.log('[focus]');
+const handleReady = () => console.log('[ready]');
 
 const createOptions = (fontSize, placeholder) => {
   return {
@@ -91,7 +82,7 @@ function CardMultiForm (props) {
 
   return (
     <div className="Checkout">
-      <h2>Card Element with separate fields</h2>
+      <h2>Distinct Card Elements</h2>
       <form onSubmit={handleSubmit} ref={form}>
         <div>
           <input data-recurly="first_name" placeholder="First Name" defaultValue="John"></input>
@@ -148,22 +139,16 @@ class Checkout extends React.Component {
 
     this.state = {
       elementFontSize: window.innerWidth < 450 ? '14px' : '18px',
+      actionTokenId: ''
     };
 
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 450 && this.state.elementFontSize !== '14px') {
-        this.setState({ elementFontSize: '14px' });
-      } else if (
-        window.innerWidth >= 450 &&
-        this.state.elementFontSize !== '18px'
-      ) {
-        this.setState({ elementFontSize: '18px' });
-      }
-    });
+    this.handleChangeFontSize = event => this.setState({ elementFontSize: event.target.value });
+    this.handleChangeActionToken = event => this.setState({ actionTokenId: event.target.value });
+    this.handleThreeDSecureToken = token => console.log(`[three-d-secure-action-result-token]: ${token.id}`);
   }
 
   render () {
-    const { elementFontSize } = this.state;
+    const { elementFontSize, actionTokenId } = this.state;
     return (
       <div>
         <Elements>
@@ -172,6 +157,24 @@ class Checkout extends React.Component {
         <Elements>
           <CardMultiForm fontSize={elementFontSize} />
         </Elements>
+
+        <div>
+          {
+            actionTokenId
+              ?
+                <ThreeDSecureAction
+                  actionTokenId={actionTokenId}
+                  onToken={this.handleThreeDSecureToken}
+                  className="recurly-three-d-secure-action"
+                />
+              : ''
+          }
+        </div>
+
+        <div>
+          <input type="text" defaultValue={elementFontSize} onChange={this.handleChangeFontSize}></input>
+          <input type="text" placeholder="ThreeDSecureActionTokenId" onChange={this.handleChangeActionToken}></input>
+        </div>
       </div>
     );
   }
@@ -181,7 +184,7 @@ const App = () => {
   return (
     <div>
       <h1>react-recurly demo</h1>
-      <RecurlyProvider publicKey="dev-AUlPEVJpUXOM7bO3rf5VzS" api="https://api.lvh.me:3000/js/v1">
+      <RecurlyProvider publicKey="dev-Cyx80WKsy3H1qd748r1wzi" api="https://api.lvh.me:3000/js/v1">
         <Checkout />
       </RecurlyProvider>
     </div>
