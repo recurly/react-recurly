@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {render} from 'react-dom';
 
 import {
@@ -10,7 +10,8 @@ import {
   CardMonthElement,
   CardYearElement,
   CardCvvElement,
-  ThreeDSecureAction
+  ThreeDSecureAction,
+  useCheckoutPricing,
 } from '../lib/index';
 
 const handleBlur = () => console.log('[blur]');
@@ -133,6 +134,52 @@ function CardMultiForm (props) {
   );
 }
 
+function CheckoutPricing() {
+  const [plan, setPlan] = useState("basic");
+  const [coupon, setCoupon] = useState("");
+  const [giftCard, setGiftCard] = useState("");
+  const [recurlyError, setRecurlyError] = useState(null);
+  const [pricing, updatePricingInputs] = useCheckoutPricing({plan}, setRecurlyError);
+
+  function updatePlan(e) {
+    setRecurlyError(null);
+    const plan = e.target.value;
+    setPlan(plan);
+    updatePricingInputs({plan});
+    // updatePricingInputs(inputs => ({...inputs, plan}))
+  }
+
+  function updatePricing(e) {
+    setRecurlyError(null);
+    e.preventDefault();
+    updatePricingInputs({coupon, giftCard});
+  }
+
+  return <div className="Checkout">
+    <h2>Distinct Card Elements</h2>
+    <div className="panel" style={{marginBottom: "30px"}}>
+      <select id="plan" value={plan} onChange={updatePlan}>
+        <option value="basic">Basic</option>
+        <option value="advanced">Advanced</option>
+      </select>
+      <form onSubmit={updatePricing} >
+        <label>
+          Coupon
+          <input type="text" value={coupon} onChange={e => setCoupon(e.target.value)} />
+        </label>
+        <label>
+          Gift card
+          <input type="text" value={giftCard} onChange={e => setGiftCard(e.target.value)} />
+        </label>
+        <button>Calculate subtotal</button>
+      </form>
+      <div style={{marginTop: "15px"}}>
+        {recurlyError ? <span style={{color: "red"}}>{recurlyError.message}</span> : `Subtotal: ${pricing.now && pricing.now.subtotal || ""}`}
+      </div>
+    </div>
+  </div>
+}
+
 class Checkout extends React.Component {
   constructor() {
     super();
@@ -156,6 +203,9 @@ class Checkout extends React.Component {
         </Elements>
         <Elements>
           <CardMultiForm fontSize={elementFontSize} />
+        </Elements>
+        <Elements>
+          <CheckoutPricing />
         </Elements>
 
         <div>
