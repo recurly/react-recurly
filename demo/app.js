@@ -183,13 +183,14 @@ class Checkout extends React.Component {
             min="0"
             max="32"
           ></input>
+          {elementFontSize}
         </div>
       </div>
     );
   }
 }
 
-export default function App() {
+export default function App () {
   return (
     <div>
       <h1>react-recurly demo</h1>

@@ -1,30 +1,27 @@
 {
-  "name": "react-recurly",
-  "version": "1.0.0",
-  "description": "React component for Recurly.js",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "name": "@recurly/react-recurly",
+  "version": "1.0.0-beta",
+  "description": "React components for Recurly.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chrissrogers/react-recurly.git"
+    "url": "git+https://github.com/recurly/react-recurly.git"
   },
   "author": "Recurly",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chrissrogers/react-recurly/issues"
+    "url": "https://github.com/recurly/react-recurly/issues"
   },
-  "homepage": "https://github.com/chrissrogers/react-recurly#readme",
+  "homepage": "https://github.com/recurly/react-recurly#readme",
   "peerDependencies": {
-    "react": "^15.5.4 || ^16.0.0-0",
-    "react-dom": "^15.5.4 || ^16.0.0-0"
+    "react": "^16.8.0-0",
+    "react-dom": "^16.8.0-0"
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "@testing-library/react": "^9.3.3",
     "babel-jest": "^24.9.0",

@@ -7,21 +7,7 @@ module.exports = {
   },
   mode: 'development',
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              presets: ['@babel/preset-env']
-            }
-          }
-        ]
-      }
-    ]
+    rules: [{ test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }]
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -36,6 +22,7 @@ module.exports = {
   ],
   devServer: {
     disableHostCheck: true,
-    host: 'react-recurly-rig.lvh.me'
-  }
+    host: 'react-recurly-demo.lvh.me'
+  },
+  devtool: 'inline-source-map'
 };
