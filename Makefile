@@ -20,4 +20,7 @@ node_modules: package.json
 clean:
 	@rm -rf node_modules build
 
+test:
+	@npm test
+
 .PHONY: test clean
