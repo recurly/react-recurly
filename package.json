@@ -26,15 +26,23 @@
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
+    "@testing-library/react": "^9.3.3",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "jest-transform-css": "^2.0.0",
     "memoize-one": "^5.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "recurly.js": "github:recurly/recurly-js",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
