@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 
 import {
   RecurlyProvider,
@@ -142,7 +142,7 @@ class Checkout extends React.Component {
       actionTokenId: ''
     };
 
-    this.handleChangeFontSize = event => this.setState({ elementFontSize: event.target.value });
+    this.handleChangeFontSize = event => this.setState({ elementFontSize: `${event.target.value}px` });
     this.handleChangeActionToken = event => this.setState({ actionTokenId: event.target.value });
     this.handleThreeDSecureToken = token => console.log(`[three-d-secure-action-result-token]: ${token.id}`);
   }
@@ -170,10 +170,20 @@ class Checkout extends React.Component {
               : ''
           }
         </div>
+        <div>
+          <input type="text" placeholder="ThreeDSecureActionTokenId" onChange={this.handleChangeActionToken}></input>
+        </div>
 
         <div>
-          <input type="text" defaultValue={elementFontSize} onChange={this.handleChangeFontSize}></input>
-          <input type="text" placeholder="ThreeDSecureActionTokenId" onChange={this.handleChangeActionToken}></input>
+          <label htmlFor="element-font-size">font size </label>
+          <input
+            id="element-font-size"
+            type="range"
+            defaultValue={elementFontSize}
+            onChange={this.handleChangeFontSize}
+            min="0"
+            max="32"
+          ></input>
         </div>
       </div>
     );
