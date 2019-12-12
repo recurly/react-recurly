@@ -190,7 +190,7 @@ class Checkout extends React.Component {
   }
 }
 
-export default function App () => {
+export default function App () {
   return (
     <div>
       <h1>react-recurly demo</h1>

@@ -1,11 +1,8 @@
 {
-  "name": "react-recurly",
-  "version": "0.0.1-beta",
-  "description": "React component for Recurly.js",
-  "main": "./lib/index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "name": "@recurly/react-recurly",
+  "version": "1.0.0-beta",
+  "description": "React components for Recurly.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/recurly/react-recurly.git"
@@ -17,8 +14,8 @@
   },
   "homepage": "https://github.com/recurly/react-recurly#readme",
   "peerDependencies": {
-    "react": "^16.0.0-0",
-    "react-dom": "^16.0.0-0"
+    "react": "^16.8.0-0",
+    "react-dom": "^16.8.0-0"
   },
   "dependencies": {},
   "devDependencies": {
