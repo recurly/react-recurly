@@ -194,7 +194,7 @@ export default function App () {
   return (
     <div>
       <h1>react-recurly demo</h1>
-      <RecurlyProvider publicKey="dev-Cyx80WKsy3H1qd748r1wzi" api="https://api.lvh.me:3000/js/v1">
+      <RecurlyProvider publicKey={process.env.PUBLIC_API_KEY} api="https://api.lvh.me:3000/js/v1">
         <Checkout />
       </RecurlyProvider>
     </div>
