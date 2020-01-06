@@ -3,7 +3,6 @@ import { Elements, ThreeDSecureAction } from '../lib/index';
 import CardForm from './card-form';
 import CardMultiForm from './card-multi-form';
 import CheckoutPricing from './checkout-pricing';
-import SubscriptionPricing from './subscription-pricing';
 
 export default class Checkout extends React.Component {
   constructor() {
@@ -32,9 +31,6 @@ export default class Checkout extends React.Component {
         </Elements>
         <Elements>
           <CheckoutPricing />
-        </Elements>
-        <Elements>
-          <SubscriptionPricing />
         </Elements>
         <div>
           {actionTokenId ? (
