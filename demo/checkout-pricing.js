@@ -6,7 +6,21 @@ export default function CheckoutPricing() {
   const [coupon, setCoupon] = useState('');
   const [giftCard, setGiftCard] = useState('');
   const [recurlyError, setRecurlyError] = useState(null);
-  const [pricing, updatePricingInputs] = useCheckoutPricing({ plan }, setRecurlyError);
+  const [pricing, updatePricingInputs] = useCheckoutPricing(
+    {
+      subscriptions: [
+        {
+          plan: 'basic',
+          quantity: 1,
+        },
+        {
+          plan: 'basic',
+          quantity: 1,
+        },
+      ],
+    },
+    setRecurlyError,
+  );
 
   function updatePlan(e) {
     setRecurlyError(null);
@@ -20,6 +34,8 @@ export default function CheckoutPricing() {
     e.preventDefault();
     updatePricingInputs({ coupon, giftCard });
   }
+
+  console.log(pricing);
 
   return (
     <div className="Checkout">

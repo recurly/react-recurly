@@ -36,9 +36,9 @@ export default function CardForm(props) {
       <h2>Card Element</h2>
       <form onSubmit={handleSubmit} ref={form}>
         <div>
-          <input data-recurly="first_name" placeholder="First Name" value="John"></input>
-          <input data-recurly="last_name" placeholder="Last Name" value="Rambo"></input>
-          <input data-recurly="postal_code" placeholder="Postal Code" value="94117"></input>
+          <input data-recurly="first_name" placeholder="First Name" defaultValue="John" />
+          <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo" />
+          <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117" />
         </div>
         <CardElement
           onBlur={handleBlur}
