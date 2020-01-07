@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useCheckoutPricing } from '../lib/index';
 
+function catchE(err) {
+  throw err;
+}
+
 export default function CheckoutPricing() {
   const [plan, setPlan] = useState('basic');
   const [coupon, setCoupon] = useState('');
@@ -8,34 +12,28 @@ export default function CheckoutPricing() {
   const [recurlyError, setRecurlyError] = useState(null);
   const [pricing, updatePricingInputs] = useCheckoutPricing(
     {
-      subscriptions: [
-        {
-          plan: 'basic',
-          quantity: 1,
-        },
-        {
-          plan: 'basic',
-          quantity: 1,
-        },
-      ],
+      subscriptions: [{ plan: 'basic' }, { plan: 'basic' }],
+      // catch: catchE,
     },
-    setRecurlyError,
+    // setRecurlyError,
   );
 
   function updatePlan(e) {
     setRecurlyError(null);
     const plan = e.target.value;
     setPlan(plan);
-    updatePricingInputs({ plan });
+    // updatePricingInputs(inputs => {
+    //   plan;
+    // });
   }
 
   function updatePricing(e) {
-    setRecurlyError(null);
     e.preventDefault();
-    updatePricingInputs({ coupon, giftCard });
+    // setRecurlyError(null);
+    updatePricingInputs({ coupon, giftCard, plan });
   }
 
-  console.log(pricing);
+  console.log(pricing.price);
 
   return (
     <div className="Checkout">
@@ -53,15 +51,17 @@ export default function CheckoutPricing() {
           <div>
             <button>Calculate subtotal</button>
           </div>
-          <div style={{ marginTop: '15px' }}>
-            {recurlyError ? (
-              <span data-testid="error" style={{ color: 'red' }}>
-                {recurlyError.message}
-              </span>
-            ) : (
-              <>Subtotal: {pricing.now ? <span data-testid="subtotal">{pricing.now.subtotal}</span> : ''}</>
-            )}
-          </div>
+          {
+            <div style={{ marginTop: '15px' }}>
+              {recurlyError ? (
+                <span data-testid="error" style={{ color: 'red' }}>
+                  {recurlyError.message}
+                </span>
+              ) : (
+                <>Subtotal: {pricing.price ? <span data-testid="subtotal">{pricing.price.now.subtotal}</span> : ''}</>
+              )}
+            </div>
+          }
         </form>
       </div>
     </div>

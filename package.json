@@ -21,8 +21,10 @@
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
+    "@babel/runtime": "^7.7.7",
     "@testing-library/react": "^9.3.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
