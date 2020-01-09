@@ -3,8 +3,8 @@
   <head>
     <title>demo | react-recurly</title>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-    <link rel="stylesheet" href="https://js.lvh.me:8020/build/recurly.css">
-    <script src="https://js.lvh.me:8020/build/recurly.js"></script>
+    <link rel="stylesheet" href="https://js.recurly.com/v4/recurly.css">
+    <script src="https://js.recurly.com/v4/recurly.js"></script>
     <style>
       * {
         box-sizing: border-box;
@@ -13,6 +13,7 @@
       html {
         background-color: #f3f3f4;
         font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 1em;
         color: #38383a;
       }
       h1 {
@@ -26,15 +27,12 @@
         color: #555;
         padding: 0;
         margin: 0;
-        font-size: 1.1em;
+        font-size: 1.2em;
         font-weight: 400;
         margin-bottom: 0.5em;
       }
-      form {
-        background: white;
-        border: 0;
-        box-shadow: 5px 5px #a3a3a7;
-        padding: 0.75em;
+      p {
+        font-size: 0.8em;
       }
       input {
         border: 1px solid #d7d7d9;
@@ -64,8 +62,19 @@
         top: 2px;
         box-shadow: 1px 1px #2a6f73;
       }
-      .Checkout {
-        margin: 0 0.5em 2em;
+      th,
+      td {
+        padding: 10px;
+      }
+      .App {
+        padding: 0 0.5em;
+      }
+      .DemoSection {
+        margin: 0 0 3em;
+        background: white;
+        border: 0;
+        box-shadow: 5px 5px #a3a3a7;
+        padding: 0.75em;
       }
       .recurly-element {
         height: 2.5em;

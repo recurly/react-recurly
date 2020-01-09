@@ -22,7 +22,7 @@ module.exports = {
       template: './demo/index.html',
     }),
     new webpack.DefinePlugin({
-      'process.env.PUBLIC_API_KEY': JSON.stringify(process.env.PUBLIC_API_KEY)
+      'process.env.RECURLY_PUBLIC_KEY': JSON.stringify(process.env.RECURLY_PUBLIC_KEY)
     })
   ],
   devServer: {
