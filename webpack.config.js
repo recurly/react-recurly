@@ -1,5 +1,7 @@
+require('dotenv').config();
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require("webpack");
 
 module.exports = {
   entry: {
@@ -18,6 +20,9 @@ module.exports = {
       inject: false,
       filename: 'index.html',
       template: './demo/index.html',
+    }),
+    new webpack.DefinePlugin({
+      'process.env.PUBLIC_API_KEY': JSON.stringify(process.env.PUBLIC_API_KEY)
     })
   ],
   devServer: {
