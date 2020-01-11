@@ -35,7 +35,7 @@ From here, you will structure your React application's checkout components in th
 
 ```jsx
 import React from 'react';
-import { CardElement, Elements, RecurlyProvider, useRecurly } from 'react-recurly';
+import { CardElement, Elements, RecurlyProvider, useRecurly } from '@recurly/react-recurly';
 import { render } from 'react-dom';
 
 const App = () => {
@@ -80,7 +80,7 @@ This component accepts your `publicKey` as a prop. It is responsible for creatin
 *`index.js`*
 ```jsx
 import React from 'react';
-import { RecurlyProvider } from 'react-recurly';
+import { RecurlyProvider } from '@recurly/react-recurly';
 import { render } from 'react-dom';
 
 import MyCardForm from './my-card-form';
@@ -103,7 +103,7 @@ This component groups `Element` components together. When generating tokens, it 
 *`index.js`*
 ```jsx
 import React from 'react';
-import { Elements, RecurlyProvider } from 'react-recurly';
+import { Elements, RecurlyProvider } from '@recurly/react-recurly';
 import { render } from 'react-dom';
 
 import MyCardForm from './my-card-form';
@@ -128,7 +128,7 @@ This component renders a [Card Element](https://developers.recurly.com/reference
 *`my-card-form.js`*
 ```jsx
 import React from 'react';
-import { CardElement } from 'react-recurly';
+import { CardElement } from '@recurly/react-recurly';
 
 export function MyCardForm (props) {
   return (
@@ -166,7 +166,7 @@ Use the `useRecurly` hook to generate a token! When your user submits your check
 *`my-card-form.js`*
 ```jsx
 import React from 'react';
-import { CardElement, useRecurly } from 'react-recurly';
+import { CardElement, useRecurly } from '@recurly/react-recurly';
 
 export function MyCardForm (props) {
   const recurly = useRecurly();

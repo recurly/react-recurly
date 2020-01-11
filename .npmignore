@@ -1,5 +1,6 @@
 .babelrc
 demo
+test
 Makefile
 webpack.config.js
 .env
