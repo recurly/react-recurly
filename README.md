@@ -4,16 +4,16 @@
 
 ## Demo
 
-See the [demo](demo) directory.
+The best way to get started is to interact with our [live demo on CodeSandbox][codesandbox]. You may also view the [demo source](demo) in this repo. The [card-element-demo](demo/demos/card-element-demo.js) is a great place to begin seeing how you might structure your own payment form components.
 
-These examples provide a quick start to using `react-recurly`. The [card-element-demo](demo/demos/card-element-demo.js) is a great place to begin seeing how you might structure your own payment form components.
+#### Running demos locally
 
 1. `make demo`
 2. [https://localhost:8040](https://localhost:8040)
 
 ## Getting Started
 
-If you haven't yet, please review the [Recurly.js documentation](https://developers.recurly.com/reference/recurly-js/). This will give you a solid understanding of the total capabilities of the library before we begin implementing some of its features in React. Now let's begin!
+If you haven't yet, please review the [Recurly.js documentation][recurly-js-docs]. This will give you a solid understanding of the total capabilities of the library before we begin implementing some of its features in React. Now let's begin!
 
 First, install this package
 
@@ -31,7 +31,7 @@ Then, include recurly.js in your application via our CDN.
 
 From here, you will structure your React application's checkout components in the following manner. We will go into more detail on each component below.
 
-## Simplest Implementation
+### Simplest Implementation
 
 ```jsx
 import React from 'react';
@@ -73,7 +73,7 @@ function CardForm (props) {
 render(<App />, document.querySelector('.App'));
 ```
 
-### RecurlyProvider
+### Component: `RecurlyProvider`
 
 This component accepts your `publicKey` as a prop. It is responsible for creating a `recurly` instance on which we will generate tokens. This should wrap any other `react-recurly` component you will use.
 
@@ -96,7 +96,7 @@ const App = () => {
 render(<App />, document.querySelector('.App'));
 ```
 
-### Elements
+### Component: `Elements`
 
 This component groups `Element` components together. When generating tokens, it is used to determine which values will be tokenized. This should wrap your checkout form.
 
@@ -121,7 +121,7 @@ const App = () => {
 render(<App />, document.querySelector('.App'));
 ```
 
-### CardElement
+### Component: `CardElement`
 
 This component renders a [Card Element](https://developers.recurly.com/reference/recurly-js/#the-card-element). Your users will enter their card information (number, expiry, and cvv) here.
 
@@ -141,15 +141,27 @@ export function MyCardForm (props) {
 }
 ```
 
-### CardNumberElement, CardMonthElement, CardYearElement, CardCvvElement
+The `CardElement` accepts the following props
 
-If the `CardElement` does not suit your design needs, you may alternatively use individual card fields.
+| Prop name   | Type       | Description                                                                                                 |
+| :---------- | :--------- | :---------------------------------------------------------------------------------------------------------- |
+| `className` | _String_   | Sets the `className` property for the `CardElement` container.                                              |
+| `id`        | _String_   | Sets the `id` property for the `CardElement` container.                                                     |
+| `inputType` | _String_   | See [Styling Elements][styling-elements] for available options.                                             |
+| `onChange`  | _Function_ | Called when the state of the `CardElement` changes.                                                         |
+| `onFocus`   | _Function_ | Called when a user focuses on the `CardElement`.                                                            |
+| `onBlur`    | _Function_ | Called when a user blurs from the `CardElement`.                                                            |
+| `onReady`   | _Function_ | Called when the `CardElement` has finished initializing.                                                    |
+| `onSubmit`  | _Function_ | Called when a user presses the <kbd>enter</kbd> key while focused on the `CardElement`.                     |
+| `style`     | _Object_   | Set style attributes for the `CardElement`. See [Styling Elements][styling-elements] for available options. |
+
+If the `CardElement` does not suit your design needs, you may alternatively use individual card fields. They are available as `CardNumberElement`, `CardMonthElement`, `CardYearElement`, and `CardCvvElement`. They accept the same props as the `CardElement`.
 
 ### Getting a token: `useRecurly`
 
-Use the `useRecurly` hook to generate a token! When your user submits your checkout form, this hook is used to submit their card information securely to Recurly, generate a token, and return that token to you. You will then send this token to your server, and [use it in the Recurly API](https://developers.recurly.com/reference/recurly-js/#using-a-token) to store or charge your customer's credit card.
+Use the `useRecurly` hook to generate a token! When your user submits your checkout form, this hook is used to submit their card information securely to Recurly, generate a token, and return that token to you. You will then send this token to your server, and [use it in the Recurly API][using-a-token] to store or charge your customer's credit card.
 
-`useRecurly` will return a `recurly` instance on which you will call `recurly.token`. You will create a ref to your form using [`React.createRef`](https://reactjs.org/docs/refs-and-the-dom.html), and pass this to `recurly.token`.
+`useRecurly` will return a `recurly` instance on which you will call `recurly.token`. You will create a ref to your form using [`React.createRef`][react-refs], and pass this to `recurly.token`.
 
 *`my-card-form.js`*
 ```jsx
@@ -178,3 +190,9 @@ export function MyCardForm (props) {
   );
 }
 ```
+
+[codesandbox]: https://codesandbox.io/s/react-recurly-demo-eo2wh
+[recurly-js-docs]: https://developers.recurly.com/reference/recurly-js/
+[styling-elements]: https://developers.recurly.com/reference/recurly-js/#styling-elements
+[using-a-token]: https://developers.recurly.com/reference/recurly-js/#using-a-token
+[react-refs]: https://reactjs.org/docs/refs-and-the-dom.html
