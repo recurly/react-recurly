@@ -17,6 +17,7 @@ import { render } from 'react-dom';
 import { CardElementDemo } from './card-element-demo';
 import { IndividualCardElementsDemo } from './individual-card-elements-demo';
 import { ThreeDSecureDemo } from './three-d-secure-demo';
+import { CheckoutPricing } from './checkout-pricing';
 
 function App () {
   return (
@@ -31,6 +32,9 @@ function App () {
 
       <h2>3D Secure</h2>
       <ThreeDSecureDemo />
+
+      <h2>Checkout Pricing</h2>
+      <CheckoutPricing />
     </div>
   );
 };
