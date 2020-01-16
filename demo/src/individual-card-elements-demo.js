@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// in your app, these would be imported from 'react-recurly'
 import {
   CardNumberElement,
   CardMonthElement,
@@ -9,7 +8,7 @@ import {
   Elements,
   RecurlyProvider,
   useRecurly
-} from '../../lib/index';
+} from '@recurly/react-recurly';
 
 const handleBlur = () => console.log('[blur]');
 const handleChange = change => console.log('[change]', change);
@@ -62,9 +61,21 @@ function CardForm (props) {
   return (
     <form onSubmit={handleSubmit} ref={form}>
       <div>
-        <input data-recurly="first_name" placeholder="First Name" defaultValue="John" />
-        <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo" />
-        <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117" />
+        <input
+          data-recurly="first_name"
+          placeholder="First Name"
+          defaultValue="John"
+        />
+        <input
+          data-recurly="last_name"
+          placeholder="Last Name"
+          defaultValue="Rambo"
+        />
+        <input
+          data-recurly="postal_code"
+          placeholder="Postal Code"
+          defaultValue="94117"
+        />
       </div>
       <CardNumberElement
         className="recurly-element-inline"
@@ -73,7 +84,7 @@ function CardForm (props) {
         onFocus={handleFocus}
         onReady={handleReady}
         onSubmit={handleSubmit}
-        style={{ fontSize, placeholder: { content: 'Card number' } }}
+        style={{ fontSize, placeholder: { content: "Card number" } }}
       />
       <CardMonthElement
         className="recurly-element-inline"
@@ -82,7 +93,7 @@ function CardForm (props) {
         onFocus={handleFocus}
         onReady={handleReady}
         onSubmit={handleSubmit}
-        style={{ fontSize, placeholder: { content: 'MM' } }}
+        style={{ fontSize, placeholder: { content: "MM" } }}
       />
       <CardYearElement
         className="recurly-element-inline"
@@ -91,7 +102,7 @@ function CardForm (props) {
         onFocus={handleFocus}
         onReady={handleReady}
         onSubmit={handleSubmit}
-        style={{ fontSize, placeholder: { content: 'YY' } }}
+        style={{ fontSize, placeholder: { content: "YY" } }}
       />
       <CardCvvElement
         className="recurly-element-inline"
@@ -100,7 +111,7 @@ function CardForm (props) {
         onFocus={handleFocus}
         onReady={handleReady}
         onSubmit={handleSubmit}
-        style={{ fontSize, placeholder: { content: 'CVV' } }}
+        style={{ fontSize, placeholder: { content: "CVV" } }}
       />
       <div>
         <button>Pay</button>

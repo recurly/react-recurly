@@ -1,9 +1,22 @@
+/**
+ * @recurly/react-recurly-demo
+ *
+ * This demo is designed to help you structure a React app using react-recurly
+ *
+ * 1. Take a look at the .env file. This file contains the public key this app
+ *    will use to configure recurly.js. Set the value of `RECURLY_PUBLIC_KEY` to your own
+ *    Recurly public key (https://app.recurly.com/go/developer/api_access)
+ *
+ * The `App` component in this file simply organizes the demos. If you're getting
+ * started, have a look at src/card-element-demo.js
+ */
+
 import React from 'react';
 import { render } from 'react-dom';
 
-import { CardElementDemo } from './demos/card-element-demo';
-import { IndividualCardElementsDemo } from './demos/individual-card-elements-demo';
-import { ThreeDSecureDemo } from './demos/three-d-secure-demo';
+import { CardElementDemo } from './src/card-element-demo';
+import { IndividualCardElementsDemo } from './src/individual-card-elements-demo';
+import { ThreeDSecureDemo } from './src/three-d-secure-demo';
 
 function App () {
   return (
@@ -21,6 +34,5 @@ function App () {
     </div>
   );
 };
-
 
 render(<App />, document.querySelector('.App'));

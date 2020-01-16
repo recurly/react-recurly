@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-// in your app, these would be imported from 'react-recurly'
 import {
   CardElement,
   Elements,
   RecurlyProvider,
   useRecurly
-} from '../../lib/index';
+} from '@recurly/react-recurly';
 
 const handleBlur = () => console.log('[blur]');
 const handleChange = change => console.log('[change]', change);
@@ -59,9 +58,21 @@ function CardForm (props) {
   return (
     <form onSubmit={handleSubmit} ref={form}>
       <div>
-        <input data-recurly="first_name" placeholder="First Name" defaultValue="John" />
-        <input data-recurly="last_name" placeholder="Last Name" defaultValue="Rambo" />
-        <input data-recurly="postal_code" placeholder="Postal Code" defaultValue="94117" />
+        <input
+          data-recurly="first_name"
+          placeholder="First Name"
+          defaultValue="John"
+        />
+        <input
+          data-recurly="last_name"
+          placeholder="Last Name"
+          defaultValue="Rambo"
+        />
+        <input
+          data-recurly="postal_code"
+          placeholder="Postal Code"
+          defaultValue="94117"
+        />
       </div>
       <CardElement
         onBlur={handleBlur}

@@ -1,21 +1,18 @@
-# react-recurly
+<img src="https://i.imgur.com/gGxJ8zx.png" align="right">
 
-*React components for Recurly.js*
+# react-recurly &middot; [![build status][travis-image]][travis-url]
 
-## Demo
+React components for [Recurly.js][recurly-js-docs]
 
-The best way to get started is to interact with our [live demo on CodeSandbox][codesandbox]. You may also view the [demo source](demo) in this repo. The [card-element-demo](demo/demos/card-element-demo.js) is a great place to begin seeing how you might structure your own payment form components.
+## Examples
 
-#### Running demos locally
+[Interactive Demo][codesandbox]
 
-1. `make demo`
-2. [https://localhost:8040](https://localhost:8040)
+The best way to get started is to interact with our [live demo on CodeSandbox][codesandbox]. You may also view the [demo source](demo) in this repository. The [card-element-demo](demo/src/card-element-demo.js) is a great place to begin seeing how you might structure your own payment form components.
 
-## Getting Started
+## Installation
 
-If you haven't yet, please review the [Recurly.js documentation][recurly-js-docs]. This will give you a solid understanding of the total capabilities of the library before we begin implementing some of its features in React. Now let's begin!
-
-First, install this package
+You may install this package with npm
 
 ```bash
 npm install @recurly/react-recurly
@@ -29,7 +26,9 @@ Then, include recurly.js in your application via our CDN.
 <link rel="stylesheet" href="https://js.recurly.com/v4/recurly.css">
 ```
 
-From here, you will structure your React application's checkout components in the following manner. We will go into more detail on each component below.
+## Getting Started
+
+If you haven't yet, please review the [Recurly.js documentation][recurly-js-docs]. This will give you a solid understanding of the total capabilities of the library before we begin implementing some of its features in React. Now let's begin!
 
 ### Simplest Implementation
 
@@ -191,7 +190,9 @@ export function MyCardForm (props) {
 }
 ```
 
-[codesandbox]: https://codesandbox.io/s/react-recurly-demo-eo2wh
+[travis-url]: https://travis-ci.org/recurly/react-recurly/builds
+[travis-image]: https://img.shields.io/travis/recurly/react-recurly/master.svg?style=flat-square
+[codesandbox]: https://codesandbox.io/s/github/recurly/react-recurly/demo
 [recurly-js-docs]: https://developers.recurly.com/reference/recurly-js/
 [styling-elements]: https://developers.recurly.com/reference/recurly-js/#styling-elements
 [using-a-token]: https://developers.recurly.com/reference/recurly-js/#using-a-token

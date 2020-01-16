@@ -1,20 +1,7 @@
-BIN = ./node_modules/.bin
-WEBPACK = $(BIN)/webpack
-SERVER = $(BIN)/webpack-dev-server --inline --hot --port 8040
-
-server: build
-ifdef RECURLY_JS_CERT
-	@$(SERVER) --https --cert $(RECURLY_JS_CERT) --key $(RECURLY_JS_KEY) --display-error-details
-else
-	@$(SERVER) --https
-endif
-
-build: build/demo.js
-build/demo.js: demo lib node_modules
-	@$(WEBPACK) --display-reasons --display-chunks
-
-test:
+test: lib node_modules
 	@npm test
+test-debug: lib node_modules
+	@node --inspect-brk node_modules/.bin/jest --runInBand
 
 publish: lib clean node_modules
 	@npm publish --access public
@@ -25,4 +12,4 @@ node_modules: package.json
 clean:
 	@rm -rf node_modules build
 
-.PHONY: clean publish server test
+.PHONY: clean publish test-debug
