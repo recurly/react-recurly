@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { CardElementDemo } from './demos/card-element-demo';
-import { IndividualCardElementsDemo } from './demos/individual-card-elements-demo';
-import { ThreeDSecureDemo } from './demos/three-d-secure-demo';
+import { CardElementDemo } from './src/card-element-demo';
+import { IndividualCardElementsDemo } from './src/individual-card-elements-demo';
+import { ThreeDSecureDemo } from './src/three-d-secure-demo';
 
 function App () {
   return (
@@ -21,6 +21,5 @@ function App () {
     </div>
   );
 };
-
 
 render(<App />, document.querySelector('.App'));

@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-// in your app, these would be imported from 'react-recurly'
 import {
   RecurlyProvider,
   ThreeDSecureAction,
   useRecurly
-} from '../../lib/index';
+} from "@recurly/react-recurly";
 
-const handleThreeDSecureToken = token => console.log(`[three-d-secure-action-result-token]: ${token.id}`);
+const handleThreeDSecureToken = token =>
+  console.log(`[three-d-secure-action-result-token]: ${token.id}`);
 
-export function ThreeDSecureDemo (props) {
-  const [actionTokenId, setActionTokenId] = useState('');
+export function ThreeDSecureDemo(props) {
+  const [actionTokenId, setActionTokenId] = useState("");
 
   const handleChangeActionToken = event => setActionTokenId(event.target.value);
 
   return (
     <div className="DemoSection">
       <RecurlyProvider publicKey={process.env.RECURLY_PUBLIC_KEY}>
-        <p>
-          Provide a ThreeDSecureActionTokenId returned by the Recurly API
-        </p>
+        <p>Provide a ThreeDSecureActionTokenId returned by the Recurly API</p>
 
         <div>
           <input
@@ -30,9 +28,7 @@ export function ThreeDSecureDemo (props) {
           />
         </div>
 
-        <p>
-          The challenge prompt will appear below
-        </p>
+        <p>The challenge prompt will appear below</p>
 
         {actionTokenId ? (
           <div>
