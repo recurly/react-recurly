@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 import {
   RecurlyProvider,
   ThreeDSecureAction,
   useRecurly
-} from "@recurly/react-recurly";
+} from '@recurly/react-recurly';
 
 const handleThreeDSecureToken = token =>
   console.log(`[three-d-secure-action-result-token]: ${token.id}`);
 
-export function ThreeDSecureDemo(props) {
-  const [actionTokenId, setActionTokenId] = useState("");
+export function ThreeDSecureDemo (props) {
+  const [actionTokenId, setActionTokenId] = useState('');
 
   const handleChangeActionToken = event => setActionTokenId(event.target.value);
 

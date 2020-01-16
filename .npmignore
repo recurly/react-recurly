@@ -1,8 +1,8 @@
-.env
 build
 demo
-babel.config.js
 test
+.travis.yml
+babel.config.js
 jest.*.js
 Makefile
 webpack.config.js

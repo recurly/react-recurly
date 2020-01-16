@@ -12,4 +12,4 @@ node_modules: package.json
 clean:
 	@rm -rf node_modules build
 
-.PHONY: clean publish
+.PHONY: clean publish test-debug

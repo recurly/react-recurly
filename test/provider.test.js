@@ -83,8 +83,8 @@ describe('<RecurlyProvider />', function () {
 
       function StubComponentTwo () {
         const { recurly } = useContext(RecurlyContext);
-        expect(recurly.config.publicKey).toBe('test-public-key');
         expect(recurly).toBe(memo);
+        expect(recurly.config.publicKey).toBe('test-public-key');
         return '';
       }
 

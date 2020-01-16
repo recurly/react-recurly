@@ -12,12 +12,14 @@ import { RecurlyElementsContext } from '../lib/elements';
 
 describe('useRecurly', function () {
   describe('when not a descendant of <Elements />', function () {
+    const message = /you are trying to use Recurly outside of an Elements context/;
+
     suppressConsoleErrors();
 
     it('throws an error', function () {
       expect(() => {
         render(<TestComponent />);
-      }).toThrow(/you are trying to use Recurly outside of an Elements context/);
+      }).toThrow(message);
 
       expect(() => {
         render(
@@ -25,7 +27,7 @@ describe('useRecurly', function () {
             <TestComponent />
           </RecurlyProvider>
         );
-      }).toThrow(/you are trying to use Recurly outside of an Elements context/);
+      }).toThrow(message);
     });
 
     function TestComponent () {
