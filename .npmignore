@@ -1,6 +1,8 @@
-.babelrc
+.env
+build
 demo
+babel.config.js
 test
+jest.*.js
 Makefile
 webpack.config.js
-.env
