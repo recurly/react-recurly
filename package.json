@@ -27,8 +27,17 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
+    "@storybook/addon-actions": "^5.3.5",
+    "@storybook/addon-docs": "^5.3.5",
+    "@storybook/addon-knobs": "^5.3.5",
+    "@storybook/addon-links": "^5.3.5",
+    "@storybook/addon-notes": "^5.3.5",
+    "@storybook/addon-viewport": "^5.3.5",
+    "@storybook/addons": "^5.3.5",
+    "@storybook/react": "^5.3.5",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.3",
+    "@testing-library/react": "^9.4.0",
+    "babel-loader": "^8.0.6",
     "jest": "^24.9.0",
     "jest-transform-css": "^2.0.0",
     "react": "^16.12.0",
@@ -37,6 +46,8 @@
   },
   "scripts": {
     "test": "jest",
-    "prepublishOnly": "./node_modules/.bin/babel lib -d lib-dist"
+    "prepublishOnly": "babel lib -d lib-dist",
+    "storybook": "start-storybook -p 6006 -c docs/.storybook/",
+    "build-storybook": "build-storybook -c docs/.storybook/"
   }
 }
