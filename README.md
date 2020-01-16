@@ -192,7 +192,7 @@ export function MyCardForm (props) {
 
 [travis-url]: https://travis-ci.org/recurly/react-recurly/builds
 [travis-image]: https://img.shields.io/travis/recurly/react-recurly/master.svg?style=flat-square
-[codesandbox]: https://codesandbox.io/s/github/recurly/react-recurly/demo
+[codesandbox]: https://codesandbox.io/s/github/recurly/react-recurly/tree/master/demo
 [recurly-js-docs]: https://developers.recurly.com/reference/recurly-js/
 [styling-elements]: https://developers.recurly.com/reference/recurly-js/#styling-elements
 [using-a-token]: https://developers.recurly.com/reference/recurly-js/#using-a-token
