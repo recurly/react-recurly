@@ -1,5 +1,6 @@
 build
 demo
+lib
 test
 .travis.yml
 babel.config.js

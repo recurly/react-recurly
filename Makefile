@@ -10,6 +10,6 @@ node_modules: package.json
 	@npm install
 
 clean:
-	@rm -rf node_modules build
+	@rm -rf build lib-dist node_modules
 
 .PHONY: clean publish test-debug
