@@ -4,11 +4,11 @@
 // See https://github.com/facebook/jest/issues/8365
 
 module.exports = {
-    'presets': [
-      '@babel/preset-react',
-      '@babel/preset-env'
-    ],
-    'plugins': [
-      '@babel/plugin-proposal-class-properties'
-    ]
+  'presets': [
+    '@babel/preset-react',
+    '@babel/preset-env'
+  ],
+  'plugins': [
+    '@babel/plugin-proposal-class-properties'
+  ]
 };

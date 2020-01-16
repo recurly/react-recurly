@@ -2,7 +2,7 @@
   "name": "@recurly/react-recurly",
   "version": "1.0.1",
   "description": "React components for Recurly.js",
-  "main": "lib/index.js",
+  "main": "lib-dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/recurly/react-recurly.git"
@@ -22,6 +22,7 @@
     "memoize-one": "^5.1.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
@@ -35,6 +36,7 @@
     "recurly.js": "github:recurly/recurly-js"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "./node_modules/.bin/babel lib -d lib-dist"
   }
 }
