@@ -14,9 +14,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { CardElementDemo } from './src/card-element-demo';
-import { IndividualCardElementsDemo } from './src/individual-card-elements-demo';
-import { ThreeDSecureDemo } from './src/three-d-secure-demo';
+import { CardElementDemo } from './card-element-demo';
+import { IndividualCardElementsDemo } from './individual-card-elements-demo';
+import { ThreeDSecureDemo } from './three-d-secure-demo';
 
 function App () {
   return (

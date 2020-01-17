@@ -20,7 +20,7 @@ export function CardElementDemo (props) {
 
   return (
     <div className="DemoSection">
-      <RecurlyProvider publicKey={process.env.RECURLY_PUBLIC_KEY}>
+      <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY}>
         <Elements>
           <CardForm fontSize={`${fontSize}px`} />
         </Elements>
