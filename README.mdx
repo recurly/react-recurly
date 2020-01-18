@@ -89,9 +89,9 @@ export function MyPaymentForm (props) {
 }
 ```
 
-We are now ready to add the final step: **getting a token**. When our users' submit our form, we want to send their payment information to Recurly, which will return a token. We'll then keep this token to use in the Recurly API.
+We are now ready to add the final step: **getting a token**. When our users submit our form, we want to send their payment information to Recurly, which will return a token. We'll then keep this token to use in the Recurly API.
 
-To accomplish this, we will use the [useRecurly][docs-hook-use-recurly] hook. This hook provides a Recurly.js instance, which we will use to call [recurly.token][docs-recurly-js-token]. Since this function expects a `<form>`, we will create a ref to pass to it.
+To accomplish this, we will use the [useRecurly][docs-hook-use-recurly] hook. This hook returns a Recurly.js instance, on which we will call [recurly.token][docs-recurly-js-token]. Since this function expects a `<form>`, we will create a [React ref](react-refs) to pass to it.
 
 ```jsx
 // my-payment-form.js
@@ -123,18 +123,23 @@ export function MyPaymentForm (props) {
 }
 ```
 
-With that, we have implemented the essential components of a payment form using react-recurly.
+With that, we have implemented the essential components of a payment form using react-recurly. The tokens generated above may be used on any `billing_info` object in the [Recurly API][docs-recurly-api].
 
 ##### More resources
 
-* [Interactive Demo][demo]
 * [Documentation & Reference][docs]
 * [Recurly.js Documentation][docs-recurly-js]
+* [Interactive Demo][demo]
+* [Code on GitHub][github]
+* [Recurly API Documentation][docs-recurly-api]
+* Questions? [GitHub issues][github-issues] and [Recurly support][support] are here for you.
 
 ## Licence
 
 MIT
 
+[github]: https://github.com/recurly/react-recurly
+[github-issues]: https://github.com/recurly/react-recurly/issues
 [travis-url]: https://travis-ci.org/recurly/react-recurly/builds
 [travis-image]: https://img.shields.io/travis/recurly/react-recurly/master.svg?style=flat-square
 
@@ -148,12 +153,13 @@ MIT
 [docs-recurly-js-elements]: https://developers.recurly.com/reference/recurly-js/#elements
 [docs-recurly-js-billing-fields]: https://developers.recurly.com/reference/recurly-js/#billing-fields
 [docs-recurly-js-token]: https://developers.recurly.com/reference/recurly-js/#getting-a-token
+[docs-recurly-api]: https://developers.recurly.com/api
 
 [demo]: https://recurly.github.io/react-recurly/?path=/docs/introduction-interactive-demo--page
 [demo-src]: https://github.com/recurly/react-recurly/tree/master/demo
 [card-element-demo.js]: https://github.com/recurly/react-recurly/demo/src/card-element-demo.js
 
 [app-api-access]: https://app.recurly.com/go/developer/api_access
-[using-a-token]: https://developers.recurly.com/reference/recurly-js/#using-a-token
+[support]: https://recurly.zendesk.com
 
 [react-refs]: https://reactjs.org/docs/refs-and-the-dom.html
