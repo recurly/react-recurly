@@ -9,6 +9,8 @@ docs: $(PKG)
 	@npm run storybook
 docs-build: $(PKG)
 	@npm run build-storybook
+docs-publish: $(PKG)
+	@npm run deploy-storybook
 
 publish: lib clean node_modules
 	@npm publish --access public
@@ -19,4 +21,4 @@ node_modules: package.json
 clean:
 	@rm -rf build lib-dist node_modules
 
-.PHONY: clean publish test-debug docs docs-build
+.PHONY: clean publish test-debug docs docs-build docs-deploy
