@@ -3,8 +3,6 @@ import { configure, addParameters } from '@storybook/react';
 import { create } from '@storybook/theming';
 import { version } from '../../package.json';
 
-import 'highlight.js/styles/tomorrow-night.css';
-
 const theme = create({
   base: 'light',
   brandTitle: `react-recurly ${version}`,
