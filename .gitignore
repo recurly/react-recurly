@@ -1,5 +1,6 @@
 .DS_Store
 
+build
 lib-dist
 node_modules
 
