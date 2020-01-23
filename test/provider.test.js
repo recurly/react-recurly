@@ -51,8 +51,8 @@ describe('<RecurlyProvider />', function () {
       );
 
       function StubComponent () {
-        const recurlyContext = useContext(RecurlyContext);
-        expect(recurlyContext.recurly).toBeInstanceOf(window.recurly.Recurly);
+        const { recurly } = useContext(RecurlyContext);
+        expect(recurly).toBeInstanceOf(window.recurly.Recurly);
         return '';
       }
     });
