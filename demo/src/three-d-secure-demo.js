@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import {
   RecurlyProvider,
   ThreeDSecureAction,
-  useRecurly
 } from '@recurly/react-recurly';
 
 const handleThreeDSecureToken = token =>
