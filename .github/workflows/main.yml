@@ -1,14 +1,10 @@
-on: ["push", "pull_request"]
-
-name: Coverage
-
+on: [push, pull_request]
+name: Continuous Integration
 jobs:
-
   build:
-    name: Coverage
+    name: Test Coverage
     runs-on: ubuntu-latest
     steps:
-
     - uses: actions/checkout@v2
 
     - name: Use Node.js

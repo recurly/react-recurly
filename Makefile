@@ -10,8 +10,6 @@ docs: $(PKG)
 	@npm run storybook
 docs-build: $(PKG)
 	@npm run build-storybook
-docs-publish: $(PKG)
-	@npm run deploy-storybook
 
 publish: lib clean node_modules
 	@npm publish --access public
