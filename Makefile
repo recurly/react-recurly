@@ -1,3 +1,4 @@
+BIN = ./node_modules/.bin
 PKG = lib node_modules
 
 test: $(PKG)
@@ -21,4 +22,4 @@ node_modules: package.json
 clean:
 	@rm -rf build lib-dist node_modules
 
-.PHONY: clean publish test test-debug docs docs-build docs-deploy
+.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy
