@@ -5,6 +5,8 @@ test: $(PKG)
 	@npm test
 test-debug: $(PKG)
 	@node --inspect-brk node_modules/.bin/jest --runInBand
+test-watch: $(PKG)
+	@npm test -- --watchAll
 
 docs: $(PKG)
 	@npm run storybook

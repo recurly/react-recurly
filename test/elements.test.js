@@ -1,42 +1,30 @@
-import React, { useContext } from 'react'
-import { render } from '@testing-library/react'
-import { suppressConsoleErrors } from './support/helpers';
+import React, { useContext } from 'react';
+import { render, mount } from 'enzyme';
+import { suppressConsoleErrors, withRecurlyProvider } from './support/helpers';
 
-import { Elements, RecurlyProvider } from '../lib';
+import { Elements } from '../lib';
 import { RecurlyElementsContext } from '../lib/elements';
 
 describe('<Elements />', function () {
   describe('without a parent <RecurlyProvider />', function () {
-    const storedRecurly = window.recurly;
-
     suppressConsoleErrors();
 
     it('throws an error', function () {
-      expect(() => {
-        render(<Elements />);
-      }).toThrow('<Elements> must be within a <RecurlyProvider> tree.');
+      expect(() => render(<Elements />)).toThrow('<Elements> must be within a <RecurlyProvider> tree.');
     });
   });
 
   describe('with a parent <RecurlyProvider />', function () {
     it('does not throw an error', function () {
-      expect(() => {
-        render(
-          <RecurlyProvider publicKey="test-public-key">
-            <Elements />
-          </RecurlyProvider>
-        );
-      }).not.toThrow();
+      expect(() => render(withRecurlyProvider(<Elements />))).not.toThrow();
     });
 
     it('provides an Elements instance', function () {
-      render(
-        <RecurlyProvider publicKey="test-public-key">
-          <Elements>
-            <StubComponent />
-          </Elements>
-        </RecurlyProvider>
-      );
+      render(withRecurlyProvider(
+        <Elements>
+          <StubComponent />
+        </Elements>
+      ));
 
       function StubComponent () {
         const { elements } = useContext(RecurlyElementsContext);
@@ -44,28 +32,24 @@ describe('<Elements />', function () {
         return '';
       }
     });
+  });
 
-    it(`accepts an onSubmit func prop which is called when Elements emits 'submit'`, function (done) {
-      const stubEvent = { arbitrary: 'properties' };
+  describe('event handlers', function () {
+    const example = { arbitrary: 'properties' };
 
-      render(
-        <RecurlyProvider publicKey="test-public-key">
-          <Elements onSubmit={stubSubmitListener}>
-            <StubComponent />
-          </Elements>
-        </RecurlyProvider>
-      );
+    describe('[onSubmit]', function () {
+      it(`is called when Elements emits 'submit'`, function () {
+        const subject = jest.fn();
+        const fixture = mount(withRecurlyProvider(<Elements onSubmit={subject} />)).find(Elements);
 
-      function stubSubmitListener (event) {
-        expect(event).toBe(stubEvent);
-        done();
-      }
+        fixture.instance()._elements.emit('submit', example);
+        expect(subject).toHaveBeenCalledWith(example);
+      });
 
-      function StubComponent () {
-        const { elements } = useContext(RecurlyElementsContext);
-        elements.emit('submit', stubEvent);
-        return '';
-      }
+      it('does nothing by default', function () {
+        const fixture = mount(withRecurlyProvider(<Elements />)).find(Elements);
+        expect(() => fixture.instance()._elements.emit('submit', example)).not.toThrow();
+      });
     });
   });
 });
