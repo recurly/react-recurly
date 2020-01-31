@@ -1,13 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import { suppressConsoleErrors } from './support/helpers';
+import React from 'react';
+import { render } from 'enzyme';
+import { suppressConsoleErrors, withRecurlyProvider } from './support/helpers';
 
-import {
-  RecurlyProvider,
-  Elements,
-  useRecurly
-} from '../lib';
-
+import { Elements, useRecurly } from '../lib';
 import { RecurlyElementsContext } from '../lib/elements';
 
 describe('useRecurly', function () {
@@ -21,13 +16,7 @@ describe('useRecurly', function () {
         render(<TestComponent />);
       }).toThrow(message);
 
-      expect(() => {
-        render(
-          <RecurlyProvider publicKey="test-public-key">
-            <TestComponent />
-          </RecurlyProvider>
-        );
-      }).toThrow(message);
+      expect(() => render(withRecurlyProvider(<TestComponent />))).toThrow(message);
     });
 
     function TestComponent () {
@@ -38,13 +27,11 @@ describe('useRecurly', function () {
 
   describe('when a descendant of <Elements />', function () {
     const fixture = TestComponent => () => {
-      render(
-        <RecurlyProvider publicKey="test-public-key">
-          <Elements>
-            <TestComponent />
-          </Elements>
-        </RecurlyProvider>
-      );
+      render(withRecurlyProvider(
+        <Elements>
+          <TestComponent />
+        </Elements>
+      ));
     };
 
     it('returns a Recurly instance', function () {
