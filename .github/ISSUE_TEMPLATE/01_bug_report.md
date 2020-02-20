@@ -19,7 +19,7 @@ If possible, include a stacktrace or browser console log containing any relevant
 
 Steps to reproduce the behavior.
 
-If possible, please provide example code, a jsfiddle, or CodeSandbox demo which we can run to reproduce the bug.
+If possible, please provide example code, a jsfiddle, or [CodeSandbox demo](https://codesandbox.io/s/github/recurly/react-recurly/tree/master/demo?fontsize=14&hidenavigation=1&theme=dark) demo which we can run to reproduce the bug.
 The faster we can reproduce the bug, the faster we can help.
 
 **Expected behavior**
