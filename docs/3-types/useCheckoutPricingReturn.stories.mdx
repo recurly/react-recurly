@@ -1,0 +1,58 @@
+import { Subtitle } from '@storybook/addon-docs/blocks';
+import { PropsTable } from '@storybook/components';
+
+<Meta title="Types/UseCheckoutPricingReturn" />
+
+# UseCheckoutPricingReturn
+
+<Subtitle slot={() => 'useCheckoutPricing() return value'} />
+
+An array of two items returned from calling `useCheckoutPricing`. For more info on `useCheckoutPricing`, see the [implementation guide](/?path=/docs/hooks-usecheckoutpricing--page).
+
+<PropsTable
+  rows={[
+    {
+      name: 'useCheckoutPricingReturn',
+      type: { summary: 'array', detail: "[{ useCheckoutPricingState }, setCheckoutPricing]" },
+      description:
+        'An array with a `useCheckoutPricingState` object as the first item and a `setCheckoutPricing` update function as the second value',
+    },
+  ]}
+/>
+
+### UseCheckoutPricingState
+
+<PropsTable
+  rows={[
+    {
+      name: 'price',
+      type: { summary: 'object' },
+      description:
+        'A recurly.js [PricingState object](https://developers.recurly.com/reference/recurly-js/#pricing)',
+    },
+    {
+      name: 'loading',
+      type: { summary: 'boolean' },
+      description: 'Describes the current loading state of useCheckoutPricing',
+    },
+  ]}
+/>
+
+### setCheckoutPricing
+
+<PropsTable
+  rows={[
+    {
+      name: 'setCheckoutPricing',
+      type: { summary: 'function', detail: `setCheckoutPricing({ subscriptions: [{plan: 'my-plan' }]});
+-
+setCheckoutPricing(prev => ({
+  ...prev,
+  subscriptions: [{ plan: 'my-plan' })]
+});
+      ` },
+      description:
+        'A react [setState](https://reactjs.org/docs/hooks-state.html) function that accepts a `useCheckoutPricingInput`. When called, `setCheckoutPricing` will update its corresponding `useCheckoutPricingState`. Can also be called with a function as an argument if preferred or if previous inputs are needed.',
+    }
+  ]}
+/>
