@@ -188,18 +188,6 @@ describe('useCheckoutPricing', function() {
         await expect(checkoutPricingReturn.adjustment).not.toHaveBeenCalled();
       });
     });
-
-  });
-
-  describe('output', () => {
-    it('should return the output of recurly.Pricing.Checkout()', async () => {
-      const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
-      const { result, waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
-
-      await waitForNextUpdate();
-      const [{ pricing }] = result.current;
-      await expect(pricing).toEqual(checkoutPricingReturn);
-    });
   });
 
   describe('setPricing update function', () => {
