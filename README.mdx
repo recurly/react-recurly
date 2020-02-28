@@ -125,6 +125,38 @@ export function MyPaymentForm (props) {
 
 With that, we have implemented the essential components of a payment form using react-recurly. The tokens generated above may be used on any `billing_info` object in the [Recurly API][docs-recurly-api].
 
+## Additional Usage
+
+React-recurly also includes a [useCheckoutPricing][docs-hook-use-checkout-pricing] custom hook for generating a pricing preview before checking out.
+
+```js
+import { useCheckoutPricing, RecurlyProvider } from '@recurly/react-recurly';
+
+function PricingPreview () {
+  const initialPricingInput = {
+    subscriptions: [
+      {
+        plan: 'my-plan'
+      }
+    ]
+  };
+
+  const [{ price, loading }, setCheckoutPricing] = useCheckoutPricing(initialPricingInput);
+
+  if (!loading) {
+    return <div>{price.now.subtotal}</div>
+  };
+};
+
+export default function MyApp () {
+  <RecurlyProvider>
+    <PricingPreview />
+  </RecurlyProvider>
+};
+```
+
+For more information on `useCheckoutPricing`, view the [implementation guide here][docs-hook-use-checkout-pricing].
+
 ##### More resources
 
 * [Documentation & Reference][docs]
@@ -150,6 +182,7 @@ MIT
 [docs-component-elements]: https://recurly.github.io/react-recurly/?path=/docs/components-elements--page
 [docs-component-card-element]: https://recurly.github.io/react-recurly/?path=/docs/components-cardelement--default
 [docs-hook-use-recurly]: https://recurly.github.io/react-recurly/?path=/docs/hooks-userecurly--page
+[docs-hook-use-checkout-pricing]: https://recurly.github.io/react-recurly/?path=/docs/hooks-usecheckoutpricing--page
 
 [docs-recurly-js]: https://developers.recurly.com/reference/recurly-js/
 [docs-recurly-js-elements]: https://developers.recurly.com/reference/recurly-js/#elements
