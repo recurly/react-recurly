@@ -26,7 +26,7 @@ function CheckoutPricingForm () {
     billingVatNumber: '',
     shippingCountry: '',
     shippingPostalCode: '',
-    shippingVatNumber: '',
+    shippingVatNumber: ''
   });
 
   const [{ price, loading }, setPricing] = useCheckoutPricing(null, setRecurlyError);
@@ -50,11 +50,11 @@ function CheckoutPricingForm () {
     }];
     const address = {
       country: pricingFormState.billingCountry,
-      postal_code: pricingFormState.billingPostalCode,
+      postal_code: pricingFormState.billingPostalCode
     };
     const shippingAddress = {
       country: pricingFormState.shippingCountry,
-      postal_code: pricingFormState.shippingPostalCode,
+      postal_code: pricingFormState.shippingPostalCode
     };
 
     setPricing({ ...pricingFormState, subscriptions, adjustments, address, shippingAddress });

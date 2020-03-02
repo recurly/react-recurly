@@ -21,7 +21,7 @@ const PRICING_METHODS = [
   'giftCard',
   'plan',
   'shippingAddress',
-  'tax',
+  'tax'
 ];
 
 const checkoutPricingReturn = {
@@ -39,7 +39,7 @@ const checkoutPricingReturn = {
   shippingAddress: jest.fn(() => checkoutPricingReturn),
   subscription: jest.fn(() => checkoutPricingReturn),
   tax: jest.fn(() => checkoutPricingReturn),
-  PRICING_METHODS,
+  PRICING_METHODS
 };
 
 describe('useCheckoutPricing', function() {
@@ -53,7 +53,7 @@ describe('useCheckoutPricing', function() {
         ...new Recurly('Public key'),
         Pricing: {
           Subscription: jest.fn(() => subscriptionPricingReturn),
-          Checkout: jest.fn(() => checkoutPricingReturn),
+          Checkout: jest.fn(() => checkoutPricingReturn)
         },
       };
     };
@@ -82,8 +82,8 @@ describe('useCheckoutPricing', function() {
       const initialInput = {
         subscriptions: [
           { plan: 'basic', quantity: 2 },
-          { plan: 'advanced', quantity: 5 },
-        ],
+          { plan: 'advanced', quantity: 5 }
+        ]
       };
 
       renderUseCheckoutPricing(initialInput);
@@ -98,8 +98,8 @@ describe('useCheckoutPricing', function() {
       const initialInput = {
         subscriptions: [
           { plan: 'basic', quantity: 2 },
-          { plan: 'advanced', quantity: 5 },
-        ],
+          { plan: 'advanced', quantity: 5 }
+        ]
       };
 
       renderUseCheckoutPricing(initialInput);
@@ -116,9 +116,9 @@ describe('useCheckoutPricing', function() {
           {
             plan: 'basic',
             quantity: 2,
-            addons: [{ code: 'item code', quantity: 5 }],
-          },
-        ],
+            addons: [{ code: 'item code', quantity: 5 }]
+          }
+        ]
       };
 
       renderUseCheckoutPricing(initialInput);
@@ -139,10 +139,10 @@ describe('useCheckoutPricing', function() {
               amounts: {
                 now: '3.00',
                 next: '4.00',
-              },
-            },
-          },
-        ],
+              }
+            }
+          }
+        ]
       };
 
       const { waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
@@ -167,8 +167,8 @@ describe('useCheckoutPricing', function() {
       const initialInput = {
         adjustments: [
           { itemCode: 'item-1', quantity: 2 },
-          { itemCode: 'item-2', quantity: 5 },
-        ],
+          { itemCode: 'item-2', quantity: 5 }
+        ]
       };
 
       renderUseCheckoutPricing(initialInput);
@@ -229,9 +229,9 @@ describe('useCheckoutPricing', function() {
             return {
               catch: cb => {
                 cb();
-              },
+              }
             };
-          },
+          }
         };
       };
 
