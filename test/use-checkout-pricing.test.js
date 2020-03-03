@@ -44,7 +44,6 @@ const checkoutPricingReturn = {
 
 describe('useCheckoutPricing', function() {
   const { Recurly } = window.recurly;
-  const { all } = window.Promise;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -61,7 +60,6 @@ describe('useCheckoutPricing', function() {
 
   afterEach(() => {
     window.recurly.Recurly = Recurly;
-    window.Promise.all = all;
   });
 
   describe('loading', () => {
@@ -154,16 +152,6 @@ describe('useCheckoutPricing', function() {
 
   describe('adjustments', () => {
     it('should call checkoutPricing.adjustment for each adjustment', async () => {
-      const initialInput = { adjustments: [{ itemCode: 'item-1', quantity: 1 }, { itemCode: 'item-2', quantity: 3 }] };
-
-      renderUseCheckoutPricing(initialInput);
-
-      await act(async () => {
-        await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith(initialInput.adjustments[0]);
-      });
-    });
-
-    it('should call checkoutPricing.adjustment for each adjustment', async () => {
       const initialInput = {
         adjustments: [
           { itemCode: 'item-1', quantity: 2 },
@@ -191,7 +179,7 @@ describe('useCheckoutPricing', function() {
   });
 
   describe('setPricing update function', () => {
-    it('should call subscription pricing method when passed an object with a subscriptions property', async () => {
+    it('should call subscription pricing method when passed an object with subscriptions', async () => {
       const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
       const { result, waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
 
@@ -205,7 +193,7 @@ describe('useCheckoutPricing', function() {
     });
   });
 
-  describe('Rest inputs inputs', () => {
+  describe('Rest inputs', () => {
     const checkoutPricingMethods = ['giftCard', 'address', 'shippingAddress', 'tax'];
 
     checkoutPricingMethods.forEach(async checkoutPricingMethod => {
@@ -222,19 +210,6 @@ describe('useCheckoutPricing', function() {
   describe('Error handler', () => {
     it('should be passed to .catch', async () => {
       const handleError = jest.fn();
-      window.Promise.all = function() {
-        return {
-          then: cb => {
-            cb();
-            return {
-              catch: cb => {
-                cb();
-              }
-            };
-          }
-        };
-      };
-
       const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
 
       await act(async () => {
