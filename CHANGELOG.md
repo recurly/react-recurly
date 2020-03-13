@@ -1,5 +1,9 @@
 ## react-recurly CHANGELOG
 
+### Version 1.1.1
+
+* Fixes missing lodash dependency [#40][40]
+
 ### Version 1.1.0
 
 * Adds useCheckoutPricing hook [#28][28]
@@ -19,6 +23,7 @@
 
 * Initial Release [ecd70331][ecd70331]
 
+[40]: https://github.com/recurly/react-recurly/commit/0bba8f01d7e6a7ec0877ecbbc30e3a4627bbc501
 [28]: https://github.com/recurly/react-recurly/commit/7c467341d2571d2d26f59621af30cd8c598e726b
 [22]: https://github.com/recurly/react-recurly/commit/afb8a4ef665bf5ed6ab3ef8945e299619f769504
 [11]: https://github.com/recurly/react-recurly/commit/46f892b18323166d14572347b2194096300f6c62
