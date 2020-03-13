@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/recurly/react-recurly#readme",
   "dependencies": {
-    "@recurly/react-recurly": "1.1.0",
+    "@recurly/react-recurly": "1.1.1",
     "dotenv": "^8.2.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
