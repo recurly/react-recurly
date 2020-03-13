@@ -8,3 +8,4 @@ babel.config.js
 jest.*.js
 Makefile
 webpack.config.js
+docs
