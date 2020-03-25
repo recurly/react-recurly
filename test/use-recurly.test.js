@@ -41,6 +41,7 @@ describe('useRecurly', function () {
         const recurly = useRecurly();
         expect(recurly.token).toBeInstanceOf(Function);
         expect(recurly.config.publicKey).toBe('test-public-key');
+        expect(recurly).toBeInstanceOf(window.recurly.Recurly);
         return '';
       }
     });
