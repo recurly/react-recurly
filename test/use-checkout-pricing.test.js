@@ -207,6 +207,44 @@ describe('useCheckoutPricing', function() {
     });
   });
 
+  describe('Call order', () => {
+    it('should call checkoutPricing.subscriptions before checkoutPricing.adjustments', async () => {
+      const initialInput = {
+        subscriptions: [{ plan: 'basic' }],
+        adjustments: { itemCode: 'item-1', quantity: 2 },
+      };
+
+      renderUseCheckoutPricing(initialInput);
+
+      await act(async () => {
+        setTimeout(() => {
+          expect(checkoutPricingReturn.subscription).toHaveBeenCalled();
+          expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
+          expect(checkoutPricingReturn.subscription)
+            .toHaveBeenCalledBefore(checkoutPricingReturn.adjustment);
+        }, 10);
+      });
+    });
+
+    it('should call checkoutPricing.adjustments before checkoutPricing rest inputs', async () => {
+      const initialInput = {
+        currency: "USD",
+        adjustments: { itemCode: 'item-1', quantity: 2 },
+      };
+
+      renderUseCheckoutPricing(initialInput);
+
+      await act(async () => {
+        setTimeout(() => {
+          expect(checkoutPricingReturn.currency).toHaveBeenCalled();
+          expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
+          expect(checkoutPricingReturn.adjustment)
+            .toHaveBeenCalledBefore(checkoutPricingReturn.currency);
+        }, 10);
+      });
+    });
+  });
+
   describe('Error handler', () => {
     it('should be passed to .catch', async () => {
       const handleError = jest.fn();
@@ -218,7 +256,7 @@ describe('useCheckoutPricing', function() {
           expect(handleError).toHaveBeenCalled();
           expect(checkoutPricingReturn.catch).toHaveBeenCalled();
           expect(subscriptionPricingReturn.catch).toHaveBeenCalled();
-        }, 5);
+        }, 10);
       });
     });
   });
