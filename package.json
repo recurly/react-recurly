@@ -50,7 +50,6 @@
   "scripts": {
     "test": "jest",
     "prepublishOnly": "babel lib -d lib-dist",
-    "postpublish": "deploy-storybook",
     "storybook": "start-storybook -p 6006 -c docs/.storybook/",
     "build-storybook": "build-storybook -c docs/.storybook/ -o build/docs"
   }
