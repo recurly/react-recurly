@@ -9,3 +9,4 @@ jest.*.js
 Makefile
 webpack.config.js
 docs
+README.mdx
