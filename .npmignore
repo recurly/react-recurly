@@ -10,3 +10,7 @@ Makefile
 webpack.config.js
 docs
 README.mdx
+
+types/test.tsx
+types/tsconfig.json
+types/tslint.json

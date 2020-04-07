@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
+    "jsx": "react",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@recurly/react-recurly": ["./index.d.ts"]
+    },
+    "types": []
+  },
+  "files": ["index.d.ts", "test-types.tsx"]
+}
