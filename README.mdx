@@ -99,7 +99,7 @@ import React from 'react';
 import { CardElement, useRecurly } from '@recurly/react-recurly';
 
 export function MyPaymentForm (props) {
-  let formRef = React.createRef();
+  const formRef = React.useRef();
   const recurly = useRecurly();
 
   function handleSubmit (event) {

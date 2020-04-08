@@ -13,25 +13,25 @@ Use this [hook][react-hooks] to access a Recurly instance.
 
 When a user submits your checkout form, use this hook to submit their card information securely to Recurly. We will generate a token, and return that token to you. You will then send this token to your server, and [use it in the Recurly API][using-a-token] to store or charge your user's credit card.
 
-`useRecurly()` will return a `recurly.js` instance on which you will call `recurly.token`. Create a ref to your payment form using [`React.createRef`][react-refs], and pass this ref to `recurly.token`.
+`useRecurly()` will return a `recurly.js` instance on which you will call `recurly.token`. Create a ref to your payment form using [`React.useRef`][react-refs], and pass this ref to `recurly.token`.
 
 ```jsx
 import { CardElement, useRecurly } from '@recurly/react-recurly';
 
 export function MyCardForm (props) {
   const recurly = useRecurly();
-  let form = React.createRef();
+  const formRef = React.useRef();
 
   const handleSubmit = event => {
     if (event.preventDefault) event.preventDefault();
-    recurly.token(form.current, (err, token) => {
+    recurly.token(formRef.current, (err, token) => {
       if (err) console.log('[error]', err);
       else console.log('[token]', token);
     });
   };
 
   return (
-    <form onSubmit={handleSubmit} ref={form}>
+    <form onSubmit={handleSubmit} ref={formRef}>
       <input type="text" data-recurly="first_name" />
       <input type="text" data-recurly="last_name" />
       <CardElement onSubmit={handleSubmit} />

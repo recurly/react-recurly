@@ -47,18 +47,18 @@ export function IndividualCardElementsDemo (props) {
 function CardForm (props) {
   const { fontSize } = props;
   const recurly = useRecurly();
-  let form = React.createRef();
+  const formRef = React.useRef();
 
   const handleSubmit = event => {
     if (event.preventDefault) event.preventDefault();
-    recurly.token(form.current, (err, token) => {
+    recurly.token(formRef.current, (err, token) => {
       if (err) console.log('[error]', err);
       else console.log('[token]', token);
     });
   };
 
   return (
-    <form onSubmit={handleSubmit} ref={form}>
+    <form onSubmit={handleSubmit} ref={formRef}>
       <div>
         <input
           data-recurly="first_name"
