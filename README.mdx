@@ -71,7 +71,7 @@ function App () {
 }
 ```
 
-Within our new `<MyPaymentForm />` component, we'll add a [&lt;CardElement />][docs-component-card-element] which will render a secure card element. We'll also add inputs for our users' name. To let react-recurly know that we want to use these fields, we'll use a `data-recurly` attribute. To include additional properties see, [this billing fields table][docs-recurly-js-billing-fields].
+Within our new `<MyPaymentForm />` component, we'll add a [&lt;CardElement />][docs-component-card-element] which will render a secure card element. We'll also add inputs for our users' name. To let react-recurly know that we want to use these fields, we'll use a `data-recurly` attribute. To include additional properties, see [this billing fields table][docs-recurly-js-billing-fields].
 
 ```jsx
 // my-payment-form.js
@@ -104,7 +104,7 @@ export function MyPaymentForm (props) {
 
   function handleSubmit (event) {
     event.preventDefault();
-    recurly.token(myFormRef.current, (err, token) => {
+    recurly.token(formRef.current, (err, token) => {
       if (err) {
         // handle error
       } else {
