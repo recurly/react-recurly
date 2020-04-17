@@ -159,12 +159,12 @@ describe('useCheckoutPricing', function() {
         ]
       };
 
-      renderUseCheckoutPricing(initialInput);
-
       await act(async () => {
-        await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-1', quantity: 2 });
-        await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-2', quantity: 5 });
-      });
+        await renderUseCheckoutPricing(initialInput);
+      })
+
+      await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-1', quantity: 2 });
+      await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-2', quantity: 5 });
     });
 
     it("should not call checkoutPricing.adjustment if adjustment doesn't contain an item code", async () => {
@@ -199,10 +199,12 @@ describe('useCheckoutPricing', function() {
     checkoutPricingMethods.forEach(async checkoutPricingMethod => {
       it(`should call checkoutPricing#${checkoutPricingMethod} with input value`, async () => {
         const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }], [checkoutPricingMethod]: 'Some value' };
-        renderUseCheckoutPricing(initialInput);
-        await act(async () => {
-          await expect(checkoutPricingReturn[checkoutPricingMethod]).toHaveBeenCalledWith('Some value');
-        });
+
+        await act(async() => {
+          await renderUseCheckoutPricing(initialInput);
+        })
+
+        expect(checkoutPricingReturn[checkoutPricingMethod]).toHaveBeenCalledWith('Some value');
       });
     });
   });
@@ -211,37 +213,33 @@ describe('useCheckoutPricing', function() {
     it('should call checkoutPricing.subscriptions before checkoutPricing.adjustments', async () => {
       const initialInput = {
         subscriptions: [{ plan: 'basic' }],
-        adjustments: { itemCode: 'item-1', quantity: 2 },
+        adjustments: [{ itemCode: 'item-1', quantity: 2 }]
       };
 
-      renderUseCheckoutPricing(initialInput);
-
       await act(async () => {
-        setTimeout(() => {
-          expect(checkoutPricingReturn.subscription).toHaveBeenCalled();
-          expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
-          expect(checkoutPricingReturn.subscription)
-            .toHaveBeenCalledBefore(checkoutPricingReturn.adjustment);
-        }, 10);
+        await renderUseCheckoutPricing(initialInput);
       });
+
+      expect(checkoutPricingReturn.subscription).toHaveBeenCalled();
+      expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
+      expect(checkoutPricingReturn.subscription)
+        .toHaveBeenCalledBefore(checkoutPricingReturn.adjustment);
     });
 
     it('should call checkoutPricing.adjustments before checkoutPricing rest inputs', async () => {
       const initialInput = {
         currency: "USD",
-        adjustments: { itemCode: 'item-1', quantity: 2 },
+        adjustments: [{ itemCode: 'item-1', quantity: 2 }]
       };
 
-      renderUseCheckoutPricing(initialInput);
-
       await act(async () => {
-        setTimeout(() => {
-          expect(checkoutPricingReturn.currency).toHaveBeenCalled();
-          expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
-          expect(checkoutPricingReturn.adjustment)
-            .toHaveBeenCalledBefore(checkoutPricingReturn.currency);
-        }, 10);
-      });
+        await renderUseCheckoutPricing(initialInput);
+      })
+
+      expect(checkoutPricingReturn.currency).toHaveBeenCalled();
+      expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
+      expect(checkoutPricingReturn.adjustment)
+        .toHaveBeenCalledBefore(checkoutPricingReturn.currency);
     });
   });
 
@@ -252,12 +250,9 @@ describe('useCheckoutPricing', function() {
 
       await act(async () => {
         await renderUseCheckoutPricing(initialInput, handleError);
-        setTimeout(() => {
-          expect(handleError).toHaveBeenCalled();
-          expect(checkoutPricingReturn.catch).toHaveBeenCalled();
-          expect(subscriptionPricingReturn.catch).toHaveBeenCalled();
-        }, 10);
       });
+
+      expect(subscriptionPricingReturn.catch).toHaveBeenCalledWith(handleError);
     });
   });
 });
