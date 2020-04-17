@@ -8,6 +8,7 @@ const subscriptionPricingReturn = {
   done: jest.fn(() => subscriptionPricingReturn),
   plan: jest.fn(() => subscriptionPricingReturn),
   tax: jest.fn(() => subscriptionPricingReturn),
+  currency: jest.fn(() => subscriptionPricingReturn)
 };
 
 const PRICING_METHODS = [
@@ -148,6 +149,30 @@ describe('useCheckoutPricing', function() {
       await waitForNextUpdate();
       await expect(subscriptionPricingReturn.tax).toHaveBeenCalledWith(initialInput.subscriptions[0].tax);
     });
+
+    it('should call subscriptionPricing.currency', async () => {
+      const initialInput = {
+        currency: 'USD',
+        subscriptions: [
+          {
+            plan: 'basic',
+            quantity: 2,
+            tax: {
+              vatNumber: 5,
+              amounts: {
+                now: '3.00',
+                next: '4.00',
+              }
+            }
+          }
+        ]
+      };
+
+      const { waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
+
+      await waitForNextUpdate();
+      await expect(subscriptionPricingReturn.currency).toHaveBeenCalledWith('USD');
+    })
   });
 
   describe('adjustments', () => {
