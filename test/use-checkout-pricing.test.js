@@ -40,7 +40,7 @@ const checkoutPricingReturn = {
   shippingAddress: jest.fn(() => checkoutPricingReturn),
   subscription: jest.fn(() => checkoutPricingReturn),
   tax: jest.fn(() => checkoutPricingReturn),
-  PRICING_METHODS
+  pricing: { PRICING_METHODS }
 };
 
 describe('useCheckoutPricing', function() {
