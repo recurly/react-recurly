@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import useCheckoutPricing from '../lib/use-checkout-pricing';
 import { withElements } from './support/helpers';
+import Promise from "promise";
 
 const subscriptionPricingReturn = {
   addon: jest.fn(() => subscriptionPricingReturn),
@@ -8,6 +9,7 @@ const subscriptionPricingReturn = {
   done: jest.fn(() => subscriptionPricingReturn),
   plan: jest.fn(() => subscriptionPricingReturn),
   tax: jest.fn(() => subscriptionPricingReturn),
+  currency: jest.fn(() => subscriptionPricingReturn)
 };
 
 const PRICING_METHODS = [
@@ -39,7 +41,7 @@ const checkoutPricingReturn = {
   shippingAddress: jest.fn(() => checkoutPricingReturn),
   subscription: jest.fn(() => checkoutPricingReturn),
   tax: jest.fn(() => checkoutPricingReturn),
-  PRICING_METHODS
+  pricing: { PRICING_METHODS }
 };
 
 describe('useCheckoutPricing', function() {
@@ -148,6 +150,30 @@ describe('useCheckoutPricing', function() {
       await waitForNextUpdate();
       await expect(subscriptionPricingReturn.tax).toHaveBeenCalledWith(initialInput.subscriptions[0].tax);
     });
+
+    it('should call subscriptionPricing.currency', async () => {
+      const initialInput = {
+        currency: 'USD',
+        subscriptions: [
+          {
+            plan: 'basic',
+            quantity: 2,
+            tax: {
+              vatNumber: 5,
+              amounts: {
+                now: '3.00',
+                next: '4.00',
+              }
+            }
+          }
+        ]
+      };
+
+      const { waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
+
+      await waitForNextUpdate();
+      await expect(subscriptionPricingReturn.currency).toHaveBeenCalledWith('USD');
+    })
   });
 
   describe('adjustments', () => {
@@ -159,12 +185,12 @@ describe('useCheckoutPricing', function() {
         ]
       };
 
-      renderUseCheckoutPricing(initialInput);
-
       await act(async () => {
-        await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-1', quantity: 2 });
-        await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-2', quantity: 5 });
-      });
+        await renderUseCheckoutPricing(initialInput);
+      })
+
+      await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-1', quantity: 2 });
+      await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-2', quantity: 5 });
     });
 
     it("should not call checkoutPricing.adjustment if adjustment doesn't contain an item code", async () => {
@@ -199,10 +225,12 @@ describe('useCheckoutPricing', function() {
     checkoutPricingMethods.forEach(async checkoutPricingMethod => {
       it(`should call checkoutPricing#${checkoutPricingMethod} with input value`, async () => {
         const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }], [checkoutPricingMethod]: 'Some value' };
-        renderUseCheckoutPricing(initialInput);
-        await act(async () => {
-          await expect(checkoutPricingReturn[checkoutPricingMethod]).toHaveBeenCalledWith('Some value');
-        });
+
+        await act(async() => {
+          await renderUseCheckoutPricing(initialInput);
+        })
+
+        expect(checkoutPricingReturn[checkoutPricingMethod]).toHaveBeenCalledWith('Some value');
       });
     });
   });
@@ -211,37 +239,33 @@ describe('useCheckoutPricing', function() {
     it('should call checkoutPricing.subscriptions before checkoutPricing.adjustments', async () => {
       const initialInput = {
         subscriptions: [{ plan: 'basic' }],
-        adjustments: { itemCode: 'item-1', quantity: 2 },
+        adjustments: [{ itemCode: 'item-1', quantity: 2 }]
       };
 
-      renderUseCheckoutPricing(initialInput);
-
       await act(async () => {
-        setTimeout(() => {
-          expect(checkoutPricingReturn.subscription).toHaveBeenCalled();
-          expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
-          expect(checkoutPricingReturn.subscription)
-            .toHaveBeenCalledBefore(checkoutPricingReturn.adjustment);
-        }, 10);
+        await renderUseCheckoutPricing(initialInput);
       });
+
+      expect(checkoutPricingReturn.subscription).toHaveBeenCalled();
+      expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
+      expect(checkoutPricingReturn.subscription)
+        .toHaveBeenCalledBefore(checkoutPricingReturn.adjustment);
     });
 
     it('should call checkoutPricing.adjustments before checkoutPricing rest inputs', async () => {
       const initialInput = {
         currency: "USD",
-        adjustments: { itemCode: 'item-1', quantity: 2 },
+        adjustments: [{ itemCode: 'item-1', quantity: 2 }]
       };
 
-      renderUseCheckoutPricing(initialInput);
-
       await act(async () => {
-        setTimeout(() => {
-          expect(checkoutPricingReturn.currency).toHaveBeenCalled();
-          expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
-          expect(checkoutPricingReturn.adjustment)
-            .toHaveBeenCalledBefore(checkoutPricingReturn.currency);
-        }, 10);
-      });
+        await renderUseCheckoutPricing(initialInput);
+      })
+
+      expect(checkoutPricingReturn.currency).toHaveBeenCalled();
+      expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
+      expect(checkoutPricingReturn.adjustment)
+        .toHaveBeenCalledBefore(checkoutPricingReturn.currency);
     });
   });
 
@@ -252,13 +276,29 @@ describe('useCheckoutPricing', function() {
 
       await act(async () => {
         await renderUseCheckoutPricing(initialInput, handleError);
-        setTimeout(() => {
-          expect(handleError).toHaveBeenCalled();
-          expect(checkoutPricingReturn.catch).toHaveBeenCalled();
-          expect(subscriptionPricingReturn.catch).toHaveBeenCalled();
-        }, 10);
       });
+
+      expect(subscriptionPricingReturn.catch).toHaveBeenCalled();
     });
+
+    it('should only be called once on the first error thrown', async () => {
+      const handleError = jest.fn();
+      const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
+
+      subscriptionPricingReturn.plan = () => {
+        return Promise.reject({message: "subscriptionPricingReturn.plan error"})
+      }
+      checkoutPricingReturn.subscription = () => {
+        return Promise.reject({message: "checkoutPricingReturn.subscription error"})
+      }
+
+      await act(async () => {
+        await renderUseCheckoutPricing(initialInput, handleError);
+      });
+
+      expect(handleError).toHaveBeenCalledWith({ message: "subscriptionPricingReturn.plan error" });
+      expect(handleError).toHaveBeenCalledWith({ message: "checkoutPricingReturn.subscription error" });
+    })
   });
 });
 
