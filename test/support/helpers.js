@@ -19,9 +19,11 @@ export function suppressConsoleErrors () {
  * Wraps arbitrary react components in a valid RecurlyProvider
  */
 export function withRecurlyProvider (children) {
+  const api = `http://localhost:${process.env.PORT || 9877}`;
+
   return (
-    <RecurlyProvider publicKey="test-public-key">
-      ${children}
+    <RecurlyProvider publicKey="test-public-key" api={api}>
+      {children}
     </RecurlyProvider>
   );
 }
@@ -32,7 +34,7 @@ export function withRecurlyProvider (children) {
 export function withElements (children) {
   return withRecurlyProvider(
     <Elements>
-      ${children}
+      {children}
     </Elements>
   );
 }

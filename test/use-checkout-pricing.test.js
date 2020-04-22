@@ -1,67 +1,16 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import useCheckoutPricing from '../lib/use-checkout-pricing';
+import useCheckoutPricing, { throwError } from '../lib/use-checkout-pricing';
 import { withElements } from './support/helpers';
-import Promise from "promise";
 
-const subscriptionPricingReturn = {
-  addon: jest.fn(() => subscriptionPricingReturn),
-  catch: jest.fn(() => subscriptionPricingReturn),
-  done: jest.fn(() => subscriptionPricingReturn),
-  plan: jest.fn(() => subscriptionPricingReturn),
-  tax: jest.fn(() => subscriptionPricingReturn),
-  currency: jest.fn(() => subscriptionPricingReturn)
-};
-
-const PRICING_METHODS = [
-  'reset',
-  'remove',
-  'reprice',
-  'addon',
-  'address',
-  'coupon',
-  'currency',
-  'giftCard',
-  'plan',
-  'shippingAddress',
-  'tax'
-];
-
-const checkoutPricingReturn = {
-  address: jest.fn(() => checkoutPricingReturn),
-  adjustment: jest.fn(() => checkoutPricingReturn),
-  catch: jest.fn(() => checkoutPricingReturn),
-  coupon: jest.fn(() => checkoutPricingReturn),
-  currency: jest.fn(() => checkoutPricingReturn),
-  done: jest.fn(cb => {
-    cb();
-    return checkoutPricingReturn;
-  }),
-  giftCard: jest.fn(() => checkoutPricingReturn),
-  reprice: jest.fn(() => checkoutPricingReturn),
-  shippingAddress: jest.fn(() => checkoutPricingReturn),
-  subscription: jest.fn(() => checkoutPricingReturn),
-  tax: jest.fn(() => checkoutPricingReturn),
-  pricing: { PRICING_METHODS }
-};
-
-describe('useCheckoutPricing', function() {
+describe('useCheckoutPricing', function () {
   const { Recurly } = window.recurly;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    window.recurly.Recurly = () => {
-      return {
-        ...new Recurly('Public key'),
-        Pricing: {
-          Subscription: jest.fn(() => subscriptionPricingReturn),
-          Checkout: jest.fn(() => checkoutPricingReturn)
-        },
-      };
-    };
-  });
-
-  afterEach(() => {
-    window.recurly.Recurly = Recurly;
+    window.recurly.Recurly = () => new Recurly({
+      publicKey: 'Public key',
+      api: `http://localhost:${process.env.PORT || 9877}`
+    });
   });
 
   describe('loading', () => {
@@ -69,240 +18,138 @@ describe('useCheckoutPricing', function() {
       const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
       const { result, waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
 
-      await act(async () => {
-        expect(result.current[0].loading).toBe(true);
-        await waitForNextUpdate();
-        await expect(result.current[0].loading).toBe(false);
-      });
-    });
-  });
-
-  describe('subscriptions', () => {
-    it('should call subscriptionPricing.plan for each subscription', async () => {
-      const initialInput = {
-        subscriptions: [
-          { plan: 'basic', quantity: 2 },
-          { plan: 'advanced', quantity: 5 }
-        ]
-      };
-
-      renderUseCheckoutPricing(initialInput);
-
-      await act(async () => {
-        await expect(subscriptionPricingReturn.plan).toHaveBeenCalledWith('basic', { quantity: 2 });
-        await expect(subscriptionPricingReturn.plan).toHaveBeenCalledWith('advanced', { quantity: 5 });
-      });
-    });
-
-    it('should call checkoutPricing.subscription for each subscription', async () => {
-      const initialInput = {
-        subscriptions: [
-          { plan: 'basic', quantity: 2 },
-          { plan: 'advanced', quantity: 5 }
-        ]
-      };
-
-      renderUseCheckoutPricing(initialInput);
-
-      await act(async () => {
-        await expect(checkoutPricingReturn.subscription).toHaveBeenCalledTimes(2);
-        await expect(checkoutPricingReturn.subscription).toHaveBeenCalledWith(subscriptionPricingReturn);
-      });
-    });
-
-    it('should call subscriptionPricing.addons for each addon in each subscription', async () => {
-      const initialInput = {
-        subscriptions: [
-          {
-            plan: 'basic',
-            quantity: 2,
-            addons: [{ code: 'item code', quantity: 5 }]
-          }
-        ]
-      };
-
-      renderUseCheckoutPricing(initialInput);
-
-      await act(async () => {
-        await expect(subscriptionPricingReturn.addon).toHaveBeenCalledWith('item code', { quantity: 5 });
-      });
-    });
-
-    it('should call subscriptionPricing.tax', async () => {
-      const initialInput = {
-        subscriptions: [
-          {
-            plan: 'basic',
-            quantity: 2,
-            tax: {
-              vatNumber: 5,
-              amounts: {
-                now: '3.00',
-                next: '4.00',
-              }
-            }
-          }
-        ]
-      };
-
-      const { waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
+      expect(result.current[0].loading).toBe(true);
 
       await waitForNextUpdate();
-      await expect(subscriptionPricingReturn.tax).toHaveBeenCalledWith(initialInput.subscriptions[0].tax);
+
+      await expect(result.current[0].loading).toBe(false);
     });
 
-    it('should call subscriptionPricing.currency', async () => {
-      const initialInput = {
-        currency: 'USD',
-        subscriptions: [
-          {
-            plan: 'basic',
-            quantity: 2,
-            tax: {
-              vatNumber: 5,
-              amounts: {
-                now: '3.00',
-                next: '4.00',
-              }
-            }
-          }
-        ]
-      };
-
-      const { waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
-
-      await waitForNextUpdate();
-      await expect(subscriptionPricingReturn.currency).toHaveBeenCalledWith('USD');
-    })
-  });
-
-  describe('adjustments', () => {
-    it('should call checkoutPricing.adjustment for each adjustment', async () => {
-      const initialInput = {
-        adjustments: [
-          { itemCode: 'item-1', quantity: 2 },
-          { itemCode: 'item-2', quantity: 5 }
-        ]
-      };
-
-      await act(async () => {
-        await renderUseCheckoutPricing(initialInput);
-      })
-
-      await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-1', quantity: 2 });
-      await expect(checkoutPricingReturn.adjustment).toHaveBeenCalledWith({ itemCode: 'item-2', quantity: 5 });
-    });
-
-    it("should not call checkoutPricing.adjustment if adjustment doesn't contain an item code", async () => {
-      const initialInput = { adjustments: [{ codeItem: 'item', quantity: 2 }] };
-
-      renderUseCheckoutPricing(initialInput);
-
-      await act(async () => {
-        await expect(checkoutPricingReturn.adjustment).not.toHaveBeenCalled();
-      });
-    });
-  });
-
-  describe('setPricing update function', () => {
-    it('should call subscription pricing method when passed an object with subscriptions', async () => {
+    it('should be true when setPricing is called, then false after initial pricingPromise resolves', async () => {
       const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
       const { result, waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
 
-      await act(async () => {
-        await expect(subscriptionPricingReturn.plan).toHaveBeenCalledWith('basic', { quantity: 2 });
-        const setPricing = result.current[1];
-        setPricing({ subscriptions: [{ plan: 'plan', quantity: 5 }] });
-        await waitForNextUpdate();
-        await expect(subscriptionPricingReturn.plan).toHaveBeenCalledWith('plan', { quantity: 5 });
+      expect(result.current[0].loading).toBe(true);
+
+      await waitForNextUpdate();
+
+      act(() => {
+        result.current[1]({ subscriptions: [{ plan: 'basic-2', quantity: 3 }] });
       });
+
+      await expect(result.current[0].loading).toBe(true);
+      await waitForNextUpdate();
+      await expect(result.current[0].loading).toBe(false);
     });
   });
 
-  describe('Rest inputs', () => {
-    const checkoutPricingMethods = ['giftCard', 'address', 'shippingAddress', 'tax'];
-
-    checkoutPricingMethods.forEach(async checkoutPricingMethod => {
-      it(`should call checkoutPricing#${checkoutPricingMethod} with input value`, async () => {
-        const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }], [checkoutPricingMethod]: 'Some value' };
-
-        await act(async() => {
-          await renderUseCheckoutPricing(initialInput);
-        })
-
-        expect(checkoutPricingReturn[checkoutPricingMethod]).toHaveBeenCalledWith('Some value');
-      });
-    });
-  });
-
-  describe('Call order', () => {
-    it('should call checkoutPricing.subscriptions before checkoutPricing.adjustments', async () => {
-      const initialInput = {
-        subscriptions: [{ plan: 'basic' }],
-        adjustments: [{ itemCode: 'item-1', quantity: 2 }]
-      };
-
-      await act(async () => {
-        await renderUseCheckoutPricing(initialInput);
-      });
-
-      expect(checkoutPricingReturn.subscription).toHaveBeenCalled();
-      expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
-      expect(checkoutPricingReturn.subscription)
-        .toHaveBeenCalledBefore(checkoutPricingReturn.adjustment);
-    });
-
-    it('should call checkoutPricing.adjustments before checkoutPricing rest inputs', async () => {
-      const initialInput = {
-        currency: "USD",
-        adjustments: [{ itemCode: 'item-1', quantity: 2 }]
-      };
-
-      await act(async () => {
-        await renderUseCheckoutPricing(initialInput);
-      })
-
-      expect(checkoutPricingReturn.currency).toHaveBeenCalled();
-      expect(checkoutPricingReturn.adjustment).toHaveBeenCalled();
-      expect(checkoutPricingReturn.adjustment)
-        .toHaveBeenCalledBefore(checkoutPricingReturn.currency);
-    });
-  });
-
-  describe('Error handler', () => {
-    it('should be passed to .catch', async () => {
-      const handleError = jest.fn();
+  describe('setPricing', () => {
+    it('should update output', async () => {
       const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
+      const { result, waitForNextUpdate } = renderUseCheckoutPricing(initialInput);
 
-      await act(async () => {
-        await renderUseCheckoutPricing(initialInput, handleError);
+      await waitForNextUpdate();
+
+      expect(result.current[0].price.next.total).toBe('39.98');
+
+      act(() => {
+        result.current[1]({ subscriptions: [{ plan: 'basic-2', quantity: 3 }] });
       });
 
-      expect(subscriptionPricingReturn.catch).toHaveBeenCalled();
+      expect(result.current[0].loading).toBe(true);
+
+      await waitForNextUpdate();
+
+      expect(result.current[0].price.next.total).toBe('270.27');
+      expect(result.current[0].loading).toBe(false);
+    });
+  });
+
+  describe('calculates price total when given', () => {
+    test('a subscription with a plan and quantity', async () => {
+      const { result, waitForNextUpdate } = renderUseCheckoutPricing({
+        subscriptions: [{ plan: 'basic-2', quantity: 2 }]
+      });
+
+      await waitForNextUpdate();
+
+      const [{ price }] = result.current;
+      expect(price.next.total).toBe('180.18');
     });
 
-    it('should only be called once on the first error thrown', async () => {
-      const handleError = jest.fn();
-      const initialInput = { subscriptions: [{ plan: 'basic', quantity: 2 }] };
-
-      subscriptionPricingReturn.plan = () => {
-        return Promise.reject({message: "subscriptionPricingReturn.plan error"})
-      }
-      checkoutPricingReturn.subscription = () => {
-        return Promise.reject({message: "checkoutPricingReturn.subscription error"})
-      }
-
-      await act(async () => {
-        await renderUseCheckoutPricing(initialInput, handleError);
+    test('a subscription with addons', async () => {
+      const { result, waitForNextUpdate } = renderUseCheckoutPricing({
+        subscriptions: [{
+          plan: 'basic',
+          addons: [{ code: 'snarf', quantity: 5 }]
+        }]
       });
 
-      expect(handleError).toHaveBeenCalledWith({ message: "subscriptionPricingReturn.plan error" });
-      expect(handleError).toHaveBeenCalledWith({ message: "checkoutPricingReturn.subscription error" });
-    })
+      await waitForNextUpdate();
+
+      const [{ price }] = result.current;
+      expect(price.next.total).toBe('24.99');
+    });
+
+    test('a currency and a subscription, then an updated currency', async () => {
+      const { result, waitForNextUpdate } = renderUseCheckoutPricing({
+        currency: 'EUR',
+        subscriptions: [{
+          plan: 'multiple-currencies',
+          quantity: 1
+        }]
+      });
+
+      await waitForNextUpdate();
+
+      expect(result.current[0].price.next.total).toBe('19.99');
+      expect(result.current[0].price.currency.code).toBe('EUR');
+
+      act(() => {
+        result.current[1](prev => ({ ...prev, currency: 'USD' }));
+      });
+
+      await waitForNextUpdate();
+
+      expect(result.current[0].price.next.total).toBe('19.99');
+      expect(result.current[0].price.currency.code).toBe('USD');
+    });
+
+    test('an item adjustment', async () => {
+      const { result, waitForNextUpdate } = renderUseCheckoutPricing({
+        adjustments: [{ itemCode: 'basic-item', quantity: 2 }]
+      });
+
+      await waitForNextUpdate();
+
+      const [{ price }] = result.current;
+      expect(price.now.total).toBe('80.00');
+    });
+  });
+
+  it('should call handleError if a promise is rejected', async () => {
+    const handleError = jest.fn();
+    const { waitForNextUpdate } = renderUseCheckoutPricing({
+      subscriptions: [{ plan: 'invalid' }]
+    }, handleError);
+
+    await waitForNextUpdate();
+
+    expect(handleError).toHaveBeenCalledWith({
+      name: 'api-error',
+      code: 'not-found',
+      message: "Couldn't find Plan with plan_code = invalid"
+    });
+  });
+
+  describe('default handleError', () => {
+    it('should throw an error', () => {
+      expect(throwError).toThrow();
+    });
   });
 });
 
-function renderUseCheckoutPricing(initialInput, handleError) {
+function renderUseCheckoutPricing (initialInput, handleError) {
   const options = { wrapper: ({ children }) => withElements(children) };
   return renderHook(() => useCheckoutPricing(initialInput, handleError), options);
 }
