@@ -24,4 +24,4 @@ node_modules: package.json
 clean:
 	@rm -rf build lib-dist node_modules
 
-.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy types
+.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy test-types

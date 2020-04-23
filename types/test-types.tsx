@@ -131,44 +131,44 @@ function TestComponent() {
     ],
     adjustments: [
       {
-        itemCode: "item-code",
+        itemCode: 'item-code',
         quantity: 3,
-        currency: "USD"
+        currency: 'USD'
       },
       {
         id: 'id',
         amount: 10,
         quantity: 3,
-        currency: "USD",
+        currency: 'USD',
         taxExempt: false,
-        taxCode: "tax-code",
+        taxCode: 'tax-code',
       }
     ],
-    currency: "USD",
+    currency: 'USD',
     address: {
-      first_name: "first",
-      last_name: "last",
-      address1: "address 1",
-      address2: "address 2",
-      city: "city",
-      state: "state",
-      postal_code: "postal code",
-      country: "US",
-      phone: "phone",
-      vat_number: "vat number"
+      first_name: 'first',
+      last_name: 'last',
+      address1: 'address 1',
+      address2: 'address 2',
+      city: 'city',
+      state: 'state',
+      postal_code: 'postal code',
+      country: 'US',
+      phone: 'phone',
+      vat_number: 'vat number'
     },
     giftCard: {
-      code: "gift-card-code"
+      code: 'gift-card-code'
     }
   };
 
-  const [{price, loading}, setPricing] = useCheckoutPricing(checkoutPricingInput);
+  const [{ price, loading }, setPricing] = useCheckoutPricing(checkoutPricingInput);
 
   setPricing(checkoutPricingInput);
   // $ExpectError
   setPricing();
   // $ExpectError
-  setPricing({ ...checkoutPricingInput, fake: "fake" });
+  setPricing({ ...checkoutPricingInput, fake: 'fake' });
 
   // $ExpectType boolean
   loading;
@@ -236,7 +236,7 @@ function TestComponent() {
   price.taxes[0].tax_type;
 
   return (
-    <RecurlyProvider publicKey={'my-public-key'}>
+    <RecurlyProvider publicKey='my-public-key'>
       <Elements onSubmit={() => {}}>
         <CardElement {...cardElementProps} />
         <CardNumberElement {...CardNumberProps} />
