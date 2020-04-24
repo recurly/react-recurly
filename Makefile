@@ -7,6 +7,8 @@ test-debug: $(PKG)
 	@node --inspect-brk node_modules/.bin/jest --runInBand
 test-watch: $(PKG)
 	@npm test -- --watchAll
+test-types: $(PKG)
+	@npm run test:types
 
 docs: $(PKG)
 	@npm run storybook
@@ -22,4 +24,4 @@ node_modules: package.json
 clean:
 	@rm -rf build lib-dist node_modules
 
-.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy
+.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy test-types

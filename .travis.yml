@@ -5,4 +5,13 @@ node_js:
 cache:
   directories:
     - node_modules
-script: make test
+
+jobs:
+  include:
+    - stage: Typecheck
+      name: dts
+      script: make test-types
+
+    - stage: Unit Test
+      name: jest
+      script: make test
