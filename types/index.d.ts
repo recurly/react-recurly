@@ -101,12 +101,70 @@ export type SetCheckoutPricing = (input: UseCheckoutPricingInput) => void;
 
 export type UseCheckoutPricingReturn = [UseCheckoutPricingState, SetCheckoutPricing];
 
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-recurlyprovider--page This component}
+ * accepts your publicKey as a prop. It is responsible for creating a recurly
+ * instance on which we will generate tokens. This should wrap any other
+ * react-recurly component you will use.
+ */
 export const RecurlyProvider: React.FC<RecurlyOptions>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-elements--page This component}
+ * groups *Element components together. When generating tokens, it is used to
+ * determine which values will be tokenized. This should wrap your checkout
+ * form.
+ *
+ * The functionality of <Elements /> is largely behind the scenes. It takes one
+ * onSubmit prop, and is used solely to designate which *Element components
+ * belong together in your component heirarchy.
+ */
 export const Elements: React.FC<ElementsProps>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-cardelement--default A card element component}
+ * which wraps its Recurly.js analogue, passing configuration props to the
+ * underlying Recurly.js CardElement and allowing event binding using props.
+ */
 export const CardElement: React.FC<CardElementProps>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-individual-card-elements-cardnumberelement--default An Element component}
+ * which wraps its Recurly.js analogue, passing configuration props to the
+ * underlying Recurly.js Element and allowing event binding using props.
+ */
 export const CardNumberElement: React.FC<IndividualElementProps<CardNumberElementChangeEvent>>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-individual-card-elements-cardmonthelement--default An Element component}
+ * which wraps its Recurly.js analogue, passing configuration props to the
+ * underlying Recurly.js Element and allowing event binding using props.
+ */
 export const CardMonthElement: React.FC<IndividualElementProps>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-individual-card-elements-cardyearelement--default An Element component}
+ * which wraps its Recurly.js analogue, passing configuration props to the
+ * underlying Recurly.js Element and allowing event binding using props.
+ */
 export const CardYearElement: React.FC<IndividualElementProps>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-individual-card-elements-cardcvvelement--default An Element component}
+ * which wraps its Recurly.js analogue, passing configuration props to the
+ * underlying Recurly.js Element and allowing event binding using props.
+ */
 export const CardCvvElement: React.FC<IndividualElementProps>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/hooks-userecurly--page Use this hook}
+ * to access a Recurly instance.
+ */
 export function useRecurly(): UseRecurlyInstance;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/hooks-usecheckoutpricing--page Use this hook}
+ * to interact with the Recurly.js pricing API and provide users with an
+ * estimate of a purchase before they check out.
+ */
 export function useCheckoutPricing(input: UseCheckoutPricingInput): UseCheckoutPricingReturn;
