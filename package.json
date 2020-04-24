@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@types/react": "^16.9.32",
-    "@types/recurly__recurly-js": "^4.12.2",
+    "@types/recurly__recurly-js": "latest",
     "lodash": "^4.17.15",
     "memoize-one": "^5.1.1",
     "prop-types": "^15.7.2"

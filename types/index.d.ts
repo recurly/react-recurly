@@ -66,7 +66,7 @@ export type CardNumberElementChangeEvent = {
 };
 
 export type UseRecurlyInstance = Recurly & {
-  token: (form: HTMLFormElement | Address, second: TokenHandler) => void;
+  token: (form: HTMLFormElement | Address, done: TokenHandler) => void;
 };
 
 export type Addon = {

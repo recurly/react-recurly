@@ -8,10 +8,10 @@ cache:
 
 jobs:
   include:
-    - stage: Unit Test
-      name: jest
-      script: make test
-
     - stage: Typecheck
       name: dts
       script: make test-types
+
+    - stage: Unit Test
+      name: jest
+      script: make test

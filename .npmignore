@@ -11,6 +11,6 @@ webpack.config.js
 docs
 README.mdx
 
-types/test.tsx
+types/test-types.tsx
 types/tsconfig.json
 types/tslint.json
