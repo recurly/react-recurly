@@ -40,14 +40,14 @@ function CheckoutPricingForm () {
   useEffect(() => {
     setRecurlyError(null);
 
-    const subscriptions = [{
+    const subscriptions = pricingFormState.plan ? [{
       plan: pricingFormState.plan,
       quantity: pricingFormState.planQuantity
-    }];
-    const adjustments = [{
+    }] : [];
+    const adjustments = pricingFormState.itemCode ? [{
       itemCode: pricingFormState.itemCode,
       quantity: pricingFormState.itemQuantity
-    }];
+    }] : [];
     const address = {
       country: pricingFormState.billingCountry,
       postal_code: pricingFormState.billingPostalCode
