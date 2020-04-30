@@ -5,6 +5,8 @@ import { suppressConsoleErrors } from './support/helpers';
 import { RecurlyProvider } from '../lib';
 import { RecurlyContext } from '../lib/provider';
 
+const api = `http://localhost:${process.env.PORT || 9877}`
+
 describe('<RecurlyProvider />', function () {
   describe('without having included recurly.js', function () {
     const storedRecurly = window.recurly;
@@ -21,7 +23,7 @@ describe('<RecurlyProvider />', function () {
 
     it('throws an error', function () {
       expect(() => {
-        render(<RecurlyProvider publicKey="test-public-key" />);
+        render(<RecurlyProvider publicKey="test-public-key" api={api} />);
       }).toThrow(/Please load Recurly\.js \(https:\/\/js\.recurly\.com\/v4\/recurly\.js\) on this page/);
     });
   });
@@ -39,13 +41,13 @@ describe('<RecurlyProvider />', function () {
   describe('with a publicKey', function () {
     it('does not throw an error', function () {
       expect(() => {
-        render(<RecurlyProvider publicKey="test-public-key" />);
+        render(<RecurlyProvider publicKey="test-public-key" api={api} />);
       }).not.toThrow();
     });
 
     it('provides a Recurly instance', function () {
       render(
-        <RecurlyProvider publicKey="test-public-key">
+        <RecurlyProvider publicKey="test-public-key" api={api}>
           <StubComponent />
         </RecurlyProvider>
       );
@@ -62,15 +64,15 @@ describe('<RecurlyProvider />', function () {
 
       render(
         <div>
-          <RecurlyProvider publicKey="test-public-key">
+          <RecurlyProvider publicKey="test-public-key" api={api}>
             <StubComponent />
           </RecurlyProvider>
 
-          <RecurlyProvider publicKey="test-public-key">
+          <RecurlyProvider publicKey="test-public-key" api={api}>
             <StubComponentTwo />
           </RecurlyProvider>
 
-          <RecurlyProvider publicKey="test-public-key-two">
+          <RecurlyProvider publicKey="test-public-key-two" api={api}>
             <StubComponentThree />
           </RecurlyProvider>
         </div>
@@ -97,4 +99,3 @@ describe('<RecurlyProvider />', function () {
     });
   });
 });
-

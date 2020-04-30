@@ -4,7 +4,7 @@ PKG = lib node_modules
 test: $(PKG)
 	@npm test
 test-debug: $(PKG)
-	@node --inspect-brk node_modules/.bin/jest --runInBand
+	@node --inspect-brk node_modules/.bin/jest --runInBand --forceExit
 test-watch: $(PKG)
 	@npm test -- --watchAll
 test-types: $(PKG)
