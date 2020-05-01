@@ -23,7 +23,8 @@
     "@types/recurly__recurly-js": "latest",
     "lodash": "^4.17.15",
     "memoize-one": "^5.1.1",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -69,6 +70,9 @@
     "prepublishOnly": "babel lib -d lib-dist && cp README.mdx README.md",
     "postpublish": "rm README.md",
     "storybook": "start-storybook -p 6006 -c docs/.storybook/",
-    "build-storybook": "build-storybook -c docs/.storybook/ -o build/docs"
-  }
+    "build-storybook": "build-storybook -c docs/.storybook/ -o build/docs",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
