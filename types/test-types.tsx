@@ -8,6 +8,7 @@ import {
   CardMonthElement,
   CardYearElement,
   CardCvvElement,
+  RiskDataCollector,
   useRecurly,
   useCheckoutPricing,
   CardElementChangeEvent,
@@ -244,6 +245,12 @@ function TestComponent() {
         <CardYearElement {...elementProps} />
         <CardCvvElement {...elementProps} />
       </Elements>
+      <RiskDataCollector
+        id="test-risk-id"
+        className="test-risk-class"
+        strategy="kount"
+        onError={() => {}}
+      />
     </RecurlyProvider>
   );
 }

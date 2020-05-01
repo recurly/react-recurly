@@ -6,7 +6,8 @@ import {
   Address,
   TokenHandler,
   CheckoutPrice,
-  Adjustment
+  Adjustment,
+  RecurlyError
 } from '@recurly/recurly-js';
 
 export type ElementsProps = {
@@ -101,6 +102,15 @@ export type SetCheckoutPricing = (input: UseCheckoutPricingInput) => void;
 
 export type UseCheckoutPricingReturn = [UseCheckoutPricingState, SetCheckoutPricing];
 
+export type RiskStrategies = 'kount';
+
+export type RiskDataCollectorProps = {
+  id?: string;
+  className?: string;
+  strategy?: RiskStrategies;
+  onError?: (e: RecurlyError) => void;
+};
+
 /**
  * {@link https://recurly.github.io/react-recurly/?path=/docs/components-recurlyprovider--page This component}
  * accepts your publicKey as a prop. It is responsible for creating a recurly
@@ -155,6 +165,12 @@ export const CardYearElement: React.FC<IndividualElementProps>;
  * underlying Recurly.js Element and allowing event binding using props.
  */
 export const CardCvvElement: React.FC<IndividualElementProps>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-riskdatacollector--page This component}
+ * adds fraud protection to your checkout
+ */
+export const RiskDataCollector: React.FC<RiskDataCollectorProps>;
 
 /**
  * {@link https://recurly.github.io/react-recurly/?path=/docs/hooks-userecurly--page Use this hook}

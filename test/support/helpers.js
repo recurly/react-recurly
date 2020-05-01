@@ -7,7 +7,7 @@ import { RecurlyProvider, Elements } from '../../lib';
  */
 export function suppressConsoleErrors () {
   beforeEach(() => {
-    jest.spyOn(console, 'error');
+    jest.spyOn(console, 'error').mockImplementation();
   });
 
   afterEach(() => {
