@@ -1,5 +1,13 @@
 ## react-recurly CHANGELOG
 
+### Version 1.2.0
+
+- Fixes currency input for useCheckoutPricing [#57][57]
+- Updates useCheckoutPricing to allow subscriptions with plan as an empty string [#59][59]
+- Updates useCheckoutPricing to allow adjustments with itemCode as an empty string [#59][59]
+- Adds TypeScript support [#60][60]
+- Adds RiskDataCollector component [#61][61]
+
 ### Version 1.1.2
 
 - Fixes references from useRecurly [#46][46]
@@ -28,6 +36,10 @@
 
 - Initial Release [ecd70331][ecd70331]
 
+[61]: https://github.com/recurly/react-recurly/pull/61/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
+[60]: https://github.com/recurly/react-recurly/pull/60/commits/5425f5f2f90e40a1e6585e74cd0e0b57e72a6057
+[59]: https://github.com/recurly/react-recurly/pull/59/commits/09b8a23a3f4e7e8608bee4f7fb4583a3a5d7e42f
+[57]: https://github.com/recurly/react-recurly/pull/57/commits/26e33efc7bf926205eab6f7bcaad69a4036b3cc8
 [49]: https://github.com/recurly/react-recurly/commit/6ae4129b8ccc3d9df68e759cb67098667537ad03
 [46]: https://github.com/recurly/react-recurly/commit/3bf0d5349a325993b4ae2b7dfde8ab0fbe2a1085
 [40]: https://github.com/recurly/react-recurly/commit/0bba8f01d7e6a7ec0877ecbbc30e3a4627bbc501
