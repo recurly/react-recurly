@@ -1,5 +1,9 @@
 ## react-recurly CHANGELOG
 
+### Version 1.2.1
+
+-Fixes "types" directory in package.json
+
 ### Version 1.2.0
 
 - Fixes currency input for useCheckoutPricing [#57][57]
