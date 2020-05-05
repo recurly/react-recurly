@@ -6,6 +6,7 @@ test
 .travis.yml
 babel.config.js
 jest.*.js
+globalSetup.js
 Makefile
 webpack.config.js
 docs
