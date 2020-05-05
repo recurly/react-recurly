@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "description": "React components for Recurly.js",
   "main": "lib-dist/index.js",
-  "types": "lib/index.d.ts",
+  "types": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/recurly/react-recurly.git"
