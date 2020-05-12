@@ -183,4 +183,4 @@ export function useRecurly(): UseRecurlyInstance;
  * to interact with the Recurly.js pricing API and provide users with an
  * estimate of a purchase before they check out.
  */
-export function useCheckoutPricing(input: UseCheckoutPricingInput): UseCheckoutPricingReturn;
+export function useCheckoutPricing(input: UseCheckoutPricingInput, handleError?: (error: RecurlyError) => any): UseCheckoutPricingReturn;

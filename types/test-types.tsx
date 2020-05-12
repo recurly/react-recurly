@@ -16,6 +16,7 @@ import {
   IndividualElementChangeEvent,
   UseCheckoutPricingInput
 } from '@recurly/react-recurly';
+import { RecurlyError } from '@recurly/recurly-js';
 
 function TestComponent() {
   const recurly = useRecurly();
@@ -163,7 +164,9 @@ function TestComponent() {
     }
   };
 
-  const [{ price, loading }, setPricing] = useCheckoutPricing(checkoutPricingInput);
+  useCheckoutPricing(checkoutPricingInput);
+
+  const [{ price, loading }, setPricing] = useCheckoutPricing(checkoutPricingInput, (e: RecurlyError) => {});
 
   setPricing(checkoutPricingInput);
   // $ExpectError
