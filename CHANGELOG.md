@@ -1,8 +1,13 @@
 ## react-recurly CHANGELOG
 
+### Version 1.2.2
+
+- Fixes type for useCheckoutPricing [#73][73]
+- Updates propTypes for <RecurlyProvider /> [#74][74]
+
 ### Version 1.2.1
 
--Fixes "types" directory in package.json
+- Fixes "types" directory in package.json
 
 ### Version 1.2.0
 
@@ -40,6 +45,8 @@
 
 - Initial Release [ecd70331][ecd70331]
 
+[74]: https://github.com/recurly/react-recurly/pull/74/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
+[73]: https://github.com/recurly/react-recurly/pull/73/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
 [61]: https://github.com/recurly/react-recurly/pull/61/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
 [60]: https://github.com/recurly/react-recurly/pull/60/commits/5425f5f2f90e40a1e6585e74cd0e0b57e72a6057
 [59]: https://github.com/recurly/react-recurly/pull/59/commits/09b8a23a3f4e7e8608bee4f7fb4583a3a5d7e42f
