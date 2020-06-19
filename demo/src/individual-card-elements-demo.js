@@ -68,7 +68,7 @@ function CardForm (props) {
         <input
           data-recurly="last_name"
           placeholder="Last Name"
-          defaultValue="Rambo"
+          defaultValue="Smith"
         />
         <input
           data-recurly="postal_code"
