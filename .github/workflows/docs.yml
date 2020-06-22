@@ -1,4 +1,7 @@
 on:
+  repository_dispatch:
+    types:
+      - docs_publish
   release:
     types:
       - published
