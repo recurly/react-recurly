@@ -1,18 +1,24 @@
-BIN = ./node_modules/.bin
-PKG = lib node_modules
+bin = ./node_modules/.bin
+jest = $(bin)/jest
+coveralls = $(bin)/coveralls
+pkg = lib node_modules
 
-test: $(PKG)
+test: $(pkg)
 	@npm test
-test-debug: $(PKG)
-	@node --inspect-brk node_modules/.bin/jest --runInBand --forceExit
-test-watch: $(PKG)
+test-debug: $(pkg)
+	@node --inspect-brk $(jest) --runInBand --forceExit
+test-watch: $(pkg)
 	@npm test -- --watchAll
-test-types: $(PKG)
+test-types: $(pkg)
 	@npm run test:types
 
-docs: $(PKG)
+test-ci: test-cov-ci
+test-cov-ci: test
+	@cat ./build/reports/coverage/lcov.info | $(coveralls)
+
+docs: $(pkg)
 	@npm run storybook
-docs-build: $(PKG)
+docs-build: $(pkg)
 	@npm run build-storybook
 
 publish: lib clean node_modules
@@ -24,4 +30,4 @@ node_modules: package.json
 clean:
 	@rm -rf build lib-dist node_modules
 
-.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy test-types
+.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy test-types test-ci test-cov-ci
