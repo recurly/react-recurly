@@ -20,6 +20,12 @@ docs: $(pkg)
 	@npm run storybook
 docs-build: $(pkg)
 	@npm run build-storybook
+docs-publish-remote:
+	@curl \
+		--header "Authorization: token $(GITHUB_TOKEN)" \
+		--request POST \
+		--data '{"event_type": "docs_publish"}' \
+	  https://api.github.com/repos/recurly/react-recurly/dispatches
 
 publish: lib clean node_modules
 	@npm publish --access public
