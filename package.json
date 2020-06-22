@@ -55,7 +55,7 @@
     "koa-jsonp": "^2.0.2",
     "koa-logger": "^3.2.1",
     "koa-override": "^3.0.0",
-    "koa-qs": "^2.0.0",
+    "koa-qs": "^3.0.0",
     "koa-route": "^3.2.0",
     "koa-send": "^5.0.0",
     "promise": "^8.1.0",
