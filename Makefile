@@ -4,6 +4,9 @@ coveralls = $(bin)/coveralls
 pkg = lib node_modules
 
 test: $(pkg)
+ifdef RECURLY_JS_SHA
+	npm i git://github.com/recurly/recurly-js.git#$(RECURLY_JS_SHA)
+endif
 	@npm test
 test-debug: $(pkg)
 	@node --inspect-brk $(jest) --runInBand --forceExit
