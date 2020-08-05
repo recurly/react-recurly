@@ -4,6 +4,8 @@ import { suppressConsoleErrors } from './support/helpers';
 
 import { RecurlyProvider } from '../lib';
 import { RecurlyContext } from '../lib/provider';
+import { version } from '../package.json';
+import isEqual from 'lodash/isEqual';
 
 const api = `http://localhost:${process.env.PORT || 9877}`
 
@@ -39,6 +41,23 @@ describe('<RecurlyProvider />', function () {
   });
 
   describe('with a publicKey', function () {
+    it('reports a "react-recurly" event on initialization once', function () {
+      const reportSpy = jest.spyOn(global.recurly.Recurly.prototype, 'report');
+
+      render(
+        <>
+          <RecurlyProvider publicKey='test-public-key' api={api} />
+          <RecurlyProvider publicKey='test-public-key' api={api} />
+          <RecurlyProvider publicKey='test-public-key-2' api={api} />
+        </>
+      );
+
+      const expected = ['react-recurly', { version }];
+      const { calls } = reportSpy.mock;
+      const reactRecurlyEventCalls = calls.filter(call => isEqual(call, expected));
+      expect(reactRecurlyEventCalls.length).toBe(1);
+    });
+
     it('does not throw an error', function () {
       expect(() => {
         render(<RecurlyProvider publicKey="test-public-key" api={api} />);
