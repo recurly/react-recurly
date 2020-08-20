@@ -145,5 +145,16 @@ export function ElementSuite (ElementClass) {
         });
       });
     });
+
+    describe('focus', function () {
+      it('should focus element when true', function () {
+        const MockComponent = props => withElements(<ElementClass {...props} />);
+        const subject = mount(<MockComponent />);
+        const subjectEl = subject.find(ElementClass);
+        expect(subjectEl.is(':focus')).toBe(false);
+        subject.setProps({ focus: true });
+        expect(subject.is(':focus')).toBe(true);
+      })
+    })
   });
 }
