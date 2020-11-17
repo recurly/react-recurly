@@ -97,8 +97,8 @@ export type UseCheckoutPricingState = {
   price: CheckoutPrice;
   loading: boolean;
 };
-
-export type SetCheckoutPricing = (input: UseCheckoutPricingInput) => void;
+                                   
+export type SetCheckoutPricing = (input: UseCheckoutPricingInput | ((prevState: UseCheckoutPricingInput) => UseCheckoutPricingInput)) => void;
 
 export type UseCheckoutPricingReturn = [UseCheckoutPricingState, SetCheckoutPricing];
 
