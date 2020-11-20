@@ -169,6 +169,7 @@ function TestComponent() {
   const [{ price, loading }, setPricing] = useCheckoutPricing(checkoutPricingInput, (e: RecurlyError) => {});
 
   setPricing(checkoutPricingInput);
+  setPricing((checkoutPricingInput: UseCheckoutPricingInput) => checkoutPricingInput);
   // $ExpectError
   setPricing();
   // $ExpectError
