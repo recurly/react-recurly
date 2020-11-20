@@ -1,5 +1,11 @@
 ## react-recurly CHANGELOG
 
+### Version 1.2.3
+
+- Fixes PropTypes.fraud.kount.dataCollector in <Provider /> [#92][92]
+- Adds event reporting when Recurly.js is initialized [#93][93]
+- Update type for SetCheckoutPricing [#99][99]
+
 ### Version 1.2.2
 
 - Fixes type for useCheckoutPricing [#73][73]
@@ -45,6 +51,9 @@
 
 - Initial Release [ecd70331][ecd70331]
 
+[99]: https://github.com/recurly/react-recurly/pull/99/commits/052a8f5d40cb469b94229bb9ae2135c5998e9caf
+[93]: https://github.com/recurly/react-recurly/pull/93/commits/0b6c128f7e4b0d4afcd7d8519d4ff89658b0a060
+[92]: https://github.com/recurly/react-recurly/pull/92/commits/f3059af42f1a97179a3219daf8d7edbe33b11972
 [74]: https://github.com/recurly/react-recurly/pull/74/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
 [73]: https://github.com/recurly/react-recurly/pull/73/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
 [61]: https://github.com/recurly/react-recurly/pull/61/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
