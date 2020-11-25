@@ -9,6 +9,7 @@ import {
   CardYearElement,
   CardCvvElement,
   RiskDataCollector,
+  ThreeDSecureAction,
   useRecurly,
   useCheckoutPricing,
   CardElementChangeEvent,
@@ -252,6 +253,12 @@ function TestComponent() {
         id="test-risk-id"
         className="test-risk-class"
         strategy="kount"
+        onError={() => {}}
+      />
+      <ThreeDSecureAction
+        id="test-threeds-id"
+        className="test-threeds-class"
+        onToken={() => {}}
         onError={() => {}}
       />
     </RecurlyProvider>
