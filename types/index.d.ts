@@ -182,7 +182,7 @@ export const CardCvvElement: React.FC<IndividualElementProps>;
 export const RiskDataCollector: React.FC<RiskDataCollectorProps>;
 
 /**
- * {@link https://recurly.github.io/react-recurly/?path=/docs/hooks-threedsecureaction--page This component}
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-threedsecureaction--page This component}
  * renders a 3-D Secure authentication flow.
  */
 export const ThreeDSecureAction: React.FC<ThreeDSecureActionProps>;
