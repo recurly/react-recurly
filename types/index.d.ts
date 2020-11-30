@@ -7,7 +7,8 @@ import {
   TokenHandler,
   CheckoutPrice,
   Adjustment,
-  RecurlyError
+  RecurlyError,
+  TokenPayload
 } from '@recurly/recurly-js';
 
 export type ElementsProps = {
@@ -111,6 +112,14 @@ export type RiskDataCollectorProps = {
   onError?: (e: RecurlyError) => void;
 };
 
+export type ThreeDSecureActionProps = {
+  id?: string;
+  className?: string;
+  actionTokenId?: string;
+  onToken?: (token: TokenPayload) => void;
+  onError?: (e: RecurlyError) => void;
+};
+
 /**
  * {@link https://recurly.github.io/react-recurly/?path=/docs/components-recurlyprovider--page This component}
  * accepts your publicKey as a prop. It is responsible for creating a recurly
@@ -171,6 +180,12 @@ export const CardCvvElement: React.FC<IndividualElementProps>;
  * adds fraud protection to your checkout
  */
 export const RiskDataCollector: React.FC<RiskDataCollectorProps>;
+
+/**
+ * {@link https://recurly.github.io/react-recurly/?path=/docs/components-threedsecureaction--page This component}
+ * renders a 3-D Secure authentication flow.
+ */
+export const ThreeDSecureAction: React.FC<ThreeDSecureActionProps>;
 
 /**
  * {@link https://recurly.github.io/react-recurly/?path=/docs/hooks-userecurly--page Use this hook}
