@@ -45,4 +45,3 @@ export function propsSlotFor (component, ...rest) {
     ]
   })
 }
-

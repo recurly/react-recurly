@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/recurly/react-recurly#readme",
   "peerDependencies": {
-    "react": "^16.8.0-0",
-    "react-dom": "^16.8.0-0"
+    "react": ">= 16.8.0-0",
+    "react-dom": ">= 16.8.0-0"
   },
   "dependencies": {
     "@types/react": "^16.9.32",

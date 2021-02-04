@@ -91,6 +91,21 @@ describe('useCheckoutPricing', function () {
       expect(price.next.total).toBe('24.99');
     });
 
+    test('a subscription with tax', async () => {
+      const { result, waitForNextUpdate } = renderUseCheckoutPricing({
+        subscriptions: [{
+          plan: 'basic',
+          tax: [{ code: 'physical-goods', amounts: { now: '2.00', next: '0.00' } }]
+        }]
+      });
+
+      await waitForNextUpdate();
+
+      const [{ price }] = result.current;
+      expect(price.now.total).toBe('21.99');
+      expect(price.next.total).toBe('19.99');
+    });
+
     test('a currency and a subscription, then an updated currency', async () => {
       const { result, waitForNextUpdate } = renderUseCheckoutPricing({
         currency: 'EUR',
