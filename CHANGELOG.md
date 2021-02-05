@@ -1,5 +1,9 @@
 ## react-recurly CHANGELOG
 
+### Version 1.2.4
+
+- useCheckoutPricing will now return its underlying pricing instance [#108][108]
+
 ### Version 1.2.3
 
 - Fixes PropTypes.fraud.kount.dataCollector in <Provider /> [#92][92]
@@ -51,6 +55,7 @@
 
 - Initial Release [ecd70331][ecd70331]
 
+[108]: https://github.com/recurly/react-recurly/commit/27116f0d7c72a34d009aaf82db23f75572318d5a
 [99]: https://github.com/recurly/react-recurly/pull/99/commits/052a8f5d40cb469b94229bb9ae2135c5998e9caf
 [93]: https://github.com/recurly/react-recurly/pull/93/commits/0b6c128f7e4b0d4afcd7d8519d4ff89658b0a060
 [92]: https://github.com/recurly/react-recurly/pull/92/commits/f3059af42f1a97179a3219daf8d7edbe33b11972
