@@ -6,6 +6,7 @@ import {
   Address,
   TokenHandler,
   CheckoutPrice,
+  CheckoutPricingInstance,
   Adjustment,
   RecurlyError,
   TokenPayload
@@ -101,7 +102,7 @@ export type UseCheckoutPricingState = {
 
 export type SetCheckoutPricing = (input: UseCheckoutPricingInput | ((prevState: UseCheckoutPricingInput) => UseCheckoutPricingInput)) => void;
 
-export type UseCheckoutPricingReturn = [UseCheckoutPricingState, SetCheckoutPricing];
+export type UseCheckoutPricingReturn = [UseCheckoutPricingState, SetCheckoutPricing, CheckoutPricingInstance];
 
 export type RiskStrategies = 'kount';
 
