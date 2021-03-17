@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Usage
 #
-# ./prepare-release major|minor|patch
+# ./prepare-release major|minor|patch [--notes-out <path>] [--tag-out <path>]
 #
 
 set -e
@@ -17,10 +17,29 @@ if [ -z "$GITHUB_TOKEN" ]; then
   exit 1
 fi
 
+# Bump version
 npm --no-git-tag-version version ${1}
-NEW_VERSION=$(cat package.json | jq -r '.version')
-github_changelog_generator -t $GITHUB_TOKEN --future-release "v$NEW_VERSION"
+new_version=$(cat package.json | jq -r '.version')
 
-git add . --all
-git commit -m $NEW_VERSION
-# git push
+# Generate Changelog
+github_changelog_generator -t $GITHUB_TOKEN --future-release "v$new_version"
+
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    # Create release notes artifact
+    -n|--notes-out)
+      echo "$new_version
+
+      $(
+        cat CHANGELOG.md | sed -n "/^## \[v$new_version\]/,/^##/p" | sed '$d;1d'
+      )" | awk '{$1=$1};1' > $2
+      shift
+      ;;
+
+    # Create release notes artifact
+    -t|--tag-out)
+      echo "v$new_version" > $2
+      ;;
+  esac
+  shift
+done
