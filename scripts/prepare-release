@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Usage
+#
+# ./prepare-release major|minor|patch
+#
+
+set -e
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "Working directory is not clean. Aborting."
+  exit 1
+fi
+
+if [ -z "$GITHUB_TOKEN" ]; then
+  echo "GITHUB_TOKEN must be set. Aborting."
+  exit 1
+fi
+
+npm --no-git-tag-version version ${1}
+NEW_VERSION=$(cat package.json | jq -r '.version')
+github_changelog_generator -t $GITHUB_TOKEN --future-release "v$NEW_VERSION"
+
+git add . --all
+git commit -m $NEW_VERSION
+# git push
