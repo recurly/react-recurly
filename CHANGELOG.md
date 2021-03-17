@@ -1,76 +1,82 @@
-## react-recurly CHANGELOG
+# Changelog
 
-### Version 1.2.4
+## [v1.2.4](https://github.com/recurly/react-recurly/tree/v1.2.4) (2021-02-05)
 
-- useCheckoutPricing will now return its underlying pricing instance [#108][108]
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.3...v1.2.4)
 
-### Version 1.2.3
+**Implemented enhancements:**
 
-- Fixes PropTypes.fraud.kount.dataCollector in <Provider /> [#92][92]
-- Adds event reporting when Recurly.js is initialized [#93][93]
-- Update type for SetCheckoutPricing [#99][99]
+- useCheckoutPricing will return its pricing instance [\#108](https://github.com/recurly/react-recurly/pull/108) ([chrissrogers](https://github.com/chrissrogers))
 
-### Version 1.2.2
+## [v1.2.3](https://github.com/recurly/react-recurly/tree/v1.2.3) (2020-11-20)
 
-- Fixes type for useCheckoutPricing [#73][73]
-- Updates propTypes for <RecurlyProvider /> [#74][74]
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.2...v1.2.3)
 
-### Version 1.2.1
+**Merged pull requests:**
 
-- Fixes "types" directory in package.json
+- Update type for SetCheckoutPricing [\#99](https://github.com/recurly/react-recurly/pull/99) ([andreisocaciu](https://github.com/andreisocaciu))
 
-### Version 1.2.0
+## [v1.2.2](https://github.com/recurly/react-recurly/tree/v1.2.2) (2020-05-18)
 
-- Fixes currency input for useCheckoutPricing [#57][57]
-- Updates useCheckoutPricing to allow subscriptions with plan as an empty string [#59][59]
-- Updates useCheckoutPricing to allow adjustments with itemCode as an empty string [#59][59]
-- Adds TypeScript support [#60][60]
-- Adds RiskDataCollector component [#61][61]
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.1...v1.2.2)
 
-### Version 1.1.2
+**Fixed bugs:**
 
-- Fixes references from useRecurly [#46][46]
-- Fixes currency in useCheckoutPricing to throw error when using a currency not configured with a plan [#49][49]
+- Plan loading issues [\#55](https://github.com/recurly/react-recurly/issues/55)
 
-### Version 1.1.1
+**Merged pull requests:**
 
-- Fixes missing lodash dependency [#40][40]
+- Fixes type for useCheckoutPricing [\#73](https://github.com/recurly/react-recurly/pull/73) ([dbrudner](https://github.com/dbrudner))
 
-### Version 1.1.0
+## [v1.2.1](https://github.com/recurly/react-recurly/tree/v1.2.1) (2020-05-05)
 
-- Adds useCheckoutPricing hook [#28][28]
-- Adds onError prop to <ThreeDSecureAction /> [#22][22]
-- Adds exception to <Element /> when it is instantiated outside of an <Elements /> tree [#22][22]
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.0...v1.2.1)
 
-### Version 1.0.2
+## [v1.2.0](https://github.com/recurly/react-recurly/tree/v1.2.0) (2020-05-05)
 
-- Fixes distribution transpiler pipeline [#11][11]
-- Restructures demo [#10][10]
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.1.2...v1.2.0)
 
-### Version 1.0.1
+**Fixed bugs:**
 
-- Fixes dependency chart [34fbbf7a][34fbbf7a]
+- Use checkout pricing currency [\#57](https://github.com/recurly/react-recurly/pull/57) ([dbrudner](https://github.com/dbrudner))
 
-### Version 1.0.0
+**Merged pull requests:**
 
-- Initial Release [ecd70331][ecd70331]
+- Adds types [\#60](https://github.com/recurly/react-recurly/pull/60) ([dbrudner](https://github.com/dbrudner))
 
-[108]: https://github.com/recurly/react-recurly/commit/27116f0d7c72a34d009aaf82db23f75572318d5a
-[99]: https://github.com/recurly/react-recurly/pull/99/commits/052a8f5d40cb469b94229bb9ae2135c5998e9caf
-[93]: https://github.com/recurly/react-recurly/pull/93/commits/0b6c128f7e4b0d4afcd7d8519d4ff89658b0a060
-[92]: https://github.com/recurly/react-recurly/pull/92/commits/f3059af42f1a97179a3219daf8d7edbe33b11972
-[74]: https://github.com/recurly/react-recurly/pull/74/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
-[73]: https://github.com/recurly/react-recurly/pull/73/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
-[61]: https://github.com/recurly/react-recurly/pull/61/commits/05c4d739d5b577084fcc8ec43e4e5989ef37c5a2
-[60]: https://github.com/recurly/react-recurly/pull/60/commits/5425f5f2f90e40a1e6585e74cd0e0b57e72a6057
-[59]: https://github.com/recurly/react-recurly/pull/59/commits/09b8a23a3f4e7e8608bee4f7fb4583a3a5d7e42f
-[57]: https://github.com/recurly/react-recurly/pull/57/commits/26e33efc7bf926205eab6f7bcaad69a4036b3cc8
-[49]: https://github.com/recurly/react-recurly/commit/6ae4129b8ccc3d9df68e759cb67098667537ad03
-[46]: https://github.com/recurly/react-recurly/commit/3bf0d5349a325993b4ae2b7dfde8ab0fbe2a1085
-[40]: https://github.com/recurly/react-recurly/commit/0bba8f01d7e6a7ec0877ecbbc30e3a4627bbc501
-[28]: https://github.com/recurly/react-recurly/commit/7c467341d2571d2d26f59621af30cd8c598e726b
-[22]: https://github.com/recurly/react-recurly/commit/afb8a4ef665bf5ed6ab3ef8945e299619f769504
-[11]: https://github.com/recurly/react-recurly/commit/46f892b18323166d14572347b2194096300f6c62
-[10]: https://github.com/recurly/react-recurly/commit/00258f746ad57ea77078f7ceb037608787e2e8ef
-[34fbbf7a]: https://github.com/recurly/react-recurly/commit/34fbbf7ac7bac95b480680d2d89d95cc11eddfdf
-[ecd70331]: https://github.com/recurly/react-recurly/commit/ecd7033104e4889fea867b4a41c59a96b3b6b519
+## [v1.1.2](https://github.com/recurly/react-recurly/tree/v1.1.2) (2020-03-31)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.1.1...v1.1.2)
+
+**Fixed bugs:**
+
+- OnChange fires multiple times when blurring or focusing CardNumberElement [\#29](https://github.com/recurly/react-recurly/issues/29)
+- Updates useRecurly to set correct prototype on copied recurly instance [\#46](https://github.com/recurly/react-recurly/pull/46) ([dbrudner](https://github.com/dbrudner))
+
+## [v1.1.1](https://github.com/recurly/react-recurly/tree/v1.1.1) (2020-03-13)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.1.0...v1.1.1)
+
+## [v1.1.0](https://github.com/recurly/react-recurly/tree/v1.1.0) (2020-03-12)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.0.2...v1.1.0)
+
+**Merged pull requests:**
+
+- Release/pricing [\#28](https://github.com/recurly/react-recurly/pull/28) ([dbrudner](https://github.com/dbrudner))
+
+## [v1.0.2](https://github.com/recurly/react-recurly/tree/v1.0.2) (2020-01-16)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.0.1...v1.0.2)
+
+## [v1.0.1](https://github.com/recurly/react-recurly/tree/v1.0.1) (2020-01-12)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.0.0...v1.0.1)
+
+## [v1.0.0](https://github.com/recurly/react-recurly/tree/v1.0.0) (2020-01-10)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/c2a2a49b63ff469ea9f5102c6db408e5126cda24...v1.0.0)
+
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
