@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Usage
+#
+# ./release
+#
+
+set -e
+
+npm publish --access public

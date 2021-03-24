@@ -1,0 +1,6 @@
+user=recurly
+project=react-recurly
+unreleased=true
+exclude-labels=question,bug?,internal,dependency,documentation,tests & build,demo only
+issues-wo-labels=false
+verbose=false
