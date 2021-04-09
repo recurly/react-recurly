@@ -1,0 +1,11 @@
+---
+owner: recurly
+repo: react-recurly
+exclude_labels:
+  - bug?
+  - internal
+  - duplicate
+  - question
+  - dependency
+  - documentation
+  - tests & build
