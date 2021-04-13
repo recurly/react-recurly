@@ -64,6 +64,12 @@ describe('<RecurlyProvider />', function () {
       }).not.toThrow();
     });
 
+    it('does not throw an error when the fraud property is configured to be true', function () {
+      expect(() => {
+        render(<RecurlyProvider publicKey="test-public-key" api={api} fraud={{kount: {dataCollector: true}}} />);
+      }).not.toThrow();
+    });
+
     it('provides a Recurly instance', function () {
       render(
         <RecurlyProvider publicKey="test-public-key" api={api}>
