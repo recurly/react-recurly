@@ -49,7 +49,7 @@ The example below shows how to use `useRecurly` to interact with the [Recurly-js
 
 ```jsx
 const PayPalButton = () => {
-  const { recurly } = useRecurly();
+  const recurly = useRecurly();
   const payPal = recurly.PayPal();
 
   useEffect(() => {
