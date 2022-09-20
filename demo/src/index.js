@@ -18,6 +18,7 @@ import { CardElementDemo } from './card-element-demo';
 import { IndividualCardElementsDemo } from './individual-card-elements-demo';
 import { ThreeDSecureDemo } from './three-d-secure-demo';
 import { CheckoutPricing } from './checkout-pricing';
+import { IndividualCardElementsWithFocusShiftDemo } from './individual-card-elements-with-focus-shift-demo';
 
 function App () {
   return (
@@ -35,6 +36,10 @@ function App () {
 
       <h2>Checkout Pricing</h2>
       <CheckoutPricing />
+
+      <h2>Individual Card Elements</h2>
+      <h3>With smart focus shifting</h3>
+      <IndividualCardElementsWithFocusShiftDemo />
     </div>
   );
 };
