@@ -46,7 +46,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "jest": "^25.5.3",
     "jest-extended": "^0.11.5",
-    "jest-transform-css": "^2.0.0",
+    "jest-transform-css": "^5.0.0",
     "koa": "^2.11.0",
     "koa-better-http-proxy": "^0.2.4",
     "koa-bodyparser": "^4.2.1",
