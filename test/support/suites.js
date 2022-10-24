@@ -120,7 +120,7 @@ export function ElementSuite (ElementClass) {
       it('does nothing by default', function () {
         const fixture = mount(withElements(<ElementClass />)).find(ElementClass);
         expect(() => {
-          fixture.instance()._element.emit('ready', example);
+          fixture.instance()._element.emit('attach', example);
           fixture.instance()._element.emit('change', example);
           fixture.instance()._element.emit('blur', example);
           fixture.instance()._element.emit('focus', example);
@@ -129,7 +129,7 @@ export function ElementSuite (ElementClass) {
       });
 
       [
-        ['onReady', 'ready'],
+        ['onReady', 'attach'],
         ['onChange', 'change'],
         ['onBlur', 'blur'],
         ['onFocus', 'focus'],
