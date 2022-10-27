@@ -1,5 +1,23 @@
 # Changelog
 
+## [v1.2.5](https://github.com/recurly/react-recurly/tree/v1.2.5) (2022-10-27)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.4...v1.2.5)
+
+
+**Merged Pull Requests**
+
+- listen_for_attach_event [#187](https://github.com/recurly/react-recurly/pull/187) ([smagdicatrecurly](https://github.com/smagdicatrecurly))
+- Adds demo for automated focus shift on individual card Elements [#183](https://github.com/recurly/react-recurly/pull/183) ([chrissrogers](https://github.com/chrissrogers))
+- setup element when didmount [#182](https://github.com/recurly/react-recurly/pull/182) ([WillXing](https://github.com/WillXing))
+- Docs fix: UseCheckoutPricingInput `subscriptions` [#157](https://github.com/recurly/react-recurly/pull/157) ([javimbk](https://github.com/javimbk))
+- Docs Fix: useRecurly Paypal example [#156](https://github.com/recurly/react-recurly/pull/156) ([javimbk](https://github.com/javimbk))
+- Revert "add security to github CODEOWNER file" [#147](https://github.com/recurly/react-recurly/pull/147) ([eternal44](https://github.com/eternal44))
+- add security to github CODEOWNER file [#142](https://github.com/recurly/react-recurly/pull/142) ([eternal44](https://github.com/eternal44))
+- fix(lib/provider.js): fix RecurlyProvider throwing error when fraud property is set [#123](https://github.com/recurly/react-recurly/pull/123) ([mikeedwards](https://github.com/mikeedwards))
+
+
+
 ## [v1.2.4](https://github.com/recurly/react-recurly/tree/v1.2.4) (2021-02-05)
 
 [Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.3...v1.2.4)
