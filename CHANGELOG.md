@@ -1,8 +1,8 @@
 # Changelog
 
-## [v1.2.5](https://github.com/recurly/react-recurly/tree/v1.2.5) (2022-10-27)
+## [v1.2.6](https://github.com/recurly/react-recurly/tree/v1.2.6) (2022-10-27)
 
-[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.4...v1.2.5)
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.4...v1.2.6)
 
 
 **Merged Pull Requests**
