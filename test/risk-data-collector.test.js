@@ -72,4 +72,27 @@ describe('<RiskDataCollector />', function () {
       });
     });
   });
+
+  describe('with recurly.configuration', function () {
+    const configureSpy = jest.spyOn(global.recurly.Recurly.prototype, 'configure');
+
+    suppressConsoleErrors();
+
+    it('gives form option a DOM Element', function () {
+      const subject = withRecurlyProvider(
+        <RiskDataCollector strategy="kount" />
+      );
+
+      expect(() => render(subject)).not.toThrow();
+      expect(console.error).not.toHaveBeenCalled();
+      expect(configureSpy).toHaveBeenCalledWith({
+        fraud: {
+          kount: {
+            dataCollector: true,
+            form: expect.any(Element)
+          }
+        }
+      });
+    });
+  });
 });
