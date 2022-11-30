@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.2.7](https://github.com/recurly/react-recurly/tree/v1.2.7) (2022-11-30)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.6...v1.2.7)
+
+
+**Merged Pull Requests**
+
+- Risk data collector form passing [#197](https://github.com/recurly/react-recurly/pull/197) ([abachman](https://github.com/abachman))
+
+
+
 ## [v1.2.6](https://github.com/recurly/react-recurly/tree/v1.2.6) (2022-10-27)
 
 [Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.4...v1.2.6)

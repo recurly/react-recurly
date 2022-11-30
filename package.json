@@ -1,6 +1,6 @@
 {
   "name": "@recurly/react-recurly",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "React components for Recurly.js",
   "main": "lib-dist/index.js",
   "types": "types/index.d.ts",
