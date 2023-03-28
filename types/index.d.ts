@@ -127,7 +127,7 @@ export type ThreeDSecureActionProps = {
  * instance on which we will generate tokens. This should wrap any other
  * react-recurly component you will use.
  */
-export const RecurlyProvider: React.FC<RecurlyOptions>;
+export const RecurlyProvider: React.FC<React.PropsWithChildren<RecurlyOptions>>;
 
 /**
  * {@link https://recurly.github.io/react-recurly/?path=/docs/components-elements--page This component}
@@ -139,7 +139,7 @@ export const RecurlyProvider: React.FC<RecurlyOptions>;
  * onSubmit prop, and is used solely to designate which *Element components
  * belong together in your component heirarchy.
  */
-export const Elements: React.FC<ElementsProps>;
+export const Elements: React.FC<React.PropsWithChildre<ElementsProps>>;
 
 /**
  * {@link https://recurly.github.io/react-recurly/?path=/docs/components-cardelement--default A card element component}
