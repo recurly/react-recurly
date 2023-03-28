@@ -139,7 +139,7 @@ export const RecurlyProvider: React.FC<React.PropsWithChildren<RecurlyOptions>>;
  * onSubmit prop, and is used solely to designate which *Element components
  * belong together in your component heirarchy.
  */
-export const Elements: React.FC<React.PropsWithChildre<ElementsProps>>;
+export const Elements: React.FC<React.PropsWithChildren<ElementsProps>>;
 
 /**
  * {@link https://recurly.github.io/react-recurly/?path=/docs/components-cardelement--default A card element component}
