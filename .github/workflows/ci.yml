@@ -19,4 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Unit test
-        run: make test-ci
+        run: make test
+      - name: Report coverage
+        uses: coverallsapp/github-action@v2
+        with:
+          path-to-lcov: ./build/reports/coverage/lcov.info
