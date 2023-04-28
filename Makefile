@@ -1,6 +1,5 @@
 bin = ./node_modules/.bin
 jest = $(bin)/jest
-coveralls = $(bin)/coveralls
 pkg = lib node_modules
 
 test: $(pkg)
@@ -14,10 +13,6 @@ test-watch: $(pkg)
 	@npm test -- --watchAll
 test-types: $(pkg)
 	@npm run test:types
-
-test-ci: test-cov-ci
-test-cov-ci: test
-	@cat ./build/reports/coverage/lcov.info | $(coveralls)
 
 docs: $(pkg)
 	@npm run storybook
