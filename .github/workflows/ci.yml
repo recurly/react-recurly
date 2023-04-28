@@ -22,5 +22,6 @@ jobs:
         run: make test
       - name: Report coverage
         uses: coverallsapp/github-action@v2
+        continue-on-error: true
         with:
           path-to-lcov: ./build/reports/coverage/lcov.info
