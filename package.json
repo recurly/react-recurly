@@ -32,7 +32,7 @@
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
-    "@recurly/public-api-test-server": "https://gitpkg.now.sh/recurly/recurly-js/packages/public-api-fixture-server",
+    "@recurly/public-api-test-server": "https://gitpkg.now.sh/recurly/recurly-js/packages/public-api-fixture-server?v4.23.2",
     "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-docs": "^5.3.18",
     "@storybook/addon-knobs": "^5.3.18",
