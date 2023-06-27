@@ -2,7 +2,7 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: './build/reports/coverage/',
   coveragePathIgnorePatterns: ['/types/'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js', 'jest-extended'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
   transformIgnorePatterns: ['/node_modules/(?!recurly.js).+\\.js$'],
   transform: {
