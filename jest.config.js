@@ -3,7 +3,7 @@ module.exports = {
   coverageDirectory: './build/reports/coverage/',
   coveragePathIgnorePatterns: ['/types/'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jsdom',
+  testEnvironment: './test/support/test-environment-fix-jsdom.js',
   transformIgnorePatterns: ['/node_modules/(?!recurly.js).+\\.js$'],
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
