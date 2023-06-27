@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import { suppressConsoleErrors, withRecurlyProvider } from './support/helpers';
 
 import { Elements, useRecurly } from '../lib';
@@ -12,10 +12,7 @@ describe('useRecurly', function () {
     suppressConsoleErrors();
 
     it('throws an error', function () {
-      expect(() => {
-        render(<TestComponent />);
-      }).toThrow(message);
-
+      expect(() => render(<TestComponent />)).toThrow(message);
       expect(() => render(withRecurlyProvider(<TestComponent />))).toThrow(message);
     });
 
@@ -35,22 +32,20 @@ describe('useRecurly', function () {
     };
 
     it('returns a Recurly instance', function () {
-      expect(fixture(TestComponent)).not.toThrow();
-
-      function TestComponent () {
+      const TestComponent = () => {
         const recurly = useRecurly();
         expect(recurly.token).toBeInstanceOf(Function);
         expect(recurly.config.publicKey).toBe('test-public-key');
         expect(recurly).toBeInstanceOf(window.recurly.Recurly);
         return '';
-      }
+      };
+
+      expect(fixture(TestComponent)).not.toThrow();
     });
 
     describe('recurly.token', function () {
       it('tokenizes the parent Elements instance', function () {
-        fixture(TestComponent)();
-
-        function TestComponent () {
+        const TestComponent = () => {
           const recurly = useRecurly();
           const elements = React.useContext(RecurlyElementsContext).elements;
           const underlyingRecurly = elements.recurly;
@@ -63,6 +58,8 @@ describe('useRecurly', function () {
           expect(underlyingRecurly.token).toHaveBeenCalledWith(elements, 1, 2, 3);
           return '';
         }
+
+        fixture(TestComponent)();
       });
     });
   });

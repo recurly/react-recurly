@@ -45,11 +45,7 @@
     "regenerator-runtime": "^0.13.11"
   },
   "scripts": {
-    "test": "jest --forceExit",
-    "test:types": "dtslint types --expectOnly",
     "prepublishOnly": "babel lib -d lib-dist && cp README.mdx README.md",
-    "postpublish": "rm README.md",
-    "storybook": "start-storybook -p 6006 -c docs/.storybook/",
-    "build-storybook": "build-storybook -c docs/.storybook/ -o build/docs"
+    "postpublish": "rm README.md"
   }
 }

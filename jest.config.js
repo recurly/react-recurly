@@ -6,8 +6,8 @@ module.exports = {
   testEnvironment: 'jsdom',
   transformIgnorePatterns: ['/node_modules/(?!recurly.js).+\\.js$'],
   transform: {
-    '^.+\\.js$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest',
     '.+\\.css$': 'jest-transform-css'
   },
-  globalSetup: './globalSetup.js'
+  globalSetup: './test/support/globalSetup.js'
 }
