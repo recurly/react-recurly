@@ -24,7 +24,7 @@ describe('useRecurly', function () {
 
   describe('when a descendant of <Elements />', function () {
     const fixture = TestComponent => () => {
-      render(withRecurlyProvider(
+      return render(withRecurlyProvider(
         <Elements>
           <TestComponent />
         </Elements>

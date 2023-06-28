@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
+import { withElements } from './support/helpers';
 
 import useCheckoutPricing, { throwError } from '../lib/use-checkout-pricing';
-import { withElements } from './support/helpers';
 
 describe('useCheckoutPricing', function () {
   const { Recurly } = window.recurly;
