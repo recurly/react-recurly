@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/blocks';
+import { Elements, CardElement } from '../../lib';
+
+<Meta title="Components/Elements" />
+
+# Elements
+
+`import { Elements } from '@recurly/react-recurly';`
+
+This component groups `*Element` components together. When generating tokens, it is used to determine which values will be tokenized. This should wrap your checkout form.
+
+The functionality of `<Elements />` is largely behind the scenes. It takes one `onSubmit` prop, and is used solely to designate which `*Element` components belong together in your component heirarchy.
+
+```js
+import {
+  RecurlyProvider,
+  Elements
+} from '@recurly/react-recurly';
+
+() => {
+  return (
+    <RecurlyProvider publicKey="MY_PUBLIC_KEY">
+      <Elements>
+        {/* Any *Element component from react-recurly */}
+      </Elements>
+    </RecurlyProvider>
+  );
+};
+```

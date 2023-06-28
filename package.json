@@ -32,6 +32,13 @@
     "@babel/preset-react": "^7.18.6",
     "@definitelytyped/dtslint": "^0.0.163",
     "@recurly/public-api-test-server": "https://gitpkg.now.sh/recurly/recurly-js/packages/public-api-fixture-server?v4.23.2",
+    "@storybook/addon-essentials": "^7.0.24",
+    "@storybook/addon-interactions": "^7.0.24",
+    "@storybook/addon-links": "^7.0.24",
+    "@storybook/blocks": "^7.0.24",
+    "@storybook/react": "^7.0.24",
+    "@storybook/react-vite": "^7.0.24",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.6",
     "babel-loader": "^9.1.2",
@@ -42,7 +49,8 @@
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
     "recurly.js": "recurly/recurly-js",
-    "regenerator-runtime": "^0.13.11"
+    "regenerator-runtime": "^0.13.11",
+    "storybook": "^7.0.24"
   },
   "scripts": {
     "prepublishOnly": "babel lib -d lib-dist && cp README.mdx README.md",

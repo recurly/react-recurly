@@ -11,9 +11,9 @@ test-types: $(pkg)
 	@npx dtslint types --expectOnly
 
 docs: $(pkg)
-	@npx start-storybook -p 6006 -c docs/.storybook/
+	@npx storybook dev -p 6006 -c docs/.storybook/
 docs-build: $(pkg)
-	@npx build-storybook -c docs/.storybook/ -o build/docs
+	@npx storybook build -c docs/.storybook/ -o build/docs
 docs-publish-remote:
 	@curl \
 		--header "Authorization: token $(GITHUB_TOKEN)" \
@@ -33,5 +33,8 @@ endif
 
 clean:
 	@rm -rf build lib-dist node_modules
+	@rm README.md
 
-.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy test-types test-ci test-cov-ci
+.PHONY: test test-debug test-watch test-types
+.PHONY: docs docs-build docs-publish-remote
+.PHONY: publish clean
