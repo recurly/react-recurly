@@ -1,0 +1,38 @@
+import { Meta, Title, Subtitle, Controls } from '@storybook/addon-docs/blocks';
+import * as ThreeDSecureActionStories from './ThreeDSecureAction.stories';
+
+<Meta of={ThreeDSecureActionStories} />
+<Title />
+<Subtitle />
+
+`import { ThreeDSecureAction } from '@recurly/react-recurly';`
+
+This component renders a 3-D Secure authentication flow. If you receive a `three_d_secure_action_token_id` from the [Recurly API][recurly-api], use it with this component to process the authentication and receive a result token.
+
+[More about Strong Customer Authentication][doc-sca]
+
+[Recurly 3-D Secure integration documentation][doc-3ds-integration]
+
+```js
+import { ThreeDSecureAction } from '@recurly/react-recurly';
+
+() => {
+  const handleToken = (token) => {
+    // token.type => 'three_d_secure_action_result'
+    // token.id
+  };
+
+  return (
+    <ThreeDSecureAction
+      actionTokenId="MY_ACTION_TOKEN_ID"
+      onToken={handleToken}
+    />
+  );
+};
+```
+
+<Controls />
+
+[recurly-api]: https://developers.recurly.com/api/
+[doc-sca]: https://docs.recurly.com/docs/revised-payment-services-directive-psd2
+[doc-3ds-integration]: https://dev.recurly.com/page/recurly-3d-secure-2-integration-guide

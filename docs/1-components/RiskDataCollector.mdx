@@ -1,0 +1,35 @@
+import { Meta, Title, Subtitle, Controls } from '@storybook/addon-docs/blocks';
+import * as RiskDataCollectorStories from './RiskDataCollector.stories';
+
+<Meta of={RiskDataCollectorStories} />
+<Title />
+<Subtitle />
+
+`import { RiskDataCollector } from '@recurly/react-recurly';`
+
+This component adds data collection elements to your checkout which are applied to any tokens generated within the bounds of its nearest ascendant parent `HTMLFormElement`.
+
+This component is compatible with [Recurly Fraud Management][doc-recurly-fraud-management] and [Kount][doc-kount].
+
+```js
+import { RiskDataCollector } from '@recurly/react-recurly';
+
+() => {
+  const handleError = (error) => {
+    // error.code
+    // error.message
+  };
+
+  return (
+    <RiskDataCollector
+      strategy="kount"
+      onError={handleError}
+    />
+  );
+};
+```
+
+<Controls />
+
+[doc-recurly-fraud-management]: https://docs.recurly.com/docs/fraud-management
+[doc-kount]: https://docs.recurly.com/docs/kount
