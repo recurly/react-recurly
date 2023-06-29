@@ -1,7 +1,8 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Controls } from '@storybook/blocks';
+import * as ElementsStories from './Elements.stories';
 import { Elements, CardElement } from '../../lib';
 
-<Meta title="Components/Elements" />
+<Meta of={ElementsStories} />
 
 # Elements
 
@@ -27,3 +28,5 @@ import {
   );
 };
 ```
+
+<Controls />
