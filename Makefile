@@ -1,5 +1,11 @@
 bin = ./node_modules/.bin
 pkg = lib node_modules
+build = $(bin)/babel lib -d lib-dist
+
+watch: $(pkg)
+	@$(build) --watch
+build: $(pkg)
+	@$(build)
 
 test: $(pkg) node_modules/recurly.js
 	@npx jest --detectOpenHandles --forceExit

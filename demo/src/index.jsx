@@ -11,37 +11,47 @@
  * started, have a look at src/card-element-demo.js
  */
 
-import React from 'react';
-import { render } from 'react-dom';
+import React, { useContext } from 'react';
+import ReactDOM from 'react-dom/client';
 
+import './index.css';
 import { CardElementDemo } from './card-element-demo';
 import { IndividualCardElementsDemo } from './individual-card-elements-demo';
 import { ThreeDSecureDemo } from './three-d-secure-demo';
 import { CheckoutPricing } from './checkout-pricing';
 import { IndividualCardElementsWithFocusShiftDemo } from './individual-card-elements-with-focus-shift-demo';
 
-function App () {
+const App = () => {
   return (
-    <div>
-      <h1>react-recurly demo</h1>
+  <div>
+    <h1>react-recurly demo</h1>
 
-      <h2>Card Element</h2>
-      <CardElementDemo />
+    <h2>Card Element</h2>
+    <CardElementDemo />
 
-      <h2>Individual Card Elements</h2>
-      <IndividualCardElementsDemo />
+    <h2>Individual Card Elements</h2>
+    <IndividualCardElementsDemo />
 
-      <h2>3D Secure</h2>
-      <ThreeDSecureDemo />
+    <h2>3D Secure</h2>
+    <ThreeDSecureDemo />
 
-      <h2>Checkout Pricing</h2>
-      <CheckoutPricing />
+    <h2>Checkout Pricing</h2>
+    <CheckoutPricing />
 
-      <h2>Individual Card Elements</h2>
-      <h3>With smart focus shifting</h3>
-      <IndividualCardElementsWithFocusShiftDemo />
-    </div>
-  );
-};
+    <h2>Individual Card Elements</h2>
+    <h3>With smart focus shifting</h3>
+    <IndividualCardElementsWithFocusShiftDemo />
+  </div>
+)};
 
-render(<App />, document.querySelector('.App'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  <App />
+);
+
+root.render(
+  // <React.StrictMode>
+    <App />
+  // </React.StrictMode>
+);
