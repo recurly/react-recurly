@@ -20,18 +20,19 @@ export const Default = {
   }
 };
 
-export const Dropdown = () => {
+export const Dropdown = {
   parameters: {
     docs: {
       description: {
         story: 'Set `inputType="select"` or `inputType="mobileSelect"` to display use a `<select>` dropdown.'
       }
     }
-  }
+  },
   args: {
     inputType: 'select'
   }
 };
+
 export const Placeholder = {
   args: {
     style: {
