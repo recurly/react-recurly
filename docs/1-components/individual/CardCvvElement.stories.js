@@ -20,8 +20,10 @@ export const Default = {
 
 export const Placeholder = {
   args: {
-    placeholder: {
-      content: 'CVV'
+    style: {
+      placeholder: {
+        content: 'CVV'
+      }
     }
   }
 };
