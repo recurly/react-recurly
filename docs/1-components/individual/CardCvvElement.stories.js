@@ -37,8 +37,10 @@ export const Localized = {
     }
   },
   args: {
-    placeholder: {
-      content: 'CVC'
+    style: {
+      placeholder: {
+        content: 'CVC'
+      }
     }
   }
 };
