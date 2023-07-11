@@ -1,11 +1,9 @@
-import { Story, Subtitle, Props } from '@storybook/addon-docs/blocks';
-import { propsSlotFor } from '../shared/prop-types';
-import { RiskDataCollector } from '../../lib';
+import { Meta, Title, Subtitle, Controls } from '@storybook/addon-docs/blocks';
+import * as RiskDataCollectorStories from './RiskDataCollector.stories';
 
-<Meta title="Components/RiskDataCollector" parameters={{ sortOrder: 6 }} />
-
-# RiskDataCollector
-<Subtitle slot={() => 'Fraud protection for your checkout'} />
+<Meta of={RiskDataCollectorStories} />
+<Title />
+<Subtitle />
 
 `import { RiskDataCollector } from '@recurly/react-recurly';`
 
@@ -31,7 +29,7 @@ import { RiskDataCollector } from '@recurly/react-recurly';
 };
 ```
 
-<Props slot={propsSlotFor(RiskDataCollector, {})} />
+<Controls />
 
 [doc-recurly-fraud-management]: https://docs.recurly.com/docs/fraud-management
 [doc-kount]: https://docs.recurly.com/docs/kount

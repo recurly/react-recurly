@@ -1,8 +1,6 @@
 import React from 'react';
-import { render, mount, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { suppressConsoleErrors, withElements } from './helpers';
-
-import { CardElement } from '../../lib';
 
 /**
  * Constructs a test suite for an Element class
@@ -11,6 +9,7 @@ import { CardElement } from '../../lib';
  */
 export function ElementSuite (ElementClass) {
   const { elementClassName } = ElementClass;
+  const getElementInstanceFor = ({ _element }) => _element;
 
   describe(`<${elementClassName} />`, function () {
     describe('without a parent <Elements />', function () {
@@ -29,26 +28,29 @@ export function ElementSuite (ElementClass) {
       });
 
       it(`places a recurly.Elements#${elementClassName}`, function () {
-        const subject = mount(withElements(<ElementClass />)).find(ElementClass);
+        let subject;
 
-        expect(subject.instance()._element).toBeInstanceOf(
+        render(withElements(<ElementClass ref={ref => subject = ref} />));
+
+        expect(getElementInstanceFor(subject)).toBeInstanceOf(
           window.recurly.Elements()[elementClassName]().constructor
         );
 
-        expect(subject.getDOMNode().querySelector('iframe')).toBe(
-          subject.instance()._element.iframe
-        );
+        expect(subject._container.current.querySelector('iframe')).toBe(getElementInstanceFor(subject).iframe);
       });
 
       describe('when unmounted', function () {
         it(`destroys the underlying recurly.Elements#${elementClassName}`, function () {
-          const subject = mount(withElements(<ElementClass />));
+          let subject;
+
+          const renderedSubject = render(withElements(<ElementClass ref={ref => subject = ref} />));
+
           const spy = jest.spyOn(
-            subject.find(ElementClass).instance()._element,
+            getElementInstanceFor(subject),
             'destroy'
           ).mockImplementation(() => {});
 
-          subject.unmount();
+          renderedSubject.unmount();
 
           expect(spy).toHaveBeenCalled();
         });
@@ -58,32 +60,34 @@ export function ElementSuite (ElementClass) {
     describe('[id]', function () {
       it('sets the id attribute of the wrapping HTMLDivElement', function () {
         const example = 'test-id';
-        const subject = mount(withElements(<ElementClass id={example} />)).find(ElementClass);
+        const subject = render(withElements(<ElementClass id={example} />)).container.firstChild;
 
-        expect(subject.getDOMNode().getAttribute('id')).toBe(example);
+        expect(subject.getAttribute('id')).toBe(example);
       });
     });
 
     describe('[className]', function () {
       it('sets the class attribute of the wrapping HTMLDivElement', function () {
         const example = 'test-class-name test-class-name-2';
-        const subject = mount(withElements(<ElementClass className={example} />)).find(ElementClass);
+        const subject = render(withElements(<ElementClass className={example} />)).container.firstChild;
 
-        expect(subject.getDOMNode().getAttribute('class')).toBe(example);
+        expect(subject.getAttribute('class')).toBe(example);
       });
     });
 
     describe('[style]', function () {
       it(`is passed on to the underlying recurly.Elements#${elementClassName}`, function () {
+        let subject;
         const example = { arbitrary: 'style-values', fontSize: '1000000px' };
-        const MockComponent = props => withElements(<ElementClass {...props} />);
-        const subject = mount(<MockComponent />);
+        const MockComponent = props => withElements(<ElementClass {...props} ref={ref => subject = ref} />);
+        const { rerender } = render(<MockComponent />);
+
         const spy = jest.spyOn(
-          subject.find(ElementClass).instance()._element,
+          getElementInstanceFor(subject),
           'configure'
         ).mockImplementation(() => {});
 
-        subject.setProps({ style: example });
+        rerender(<MockComponent style={example} />);
 
         expect(spy).toHaveBeenCalledWith({ style: example });
       });
@@ -92,25 +96,26 @@ export function ElementSuite (ElementClass) {
     describe('[tabIndex]', function () {
       it(`sets the tabIndex attribute of the recurly.Elements#${elementClassName}#iframe`, function () {
         const example = '999';
-        const subject = mount(withElements(<ElementClass tabIndex={example} />)).find(ElementClass);
+        const subject = render(withElements(<ElementClass tabIndex={example} />)).container.querySelector('iframe');
 
-        expect(subject.getDOMNode().querySelector('iframe').getAttribute('tabIndex')).toBe(example);
+        expect(subject.getAttribute('tabIndex')).toBe(example);
       });
     });
 
     describe('[...props]', function () {
       it(`passes other properties on to the recurly.Elements#${elementClassName}`, function () {
-        const example = { arbitrary: Infinity, values: /really/ };
-        const MockComponent = props => withElements(<ElementClass {...props} />);
-        const subject = mount(<MockComponent />);
+        let subject;
+        const MockComponent = props => withElements(<ElementClass {...props} ref={ref => subject = ref} />);
+        const { rerender } = render(<MockComponent />);
+
         const spy = jest.spyOn(
-          subject.find(ElementClass).instance()._element,
+          getElementInstanceFor(subject),
           'configure'
         ).mockImplementation(() => {});
 
-        subject.setProps(example);
+        rerender(<MockComponent arbitrary={Infinity} values={/really/} />);
 
-        expect(spy).toHaveBeenCalledWith({ style: {}, ...example });
+        expect(spy).toHaveBeenCalledWith({ style: {}, arbitrary: Infinity, values: /really/ });
       });
     });
 
@@ -118,13 +123,16 @@ export function ElementSuite (ElementClass) {
       const example = { arbitrary: 'values' };
 
       it('does nothing by default', function () {
-        const fixture = mount(withElements(<ElementClass />)).find(ElementClass);
+        let fixture;
+
+        render(withElements(<ElementClass ref={ref => fixture = ref} />));
+
         expect(() => {
-          fixture.instance()._element.emit('attach', example);
-          fixture.instance()._element.emit('change', example);
-          fixture.instance()._element.emit('blur', example);
-          fixture.instance()._element.emit('focus', example);
-          fixture.instance()._element.emit('submit', example);
+          getElementInstanceFor(fixture).emit('attach', example);
+          getElementInstanceFor(fixture).emit('change', example);
+          getElementInstanceFor(fixture).emit('blur', example);
+          getElementInstanceFor(fixture).emit('focus', example);
+          getElementInstanceFor(fixture).emit('submit', example);
         }).not.toThrow();
       });
 
@@ -138,8 +146,11 @@ export function ElementSuite (ElementClass) {
         describe(`[${prop}]`, function () {
           it(`is called when recurly.Elements#${elementClassName} emits '${event}'`, function () {
             const subject = jest.fn();
-            const fixture = mount(withElements(<ElementClass {...{[prop]: subject}} />)).find(ElementClass);
-            fixture.instance()._element.emit(event, example);
+            let fixture;
+
+            render(withElements(<ElementClass {...{[prop]: subject}} ref={ref => fixture = ref} />));
+
+            getElementInstanceFor(fixture).emit(event, example);
             expect(subject).toHaveBeenCalledWith(example);
           });
         });

@@ -1,11 +1,11 @@
 import React from 'react';
-import { mount, render } from 'enzyme';
+import { mount, render } from '@testing-library/react';
 import { suppressConsoleErrors, withRecurlyProvider } from './support/helpers';
 
 import { ThreeDSecureAction } from '../lib';
 
 describe('<ThreeDSecureAction />', function () {
-  const getThreeDSecureFrom = fixture => fixture.instance()._threeDSecure;
+  const getThreeDSecureInstanceFrom = ({ _threeDSecure }) => _threeDSecure;
 
   describe('without a parent <RecurlyProvider />', function () {
     const subject = <ThreeDSecureAction />;
@@ -48,20 +48,28 @@ describe('<ThreeDSecureAction />', function () {
     describe('[onToken]', function () {
       it('is called when the underlying ThreeDSecure instance receives a token', function () {
         const subject = jest.fn();
-        const fixture = mount(withRecurlyProvider(
-          <ThreeDSecureAction actionTokenId="test-action-token" onToken={subject} />
-        )).find(ThreeDSecureAction);
+        let fixture;
 
-        getThreeDSecureFrom(fixture).emit('token', example);
+        render(withRecurlyProvider(
+          <ThreeDSecureAction
+            actionTokenId="test-action-token"
+            onToken={subject}
+            ref={ref => fixture = ref}
+          />
+        ));
+
+        getThreeDSecureInstanceFrom(fixture).emit('token', example);
         expect(subject).toHaveBeenCalledWith(example);
       });
 
       it('does nothing when no handler is provided', function () {
-        const fixture = mount(withRecurlyProvider(
-          <ThreeDSecureAction actionTokenId="test-action-token" />
-        )).find(ThreeDSecureAction);
+        let fixture;
 
-        expect(() => getThreeDSecureFrom(fixture).emit('token', example)).not.toThrow();
+        render(withRecurlyProvider(
+          <ThreeDSecureAction actionTokenId="test-action-token" ref={ref => fixture = ref} />
+        ));
+
+        expect(() => getThreeDSecureInstanceFrom(fixture).emit('token', example)).not.toThrow();
       });
     });
 
@@ -70,21 +78,25 @@ describe('<ThreeDSecureAction />', function () {
 
       it('is called when the underlying ThreeDSecure instance errors', function () {
         const subject = jest.fn();
-        const fixture = mount(withRecurlyProvider(
-          <ThreeDSecureAction actionTokenId="test-action-token" onError={subject} />
-        )).find(ThreeDSecureAction);
+        let fixture;
 
-        getThreeDSecureFrom(fixture).emit('error', example);
+        render(withRecurlyProvider(
+          <ThreeDSecureAction actionTokenId="test-action-token" onError={subject} ref={ref => fixture = ref} />
+        ));
+
+        getThreeDSecureInstanceFrom(fixture).emit('error', example);
         expect(subject).toHaveBeenCalledWith(example);
       });
 
       it('throws errors when no handler is provided', function () {
-        const fixture = mount(withRecurlyProvider(
-          <ThreeDSecureAction actionTokenId="test-action-token" />
-        )).find(ThreeDSecureAction);
+        let fixture;
+
+        render(withRecurlyProvider(
+          <ThreeDSecureAction actionTokenId="test-action-token" ref={ref => fixture = ref} />
+        ));
 
         expect(() => {
-          getThreeDSecureFrom(fixture).emit('error', JSON.stringify(example));
+          getThreeDSecureInstanceFrom(fixture).emit('error', JSON.stringify(example));
         }).toThrow(JSON.stringify(example));
       });
     });

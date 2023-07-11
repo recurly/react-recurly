@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
-import { render, mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { suppressConsoleErrors, withRecurlyProvider } from './support/helpers';
 
 import { Elements } from '../lib';
 import { RecurlyElementsContext } from '../lib/elements';
 
 describe('<Elements />', function () {
+  const getElementsInstanceFor = ({ _elements }) => _elements;
+
   describe('without a parent <RecurlyProvider />', function () {
     suppressConsoleErrors();
 
@@ -40,15 +42,20 @@ describe('<Elements />', function () {
     describe('[onSubmit]', function () {
       it(`is called when Elements emits 'submit'`, function () {
         const subject = jest.fn();
-        const fixture = mount(withRecurlyProvider(<Elements onSubmit={subject} />)).find(Elements);
+        let fixture;
 
-        fixture.instance()._elements.emit('submit', example);
+        render(withRecurlyProvider(<Elements onSubmit={subject} ref={ref => fixture = ref} />));
+
+        getElementsInstanceFor(fixture).emit('submit', example);
         expect(subject).toHaveBeenCalledWith(example);
       });
 
       it('does nothing by default', function () {
-        const fixture = mount(withRecurlyProvider(<Elements />)).find(Elements);
-        expect(() => fixture.instance()._elements.emit('submit', example)).not.toThrow();
+        let fixture;
+
+        render(withRecurlyProvider(<Elements ref={ref => fixture = ref} />));
+
+        expect(() => getElementsInstanceFor(fixture).emit('submit', example)).not.toThrow();
       });
     });
   });

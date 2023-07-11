@@ -1,74 +1,47 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { withKnobs } from '@storybook/addon-knobs'
-
 import { withElements } from '../../shared/decorators';
-import { stylePropFor } from '../../shared/knobs';
-
-import {
-  RecurlyProvider,
-  Elements,
-  CardNumberElement
-} from '../../../lib';
+import { stylePropFor } from '../../shared/controls';
+import { CardNumberElement } from '../../../lib';
 
 export default {
-  title: 'Components/Individual Card Elements/CardNumberElement',
   component: CardNumberElement,
-  decorators: [withKnobs, withElements],
+  title: 'Components/Individual Card Elements/CardNumberElement',
+  tags: ['autodocs'],
+  decorators: [withElements],
   parameters: {
-    sortOrder: 3,
     componentSubtitle: 'Display a card number input'
   }
 };
 
-export const Default = () => {
-  return (
-    <CardNumberElement
-      onBlur={() => action('blur')()}
-      onChange={action('change')}
-      onFocus={() => action('focus')()}
-      onReady={() => action('ready')()}
-      onSubmit={() => action('submit')()}
-      style={stylePropFor(CardNumberElement)}
-    />
-  );
+export const Default = {
+  args: {
+    style: stylePropFor(CardNumberElement)
+  }
 };
 
-Default.story = {
-  name: 'Default'
+export const Placeholder = {
+  args: {
+    style: {
+      placeholder: {
+        content: 'Card number'
+      }
+    }
+  }
 };
 
-export const Placeholder = () => {
-  return (
-    <CardNumberElement
-      style={{
-        placeholder: {
-          content: 'Card number'
-        }
-      }}
-    />
-  );
-};
 
-Placeholder.story = {
-  name: 'Placeholder'
-};
-
-export const Localized = () => {
-  return (
-    <CardNumberElement
-      style={{
-        placeholder: {
-          content: 'Numéro de Carte'
-        }
-      }}
-    />
-  );
-};
-
-Localized.story = {
-  name: 'Localized',
+export const Localized = {
   parameters: {
-    docs: { storyDescription: 'Set `placeholder.content` to localize the `CardNumberElement`.' }
+    docs: {
+      description: {
+        story: 'Set `placeholder.content` to localize the `CardNumberElement`.'
+      }
+    }
+  },
+  args: {
+    style: {
+      placeholder: {
+        content: 'Numéro de Carte'
+      }
+    }
   }
 };

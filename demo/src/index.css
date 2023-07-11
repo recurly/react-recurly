@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+}
+body,
+html {
+  background-color: #f3f3f4;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  color: #38383a;
+}
+h1 {
+  font-weight: 400;
+  line-height: 50px;
+  font-size: 40px;
+  margin: 20px 0;
+  padding: 0;
+}
+h2, h3 {
+  color: #555;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-bottom: 0.5em;
+}
+h3 {
+  font-size: 1em;
+}
+p {
+  font-size: 0.8em;
+}
+input, select {
+  border: 1px solid #d7d7d9;
+  color: rgb(84, 84, 87);
+  margin: 0 1em 0 0;
+  height: 2em;
+  box-sizing: border-box;
+  outline: 0;
+  padding: 0 8px 0 8px;
+  width: 140px;
+}
+button {
+  background: #99c4c7;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 3px 3px #2a6f73;
+  color: #eaf4f3;
+  font-size: 0.75em;
+  font-weight: 600;
+  margin: 1em 1em 0 0;
+  outline: 0;
+  padding: 0.5em 1em;
+  text-transform: uppercase;
+}
+button:active {
+  position: relative;
+  left: 2px;
+  top: 2px;
+  box-shadow: 1px 1px #2a6f73;
+}
+th,
+td {
+  padding: 10px;
+}
+.App {
+  padding: 0 0.5em;
+}
+.DemoSection {
+  margin: 0 0 3em;
+  background: white;
+  border: 0;
+  box-shadow: 5px 5px #a3a3a7;
+  padding: 0.75em;
+}
+.recurly-element {
+  height: 2.5em;
+  border-radius: 0;
+}
+.recurly-element-card {
+  padding: 0;
+}
+.recurly-element-inline {
+  display: inline-block;
+  margin-right: 1em;
+}
+.recurly-three-d-secure-action {
+  display: inline-block;
+  height: 400px;
+  width: 250px;
+}

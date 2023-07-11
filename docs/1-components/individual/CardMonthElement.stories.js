@@ -1,97 +1,61 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { withKnobs } from '@storybook/addon-knobs'
-import { DocsPage } from '@storybook/addon-docs/blocks';
-
 import { withElements } from '../../shared/decorators';
-import { stylePropFor } from '../../shared/knobs';
-import { propsSlotFor, inputType } from '../../shared/prop-types';
-
-import {
-  RecurlyProvider,
-  Elements,
-  CardMonthElement
-} from '../../../lib';
+import { stylePropFor } from '../../shared/controls';
+import { inputType } from '../../shared/args';
+import { CardMonthElement } from '../../../lib';
 
 export default {
-  title: 'Components/Individual Card Elements/CardMonthElement',
   component: CardMonthElement,
-  decorators: [withKnobs, withElements],
+  title: 'Components/Individual Card Elements/CardMonthElement',
+  tags: ['autodocs'],
+  argTypes: { inputType },
+  decorators: [withElements],
   parameters: {
-    sortOrder: 4,
-    componentSubtitle: 'Display a card expiration month input',
+    componentSubtitle: 'Display a card expiration month input'
+  }
+};
+
+export const Default = {
+  args: {
+    style: stylePropFor(CardMonthElement)
+  }
+};
+
+export const Dropdown = {
+  parameters: {
     docs: {
-      page: () =>
-        <DocsPage
-          propsSlot={propsSlotFor(CardMonthElement, inputType)}
-        />
+      description: {
+        story: 'Set `inputType="select"` or `inputType="mobileSelect"` to display use a `<select>` dropdown.'
+      }
+    }
+  },
+  args: {
+    inputType: 'select'
+  }
+};
+
+export const Placeholder = {
+  args: {
+    style: {
+      placeholder: {
+        content: 'MM'
+      }
     }
   }
 };
 
-export const Default = () => {
-  return (
-    <CardMonthElement
-      onBlur={() => action('blur')()}
-      onChange={action('change')}
-      onFocus={() => action('focus')()}
-      onReady={() => action('ready')()}
-      onSubmit={() => action('submit')()}
-      style={stylePropFor(CardMonthElement)}
-    />
-  );
-};
-
-Default.story = {
-  name: 'Default'
-};
-
-export const Select = () => {
-  return (
-    <CardMonthElement inputType="select" />
-  );
-};
-
-Select.story = {
-  name: 'Dropdown',
+export const Localized = {
   parameters: {
     docs: {
-      storyDescription: 'Set `inputType="select"` or `inputType="mobileSelect"` to display use a `<select>` dropdown.'
+      description: {
+        story: 'Set `placeholder.content` to localize the `CardMonthElement`.'
+      }
     }
-  }
-};
-
-export const Placeholder = () => {
-  return (
-    <CardMonthElement
-      style={{
-        placeholder: {
-          content: 'MM'
-        }
-      }}
-    />
-  );
-};
-
-Placeholder.story = {
-  name: 'Placeholder'
-};
-
-export const Localized = () => {
-  return (
-    <CardMonthElement
-      style={{
-        placeholder: {
-          content: 'Mo'
-        }
-      }}
-    />
-  );
-};
-
-Localized.story = {
-  name: 'Localized',
-  parameters: {
-    docs: { storyDescription: 'Set `placeholder.content` to localize the `CardMonthElement`.' }
+  },
+  args: {
+    style: {
+      placeholder: {
+        content: 'Mo'
+      }
+    }
   }
 };

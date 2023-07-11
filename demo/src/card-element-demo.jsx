@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import {
   CardElement,
@@ -44,7 +44,7 @@ export function CardElementDemo (props) {
 function CardForm (props) {
   const { fontSize } = props;
   const recurly = useRecurly();
-  const formRef = React.useRef();
+  const formRef = useRef();
 
   const handleSubmit = event => {
     if (event.preventDefault) event.preventDefault();

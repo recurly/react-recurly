@@ -1,11 +1,9 @@
-import { Subtitle, Props } from '@storybook/addon-docs/blocks';
-import { propsSlotFor } from '../shared/prop-types';
-import { RecurlyProvider } from '../../lib';
+import { Meta, Title, Subtitle, Controls } from '@storybook/blocks';
+import * as RecurlyProviderStories from './RecurlyProvider.stories';
 
-<Meta title="Components/RecurlyProvider" parameters={{ sortOrder: 0 }} />
-
-# RecurlyProvider
-<Subtitle slot={() => 'Top-level component'} />
+<Meta of={RecurlyProviderStories} />
+<Title />
+<Subtitle />
 
 `import { RecurlyProvider } from '@recurly/react-recurly';`
 
@@ -24,6 +22,6 @@ import { RecurlyProvider } from '@recurly/react-recurly';
 ```
 **Note:** Replace `MY_PUBLIC_KEY` with yours, found [here][app-api-access].
 
-<Props slot={propsSlotFor(RecurlyProvider)} />
+<Controls />
 
 [app-api-access]: https://app.recurly.com/go/developer/api_access

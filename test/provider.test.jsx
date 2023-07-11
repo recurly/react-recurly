@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
-import { render } from 'enzyme';
+import { render } from '@testing-library/react';
 import { suppressConsoleErrors } from './support/helpers';
 
 import { RecurlyProvider } from '../lib';
 import { RecurlyContext } from '../lib/provider';
 import { version } from '../package.json';
-import isEqual from 'lodash/isEqual';
 
 const api = `http://localhost:${process.env.PORT || 9877}`
 
@@ -54,7 +53,7 @@ describe('<RecurlyProvider />', function () {
 
       const expected = ['react-recurly', { version }];
       const { calls } = reportSpy.mock;
-      const reactRecurlyEventCalls = calls.filter(call => isEqual(call, expected));
+      const reactRecurlyEventCalls = calls.filter(call => JSON.stringify(call) === JSON.stringify(expected));
       expect(reactRecurlyEventCalls.length).toBe(1);
     });
 

@@ -85,7 +85,7 @@ export default class RecurlyProvider extends React.Component {
   render() {
     return (
       <Provider value={{ recurly: this._recurly }}>{this.props.children}</Provider>
-    )
+    );
   }
 };
 

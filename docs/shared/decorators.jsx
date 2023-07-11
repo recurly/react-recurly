@@ -1,10 +1,8 @@
-import React from 'react';
 import { RecurlyProvider, Elements } from '../../lib';
-import { publicKeyProp } from './knobs';
 
 export function withRecurlyProvider (storyFn) {
   return (
-    <RecurlyProvider publicKey={publicKeyProp()}>
+    <RecurlyProvider publicKey="MY_PUBLIC_KEY">
       {storyFn()}
     </RecurlyProvider>
   );

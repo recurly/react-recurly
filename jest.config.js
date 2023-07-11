@@ -2,12 +2,13 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: './build/reports/coverage/',
   coveragePathIgnorePatterns: ['/types/'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js', 'jest-extended'],
-  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: './test/support/test-environment-fix-jsdom.js',
+  testPathIgnorePatterns: ['/node_modules/'],
   transformIgnorePatterns: ['/node_modules/(?!recurly.js).+\\.js$'],
   transform: {
-    '^.+\\.js$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest',
     '.+\\.css$': 'jest-transform-css'
   },
-  globalSetup: './globalSetup.js'
+  globalSetup: './test/support/globalSetup.js'
 }

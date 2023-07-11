@@ -1,11 +1,10 @@
-import { Subtitle, Props, getComponentProps } from '@storybook/addon-docs/blocks';
-import { propsSlotFor } from '../shared/prop-types';
-import { Elements, CardElement } from '../../lib';
+import { Meta, Title, Subtitle, Controls } from '@storybook/blocks';
+import * as ElementsStories from './Elements.stories';
+import { Elements } from '../../lib';
 
-<Meta title="Components/Elements" parameters={{ sortOrder: 1 }} />
-
-# Elements
-<Subtitle slot={() => 'Groups Elements together'} />
+<Meta of={ElementsStories} />
+<Title />
+<Subtitle />
 
 `import { Elements } from '@recurly/react-recurly';`
 
@@ -30,4 +29,4 @@ import {
 };
 ```
 
-<Props slot={propsSlotFor(Elements)} />
+<Controls />

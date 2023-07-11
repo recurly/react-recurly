@@ -1,23 +1,25 @@
 bin = ./node_modules/.bin
-jest = $(bin)/jest
 pkg = lib node_modules
+build = $(bin)/babel lib -d lib-dist
 
-test: $(pkg)
-ifdef RECURLY_JS_SHA
-	npm i git://github.com/recurly/recurly-js.git#$(RECURLY_JS_SHA)
-endif
-	@npm test
+watch: $(pkg)
+	@$(build) --watch
+build: $(pkg)
+	@$(build)
+
+test: $(pkg) node_modules/recurly.js
+	@npx jest --detectOpenHandles --forceExit
 test-debug: $(pkg)
-	@node --inspect-brk $(jest) --runInBand --forceExit
+	@node --inspect-brk $(bin)/jest --runInBand --detectOpenHandles
 test-watch: $(pkg)
-	@npm test -- --watchAll
+	@npx jest --detectOpenHandles --watchAll
 test-types: $(pkg)
-	@npm run test:types
+	@npx dtslint types --expectOnly
 
 docs: $(pkg)
-	@npm run storybook
+	@npx storybook dev -p 6006 -c docs/.storybook/
 docs-build: $(pkg)
-	@npm run build-storybook
+	@npx storybook build -c docs/.storybook/ -o build/docs
 docs-publish-remote:
 	@curl \
 		--header "Authorization: token $(GITHUB_TOKEN)" \
@@ -30,8 +32,15 @@ publish: lib clean node_modules
 
 node_modules: package.json
 	@npm install
+node_modules/recurly.js:
+ifdef RECURLY_JS_SHA
+	@npm i git://github.com/recurly/recurly-js.git#$(RECURLY_JS_SHA)
+endif
 
 clean:
 	@rm -rf build lib-dist node_modules
+	@rm README.md
 
-.PHONY: clean publish test test-ci test-debug docs docs-build docs-deploy test-types test-ci test-cov-ci
+.PHONY: test test-debug test-watch test-types
+.PHONY: docs docs-build docs-publish-remote
+.PHONY: publish clean

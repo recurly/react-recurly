@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 6006:6006
+    command: make docs
+    volumes:
+      - .:/usr/src/app

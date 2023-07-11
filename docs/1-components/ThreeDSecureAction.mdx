@@ -1,11 +1,9 @@
-import { Story, Subtitle, Props } from '@storybook/addon-docs/blocks';
-import { propsSlotFor } from '../shared/prop-types';
-import { ThreeDSecureAction } from '../../lib';
+import { Meta, Title, Subtitle, Controls } from '@storybook/addon-docs/blocks';
+import * as ThreeDSecureActionStories from './ThreeDSecureAction.stories';
 
-<Meta title="Components/ThreeDSecureAction"parameters={{ sortOrder: 7 }} />
-
-# ThreeDSecureAction
-<Subtitle slot={() => 'Display a 3-D Secure authentication flow'} />
+<Meta of={ThreeDSecureActionStories} />
+<Title />
+<Subtitle />
 
 `import { ThreeDSecureAction } from '@recurly/react-recurly';`
 
@@ -33,7 +31,7 @@ import { ThreeDSecureAction } from '@recurly/react-recurly';
 };
 ```
 
-<Props slot={propsSlotFor(ThreeDSecureAction, {})} />
+<Controls />
 
 [recurly-api]: https://developers.recurly.com/api/
 [doc-sca]: https://docs.recurly.com/docs/revised-payment-services-directive-psd2
