@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.0.0](https://github.com/recurly/react-recurly/tree/v2.0.0) (2023-08-23)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.7...v2.0.0)
+
+
+**Merged Pull Requests**
+
+- Changes demo dependency target [#214](https://github.com/recurly/react-recurly/pull/214) ([chrissrogers](https://github.com/chrissrogers))
+- Fix RecurlyProvider & Elements types [#205](https://github.com/recurly/react-recurly/pull/205) ([artyom-88](https://github.com/artyom-88))
+- Add dev dependency babel/plugin-transform-runtime [#200](https://github.com/recurly/react-recurly/pull/200) ([cyberxander90](https://github.com/cyberxander90))
+
+
+
 ## [v1.2.7](https://github.com/recurly/react-recurly/tree/v1.2.7) (2022-11-30)
 
 [Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.6...v1.2.7)
