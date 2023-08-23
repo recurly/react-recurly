@@ -53,7 +53,6 @@
     "storybook": "^7.0.24"
   },
   "scripts": {
-    "prepublishOnly": "babel lib -d lib-dist && cp README.mdx README.md",
-    "postpublish": "rm README.md"
+    "prepublishOnly": "babel lib -d lib-dist"
   }
 }
