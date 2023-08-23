@@ -137,7 +137,7 @@ export const RecurlyProvider: React.FC<React.PropsWithChildren<RecurlyOptions>>;
  *
  * The functionality of <Elements /> is largely behind the scenes. It takes one
  * onSubmit prop, and is used solely to designate which *Element components
- * belong together in your component heirarchy.
+ * belong together in your component hierarchy.
  */
 export const Elements: React.FC<React.PropsWithChildren<ElementsProps>>;
 
