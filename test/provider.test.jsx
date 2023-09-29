@@ -122,4 +122,12 @@ describe('<RecurlyProvider />', function () {
       }
     });
   });
+
+  describe('with a hostname', function () {
+    it('does not throw an error', function () {
+      expect(() => {
+        render(<RecurlyProvider hostname="test-hostname" api={api} />);
+      }).not.toThrow();
+    });
+  });
 });
