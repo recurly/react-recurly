@@ -20,6 +20,11 @@ export default class RecurlyProvider extends React.Component {
      * [API Access](https://app.recurly.com/go/developer/api_access).
      */
     publicKey: PropTypes.string,
+
+    /**
+     * Register the current hostname
+     */
+    hostname: PropTypes.string,
     /**
      * Sets a default currency
      */
@@ -56,7 +61,7 @@ export default class RecurlyProvider extends React.Component {
   constructor (props) {
     super(props);
 
-    if (!this.props.publicKey) {
+    if (!(this.props.publicKey || this.props.hostname)) {
       throw new Error(`
         Please pass your 'publicKey' value to this RecurlyProvider.
         Example: <RecurlyProvider publicKey="MY_PUBLIC_KEY">
@@ -82,7 +87,7 @@ export default class RecurlyProvider extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <Provider value={{ recurly: this._recurly }}>{this.props.children}</Provider>
     );
