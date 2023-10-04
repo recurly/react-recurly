@@ -1,6 +1,8 @@
 ---
 owner: recurly
 repo: react-recurly
+always_include_labels:
+  - new feature
 exclude_labels:
   - bug?
   - internal
