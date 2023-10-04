@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "Examples to get you started with react-recurly",
   "private": true,
+  "main": "src/index.jsx",
   "dependencies": {
-    "@recurly/react-recurly": "github:recurly/react-recurly",
+    "@recurly/react-recurly": "latest",
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
