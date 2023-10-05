@@ -1,5 +1,4 @@
 on:
-  workflow_call:
   repository_dispatch:
     types:
       - docs_publish
@@ -12,17 +11,16 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
+    - uses: actions/setup-node@v3
 
-    - name: Build documentation
-      run: make docs-build
+    - run: make docs-build
+    
+    - run: touch ./build/docs/.nojekyll
 
-    - name: Deploy
-      if: success()
-      uses: crazy-max/ghaction-github-pages@v1
+    - if: success()
+      uses: crazy-max/ghaction-github-pages@v4
       with:
         target_branch: gh-pages
         build_dir: ./build/docs
