@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.0.1](https://github.com/recurly/react-recurly/tree/v2.0.1) (2023-10-12)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v2.0.0...v2.0.1)
+
+
+**Merged Pull Requests**
+
+- adjust demo package to fix CodeSandbox setup [#220](https://github.com/recurly/react-recurly/pull/220) ([chrisdeely](https://github.com/chrisdeely))
+- Adds hostname configuration [#217](https://github.com/recurly/react-recurly/pull/217) ([chrissrogers](https://github.com/chrissrogers))
+
+
+
 ## [v2.0.0](https://github.com/recurly/react-recurly/tree/v2.0.0) (2023-08-23)
 
 [Full Changelog](https://github.com/recurly/react-recurly/compare/v1.2.7...v2.0.0)
@@ -7,7 +19,6 @@
 
 **Merged Pull Requests**
 
-- Changes demo dependency target [#214](https://github.com/recurly/react-recurly/pull/214) ([chrissrogers](https://github.com/chrissrogers))
 - Fix RecurlyProvider & Elements types [#205](https://github.com/recurly/react-recurly/pull/205) ([artyom-88](https://github.com/artyom-88))
 - Add dev dependency babel/plugin-transform-runtime [#200](https://github.com/recurly/react-recurly/pull/200) ([cyberxander90](https://github.com/cyberxander90))
 
