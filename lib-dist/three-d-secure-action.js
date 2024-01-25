@@ -32,13 +32,17 @@ var ThreeDSecureAction = /*#__PURE__*/function (_React$PureComponent) {
     _this._threeDSecure = _this._risk.ThreeDSecure({
       actionTokenId: actionTokenId
     });
-    _this._threeDSecure.on('token', function () {
+    _this._threeDSecure.on('ready', function () {
       var _this$props;
-      return (_this$props = _this.props).onToken.apply(_this$props, arguments);
+      return (_this$props = _this.props).onReady.apply(_this$props, arguments);
+    });
+    _this._threeDSecure.on('token', function () {
+      var _this$props2;
+      return (_this$props2 = _this.props).onToken.apply(_this$props2, arguments);
     });
     _this._threeDSecure.on('error', function () {
-      var _this$props2;
-      return (_this$props2 = _this.props).onError.apply(_this$props2, arguments);
+      var _this$props3;
+      return (_this$props3 = _this.props).onError.apply(_this$props3, arguments);
     });
     return _this;
   }
@@ -75,6 +79,15 @@ exports["default"] = ThreeDSecureAction;
    */
   actionTokenId: _propTypes["default"].string,
   /**
+   * Called when the 3-D Secure flow is ready for interaction
+   * @type {ThreeDSecureAction~onReady}
+   */
+
+  /**
+   * @callback ThreeDSecureAction~onReady
+   */
+  onReady: _propTypes["default"].func,
+  /**
    * Called when the user has completed the 3D Secure flow
    * @type {ThreeDSecureAction~onToken}
    */
@@ -99,6 +112,7 @@ exports["default"] = ThreeDSecureAction;
   id: undefined,
   className: undefined,
   actionTokenId: '',
+  onReady: function onReady() {},
   onToken: function onToken() {},
   onError: function onError(e) {
     throw e;
