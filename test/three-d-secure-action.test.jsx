@@ -45,6 +45,34 @@ describe('<ThreeDSecureAction />', function () {
   describe('event handlers', function () {
     const example = { arbitrary: 'properties' };
 
+    describe('[onReady]', function () {
+      it('is called when the underlying ThreeDSecure instance is ready', function () {
+        const subject = jest.fn();
+        let fixture;
+
+        render(withRecurlyProvider(
+          <ThreeDSecureAction
+            actionTokenId="test-action-token"
+            onReady={subject}
+            ref={ref => fixture = ref}
+          />
+        ));
+
+        getThreeDSecureInstanceFrom(fixture).emit('ready', );
+        expect(subject).toHaveBeenCalled();
+      });
+
+      it('does nothing when no handler is provided', function () {
+        let fixture;
+
+        render(withRecurlyProvider(
+          <ThreeDSecureAction actionTokenId="test-action-token" ref={ref => fixture = ref} />
+        ));
+
+        expect(() => getThreeDSecureInstanceFrom(fixture).emit('ready', example)).not.toThrow();
+      });
+    });
+
     describe('[onToken]', function () {
       it('is called when the underlying ThreeDSecure instance receives a token', function () {
         const subject = jest.fn();

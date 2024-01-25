@@ -117,6 +117,7 @@ export type ThreeDSecureActionProps = {
   id?: string;
   className?: string;
   actionTokenId?: string;
+  onReady?: () => void;
   onToken?: (token: TokenPayload) => void;
   onError?: (e: RecurlyError) => void;
 };
