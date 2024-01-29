@@ -27,6 +27,7 @@ var ThreeDSecureAction = /*#__PURE__*/function (_React$PureComponent) {
       throw new Error('<ThreeDSecureAction> must be within a <RecurlyProvider> tree.');
     }
     var actionTokenId = props.actionTokenId;
+    _this._attached = false;
     _this._container = /*#__PURE__*/_react["default"].createRef();
     _this._risk = _this.context.recurly.Risk();
     _this._threeDSecure = _this._risk.ThreeDSecure({
@@ -49,7 +50,9 @@ var ThreeDSecureAction = /*#__PURE__*/function (_React$PureComponent) {
   (0, _createClass2["default"])(ThreeDSecureAction, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      if (this._attached) return;
       this._threeDSecure.attach(this._container.current);
+      this._attached = true;
     }
   }, {
     key: "render",
