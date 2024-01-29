@@ -73,6 +73,7 @@ export default class ThreeDSecureAction extends React.PureComponent {
 
     const { actionTokenId } = props;
 
+    this._attached = false;
     this._container = React.createRef();
     this._risk = this.context.recurly.Risk();
     this._threeDSecure = this._risk.ThreeDSecure({ actionTokenId });
@@ -82,7 +83,9 @@ export default class ThreeDSecureAction extends React.PureComponent {
   }
 
   componentDidMount () {
+    if (this._attached) return;
     this._threeDSecure.attach(this._container.current);
+    this._attached = true;
   }
 
   render () {

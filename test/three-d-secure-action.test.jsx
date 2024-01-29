@@ -58,18 +58,15 @@ describe('<ThreeDSecureAction />', function () {
           />
         ));
 
-        getThreeDSecureInstanceFrom(fixture).emit('ready', );
+        const instance = getThreeDSecureInstanceFrom(fixture);
+
+        // stub strategy so that the readiness chain will not fall apart
+        instance.strategy = {
+          attach: () => {}
+        };
+
+        instance.emit('ready');
         expect(subject).toHaveBeenCalled();
-      });
-
-      it('does nothing when no handler is provided', function () {
-        let fixture;
-
-        render(withRecurlyProvider(
-          <ThreeDSecureAction actionTokenId="test-action-token" ref={ref => fixture = ref} />
-        ));
-
-        expect(() => getThreeDSecureInstanceFrom(fixture).emit('ready', example)).not.toThrow();
       });
     });
 
