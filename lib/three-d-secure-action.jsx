@@ -21,6 +21,16 @@ export default class ThreeDSecureAction extends React.PureComponent {
     actionTokenId: PropTypes.string,
 
     /**
+     * Called when the 3-D Secure flow is ready for interaction
+     * @type {ThreeDSecureAction~onReady}
+     */
+
+    /**
+     * @callback ThreeDSecureAction~onReady
+     */
+    onReady: PropTypes.func,
+
+    /**
      * Called when the user has completed the 3D Secure flow
      * @type {ThreeDSecureAction~onToken}
      */
@@ -47,6 +57,7 @@ export default class ThreeDSecureAction extends React.PureComponent {
     id: undefined,
     className: undefined,
     actionTokenId: '',
+    onReady: () => {},
     onToken: () => {},
     onError: e => { throw e }
   };
@@ -62,15 +73,19 @@ export default class ThreeDSecureAction extends React.PureComponent {
 
     const { actionTokenId } = props;
 
+    this._attached = false;
     this._container = React.createRef();
     this._risk = this.context.recurly.Risk();
     this._threeDSecure = this._risk.ThreeDSecure({ actionTokenId });
+    this._threeDSecure.on('ready', (...args) => this.props.onReady(...args));
     this._threeDSecure.on('token', (...args) => this.props.onToken(...args));
     this._threeDSecure.on('error', (...args) => this.props.onError(...args));
   }
 
   componentDidMount () {
+    if (this._attached) return;
     this._threeDSecure.attach(this._container.current);
+    this._attached = true;
   }
 
   render () {
