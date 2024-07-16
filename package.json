@@ -2,7 +2,7 @@
   "name": "@recurly/react-recurly",
   "version": "2.0.1",
   "description": "React components for Recurly.js",
-  "main": "lib-dist/index.js",
+  "main": "lib/index.js",
   "types": "types/index.d.ts",
   "repository": {
     "type": "git",
@@ -48,7 +48,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "recurly.js": "recurly/recurly-js",
     "regenerator-runtime": "^0.13.11",
     "storybook": "^7.0.24"
   },
