@@ -39,11 +39,9 @@ export type CardElementChangeEvent = {
   brand: string;
   empty: boolean;
   focus: boolean;
-  number: {
-    number: CardElementState;
-    expiry: CardElementState;
-    valid: CardElementState;
-  };
+  number: CardElementState;
+  expiry: CardElementState;
+  cvv: CardElementState;
 };
 
 export type CardElementProps = CardElementOptions & CommonElementProps<CardElementChangeEvent>;
