@@ -1,5 +1,23 @@
 # Changelog
 
+## [v2.0.2](https://github.com/recurly/react-recurly/tree/v2.0.2) (2025-01-30)
+
+[Full Changelog](https://github.com/recurly/react-recurly/compare/v2.0.1...v2.0.2)
+
+
+**Merged Pull Requests**
+
+- Update CardElementChangeEvent type; fixes #121 [#237](https://github.com/recurly/react-recurly/pull/237) ([joshunger](https://github.com/joshunger))
+- Add storybook-addon-a11y [#235](https://github.com/recurly/react-recurly/pull/235) ([Smolations](https://github.com/Smolations))
+- Remove internal wiki link from codel config. [#226](https://github.com/recurly/react-recurly/pull/226) ([recurly-bearley](https://github.com/recurly-bearley))
+- Adds Subscription id pass-through for useCheckoutPricing [#225](https://github.com/recurly/react-recurly/pull/225) ([chrissrogers](https://github.com/chrissrogers))
+- Adds onReady and re-render protection to ThreeDSecureAction [#224](https://github.com/recurly/react-recurly/pull/224) ([chrissrogers](https://github.com/chrissrogers))
+
+**Closed Issues**
+
+- Dependency updates addressing`npm audit` warnings.  [#202](https://github.com/recurly/react-recurly/issues/202)
+
+
 ## [v2.0.1](https://github.com/recurly/react-recurly/tree/v2.0.1) (2023-10-12)
 
 [Full Changelog](https://github.com/recurly/react-recurly/compare/v2.0.0...v2.0.1)
@@ -19,6 +37,7 @@
 
 **Merged Pull Requests**
 
+- Adds React 18 support [#212](https://github.com/recurly/react-recurly/pull/212) ([chrissrogers](https://github.com/chrissrogers))
 - Fix RecurlyProvider & Elements types [#205](https://github.com/recurly/react-recurly/pull/205) ([artyom-88](https://github.com/artyom-88))
 - Add dev dependency babel/plugin-transform-runtime [#200](https://github.com/recurly/react-recurly/pull/200) ([cyberxander90](https://github.com/cyberxander90))
 
@@ -117,6 +136,7 @@
 
 - Fixes "types" directory in package.json [#66](https://github.com/recurly/react-recurly/pull/66) ([dbrudner](https://github.com/dbrudner))
 - 1.2.0 [#65](https://github.com/recurly/react-recurly/pull/65) ([dbrudner](https://github.com/dbrudner))
+- Adds RiskDataCollector component [#61](https://github.com/recurly/react-recurly/pull/61) ([chrissrogers](https://github.com/chrissrogers))
 - Adds types [#60](https://github.com/recurly/react-recurly/pull/60) ([dbrudner](https://github.com/dbrudner))
 - Use checkout pricing currency [#57](https://github.com/recurly/react-recurly/pull/57) ([dbrudner](https://github.com/dbrudner))
 - Fixes readme on npm [#53](https://github.com/recurly/react-recurly/pull/53) ([dbrudner](https://github.com/dbrudner))
