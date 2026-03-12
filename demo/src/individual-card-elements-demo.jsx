@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import {
   CardNumberElement,
@@ -15,14 +15,14 @@ const handleChange = change => console.log('[change]', change);
 const handleFocus = () => console.log('[focus]');
 const handleReady = () => console.log('[ready]');
 
-export function IndividualCardElementsDemo (props) {
+export function IndividualCardElementsDemo () {
   const [fontSize, setFontSize] = useState('18');
 
   const handleChangeFontSize = event => setFontSize(event.target.value);
 
   return (
     <div className="DemoSection">
-      <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY}>
+      <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY} api={process.env.REACT_APP_RECURLY_API}>
         <Elements>
           <CardForm fontSize={`${fontSize}px`} />
         </Elements>
@@ -44,13 +44,12 @@ export function IndividualCardElementsDemo (props) {
   );
 }
 
-function CardForm (props) {
-  const { fontSize } = props;
+function CardForm ({ fontSize }) {
   const recurly = useRecurly();
-  const formRef = React.useRef();
+  const formRef = useRef();
 
   const handleSubmit = event => {
-    if (event.preventDefault) event.preventDefault();
+    event.preventDefault();
     recurly.token(formRef.current, (err, token) => {
       if (err) console.log('[error]', err);
       else console.log('[token]', token);

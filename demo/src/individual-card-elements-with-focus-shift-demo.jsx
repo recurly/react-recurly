@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 
 import {
   CardNumberElement,
@@ -10,12 +10,10 @@ import {
   useRecurly
 } from '@recurly/react-recurly';
 
-export function IndividualCardElementsWithFocusShiftDemo (props) {
-  const [fontSize, setFontSize] = useState('18');
-
+export function IndividualCardElementsWithFocusShiftDemo () {
   return (
     <div className="DemoSection">
-      <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY}>
+      <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY} api={process.env.REACT_APP_RECURLY_API}>
         <Elements>
           <CardForm />
         </Elements>
@@ -24,68 +22,60 @@ export function IndividualCardElementsWithFocusShiftDemo (props) {
   );
 }
 
-export function CardForm (props) {
-  const {
-    fontSize,
-    handleBlur,
-    handleFocus,
-    handleReady
-  } = props;
-  const formRef = React.useRef();
+export function CardForm ({ fontSize, handleBlur, handleFocus, handleReady }) {
+  const formRef = useRef();
   const recurly = useRecurly();
 
   const handleSubmit = event => {
-    if (event.preventDefault) event.preventDefault();
+    event.preventDefault();
     recurly.token(formRef.current, (err, token) => {
       if (err) console.log('[error]', err);
       else console.log('[token]', token);
     });
   };
 
-  const cardNumberElement = React.useRef();
-  const cardMonthElement = React.useRef();
-  const cardYearElement = React.useRef();
-  const cardCvvElement = React.useRef();
+  const cardNumberElement = useRef();
+  const cardMonthElement = useRef();
+  const cardYearElement = useRef();
+  const cardCvvElement = useRef();
 
-  // Move focus based on detection of inputs having been deemed complete
-
-  // Store the input lengths
-  let cardNumberElementLengthWas = 0;
-  let cardMonthElementLengthWas = 0;
-  let cardYearElementLengthWas = 0;
-  let cardCvvElementLengthWas = 0;
+  // Track previous lengths to detect when fields become complete
+  const cardNumberLengthWas = useRef(0);
+  const cardMonthLengthWas = useRef(0);
+  const cardYearLengthWas = useRef(0);
+  const cardCvvLengthWas = useRef(0);
 
   function handleCardNumberChange ({ brand, length }) {
-    if (brand === 'american_express' && length === 15 && cardNumberElementLengthWas !== 15) {
+    if (brand === 'american_express' && length === 15 && cardNumberLengthWas.current !== 15) {
       cardMonthElement.current._element.focus();
-    } else if (brand !== 'american_express' && length === 16 && cardNumberElementLengthWas !== 16) {
+    } else if (brand !== 'american_express' && length === 16 && cardNumberLengthWas.current !== 16) {
       cardMonthElement.current._element.focus();
     }
-    cardNumberElementLengthWas = length;
+    cardNumberLengthWas.current = length;
   }
 
   function handleCardMonthChange ({ length }) {
-    if (length === 2 && cardMonthElementLengthWas !== 2) {
+    if (length === 2 && cardMonthLengthWas.current !== 2) {
       cardYearElement.current._element.focus();
     }
-    cardMonthElementLengthWas = length;
+    cardMonthLengthWas.current = length;
   }
 
   function handleCardYearChange ({ length }) {
-    if (length === 2 && cardYearElementLengthWas !== 2) {
+    if (length === 2 && cardYearLengthWas.current !== 2) {
       cardCvvElement.current._element.focus();
     }
-    cardYearElementLengthWas = length;
+    cardYearLengthWas.current = length;
   }
 
   function handleCardCvvChange ({ length }) {
     const { brand } = cardNumberElement.current._element && cardNumberElement.current._element.state;
-    if (brand === 'american_express' && length === 4 && cardCvvElementLengthWas !== 4) {
+    if (brand === 'american_express' && length === 4 && cardCvvLengthWas.current !== 4) {
       // Move focus to another following ref if one were to exist
-    } else if (brand !== 'american_express' && length === 3 && cardCvvElementLengthWas !== 3) {
+    } else if (brand !== 'american_express' && length === 3 && cardCvvLengthWas.current !== 3) {
       // Move focus to another following ref if one were to exist
     }
-    cardCvvElementLengthWas = length;
+    cardCvvLengthWas.current = length;
   }
 
   return (

@@ -11,7 +11,7 @@
  * started, have a look at src/card-element-demo.js
  */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import './index.css';
@@ -20,6 +20,7 @@ import { IndividualCardElementsDemo } from './individual-card-elements-demo';
 import { ThreeDSecureDemo } from './three-d-secure-demo';
 import { CheckoutPricing } from './checkout-pricing';
 import { IndividualCardElementsWithFocusShiftDemo } from './individual-card-elements-with-focus-shift-demo';
+import { ApplePayDemo } from './apple-pay-demo';
 
 const App = () => {
   return (
@@ -41,6 +42,9 @@ const App = () => {
     <h2>Individual Card Elements</h2>
     <h3>With smart focus shifting</h3>
     <IndividualCardElementsWithFocusShiftDemo />
+
+    <h2>Apple Pay</h2>
+    <ApplePayDemo />
   </div>
 )};
 

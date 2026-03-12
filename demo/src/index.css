@@ -83,6 +83,19 @@ td {
   display: inline-block;
   margin-right: 1em;
 }
+.apple-pay-button {
+  -webkit-appearance: -apple-pay-button;
+  -apple-pay-button-type: buy;
+  -apple-pay-button-style: black;
+  width: 200px;
+  height: 40px;
+  cursor: pointer;
+  margin: 1em 0 0;
+}
+.apple-pay-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 .recurly-three-d-secure-action {
   display: inline-block;
   height: 400px;

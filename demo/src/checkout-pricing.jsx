@@ -3,15 +3,15 @@ import { Elements, RecurlyProvider, useCheckoutPricing } from '@recurly/react-re
 
 export function CheckoutPricing () {
   return (
-    <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY}>
+    <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY} api={process.env.REACT_APP_RECURLY_API}>
       <Elements>
         <CheckoutPricingForm />
       </Elements>
     </RecurlyProvider>
   );
-};
+}
 
-function CheckoutPricingForm () {
+function CheckoutPricingForm() {
   const [recurlyError, setRecurlyError] = useState(null);
   const [pricingFormState, setPricingFormState] = useState({
     plan: '',
@@ -33,9 +33,8 @@ function CheckoutPricingForm () {
   const showPrice = !loading && !recurlyError;
 
   function handleChange (name, value) {
-    const newState = { ...pricingFormState, [name]: value };
-    setPricingFormState(newState);
-  };
+    setPricingFormState(prev => ({ ...prev, [name]: value }));
+  }
 
   useEffect(() => {
     setRecurlyError(null);
@@ -78,7 +77,6 @@ function CheckoutPricingForm () {
           min="0"
         />
         <select
-          type="text"
           value={pricingFormState.currency}
           onChange={e => handleChange('currency', e.target.value)}
           placeholder="Currency"

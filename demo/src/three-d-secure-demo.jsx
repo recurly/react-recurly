@@ -8,14 +8,14 @@ import {
 const handleThreeDSecureToken = token =>
   console.log(`[three-d-secure-action-result-token]: ${token.id}`);
 
-export function ThreeDSecureDemo (props) {
+export function ThreeDSecureDemo () {
   const [actionTokenId, setActionTokenId] = useState('');
 
   const handleChangeActionToken = event => setActionTokenId(event.target.value);
 
   return (
     <div className="DemoSection">
-      <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY}>
+      <RecurlyProvider publicKey={process.env.REACT_APP_RECURLY_PUBLIC_KEY} api={process.env.REACT_APP_RECURLY_API}>
         <p>Provide a ThreeDSecureActionTokenId returned by the Recurly API</p>
 
         <div>
