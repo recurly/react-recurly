@@ -7,9 +7,6 @@ on:
       - released
 name: Documentation
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build:
     name: Publish
