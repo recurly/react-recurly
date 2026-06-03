@@ -5,19 +5,22 @@ on:
     branches:
       - master
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
     name: Check
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6.0.3
       - name: Types
         run: make test-types
   unit_test:
     runs-on: ubuntu-latest
     name: Unit test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6.0.3
       - name: Unit test
         run: make test
       - name: Report coverage
